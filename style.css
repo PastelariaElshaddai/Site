@@ -107,3 +107,17 @@ header p{
     font-weight:bold;
     color:#d62828;
 }
+.banner-promocao{
+    background:linear-gradient(90deg,#d62828,#ffb703);
+    color:white;
+    padding:20px;
+    border-radius:15px;
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.acoes{
+    display:grid;
+    gap:10px;
+    margin-bottom:25px;
+}
