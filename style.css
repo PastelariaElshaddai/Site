@@ -136,3 +136,30 @@ footer h3{
 footer p{
     margin:8px 0;
 }
+.produtos {
+    display: grid;
+    gap: 20px;
+}
+
+.card-produto {
+    background: #fff;
+    border-radius: 16px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.card-produto img {
+    width: 100%;
+    border-radius: 12px;
+}
+
+.card-produto h3 {
+    margin: 10px 0 5px;
+}
+
+.preco {
+    color: #d62828;
+    font-size: 22px;
+    font-weight: bold;
+}
