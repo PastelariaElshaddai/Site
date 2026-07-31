@@ -13,3 +13,10 @@ function adicionar(nome, preco){
 function verCarrinho() {
     alert("Em breve o carrinho será aberto aqui!");
 }
+let quantidade = 0;
+
+function adicionarCarrinho() {
+    quantidade++;
+
+    document.getElementById("contador").innerHTML = quantidade;
+}
