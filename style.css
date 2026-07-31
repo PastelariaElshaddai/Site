@@ -2,32 +2,45 @@ body{
     margin:0;
     font-family:Arial,sans-serif;
     background:#fff8e7;
-    color:#333;
 }
 
 header{
     background:#d62828;
     color:white;
     text-align:center;
-    padding:20px;
+    padding:25px;
+    border-bottom:6px solid #ffb703;
 }
 
-h1{
+header h1{
     margin:0;
+    font-size:32px;
+}
+
+header p{
+    margin-top:8px;
+    font-size:16px;
 }
 
 .container{
-    width:90%;
-    max-width:1200px;
+    max-width:1000px;
     margin:auto;
     padding:20px;
 }
 
 .botao{
-    background:#ffb703;
-    color:#000;
-    padding:12px 20px;
+    width:100%;
+    margin:10px 0;
+    padding:16px;
     border:none;
-    border-radius:10px;
+    border-radius:12px;
+    background:#ffb703;
+    color:#222;
+    font-size:18px;
     font-weight:bold;
+    cursor:pointer;
+}
+
+.botao:hover{
+    background:#ffcb3d;
 }
