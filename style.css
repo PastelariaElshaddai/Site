@@ -44,3 +44,22 @@ header p{
 .botao:hover{
     background:#ffcb3d;
 }
+.banner{
+    background:linear-gradient(135deg,#d62828,#ffb703);
+    color:white;
+    padding:30px;
+    border-radius:18px;
+    text-align:center;
+    margin-bottom:20px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
+.banner h2{
+    margin:0;
+    font-size:28px;
+}
+
+.banner p{
+    margin-top:10px;
+    font-size:17px;
+        }
