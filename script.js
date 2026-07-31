@@ -1,3 +1,12 @@
-document.addEventListener("DOMContentLoaded", function () {
-  console.log("Pastelaria El Shaddai carregada com sucesso!");
-});
+let carrinho = [];
+
+function adicionar(nome, preco){
+
+    carrinho.push({
+        nome:nome,
+        preco:preco
+    });
+
+    alert(nome + " foi adicionado ao carrinho!");
+
+}
