@@ -20,3 +20,15 @@ function adicionarCarrinho() {
 
     document.getElementById("contador").innerHTML = quantidade;
 }
+let carrinho = [];
+
+function adicionarProduto(nome, preco) {
+    carrinho.push({
+        nome: nome,
+        preco: preco
+    });
+
+    adicionarCarrinho();
+
+    console.log(carrinho);
+}
