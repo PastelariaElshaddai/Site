@@ -46,7 +46,16 @@ let endereco = "";
 if (tipoPedido == "1") {
     endereco = prompt("Digite seu endereço:");
 }
-let mensagem = "Olá! Meu nome é " + nome + ".%0A%0AGostaria de fazer este pedido:%0A%0A";
+let mensagem = "Olá! Meu nome é " + nome + ".%0A";
+
+if (tipoPedido == "1") {
+    mensagem += "📦 Pedido para ENTREGA%0A";
+    mensagem += "📍 Endereço: " + endereco + "%0A%0A";
+} else {
+    mensagem += "🛍️ Pedido para RETIRADA%0A%0A";
+}
+
+mensagem += "Gostaria de fazer este pedido:%0A%0A";
     let total = 0;
 
     carrinho.forEach(produto => {
