@@ -65,5 +65,5 @@ mensagem += "Gostaria de fazer este pedido:\n\n";
 
     mensagem += "\n💰 Total: R$ " + total.toFixed(2);
 
-    window.open("https://wa.me/5585988944421?text=" + encodeURIComponent(mensagem), "_blank");
+    location.href = "https://wa.me/5585988944421?text=" + encodeURIComponent(mensagem);
 }
