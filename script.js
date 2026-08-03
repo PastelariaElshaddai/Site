@@ -1,34 +1,18 @@
 let carrinho = [];
-
-function adicionar(nome, preco){
-
-    carrinho.push({
-        nome:nome,
-        preco:preco
-    });
-
-    alert(nome + " foi adicionado ao carrinho!");
-
-}
-function verCarrinho() {
-    alert("Em breve o carrinho será aberto aqui!");
-}
 let quantidade = 0;
 
-function adicionarCarrinho() {
-    quantidade++;
-
-    document.getElementById("contador").innerHTML = quantidade;
-}
-let carrinho = [];
-
 function adicionarProduto(nome, preco) {
-    carrinho.push({
-        nome: nome,
-        preco: preco
-    });
+  carrinho.push({
+    nome: nome,
+    preco: preco
+  });
 
-    adicionarCarrinho();
+  quantidade++;
+  document.getElementById("contador").innerHTML = quantidade;
 
-    console.log(carrinho);
+  alert(nome + " foi adicionado ao carrinho!");
+}
+
+function verCarrinho() {
+  alert("Em breve o carrinho será aberto!");
 }
