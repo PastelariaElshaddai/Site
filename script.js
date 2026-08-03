@@ -49,21 +49,21 @@ if (tipoPedido == "1") {
 let mensagem = "Olá! Meu nome é " + nome + ".\n";
 
 if (tipoPedido == "1") {
-    mensagem += "📦 Pedido para ENTREGA%0A";
-    mensagem += "📍 Endereço: " + endereco + "%0A%0A";
+    mensagem += "📦 Pedido para ENTREGA\n";
+    mensagem += "📍 Endereço: " + endereco + "\n\n";
 } else {
-    mensagem += "🛍️ Pedido para RETIRADA%0A%0A";
+    mensagem += "🛍️ Pedido para RETIRADA\n\n";
 }
 
 mensagem += "Gostaria de fazer este pedido:\n\n";
     let total = 0;
 
     carrinho.forEach(produto => {
-        mensagem += "• " + produto.nome + " - R$ " + produto.preco.toFixed(2) + "%0A";
+        mensagem += "• " + produto.nome + " - R$ " + produto.preco.toFixed(2) + "\n";
         total += produto.preco;
     });
 
-    mensagem += "%0A💰 Total: R$ " + total.toFixed(2);
+    mensagem += "\n💰 Total: R$ " + total.toFixed(2);
 
     window.open("https://wa.me/5585988944421?text=" + encodeURIComponent(mensagem), "_blank");
 }
