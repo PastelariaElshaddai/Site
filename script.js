@@ -32,3 +32,22 @@ function verCarrinho() {
 
     alert(mensagem);
 }
+function enviarWhatsApp() {
+
+    if (carrinho.length === 0) {
+        alert("Seu carrinho está vazio!");
+        return;
+    }
+
+    let mensagem = "Olá! Gostaria de fazer este pedido:%0A%0A";
+    let total = 0;
+
+    carrinho.forEach(produto => {
+        mensagem += "• " + produto.nome + " - R$ " + produto.preco.toFixed(2) + "%0A";
+        total += produto.preco;
+    });
+
+    mensagem += "%0A💰 Total: R$ " + total.toFixed(2);
+
+    window.open("https://wa.me/?text=" + mensagem, "_blank");
+}
