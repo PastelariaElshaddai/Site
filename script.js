@@ -38,8 +38,9 @@ function enviarWhatsApp() {
         alert("Seu carrinho está vazio!");
         return;
     }
+let nome = prompt("Qual é o seu nome?");
 
-    let mensagem = "Olá! Gostaria de fazer este pedido:%0A%0A";
+let mensagem = "Olá! Meu nome é " + nome + ".%0A%0AGostaria de fazer este pedido:%0A%0A";
     let total = 0;
 
     carrinho.forEach(produto => {
