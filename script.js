@@ -39,7 +39,13 @@ function enviarWhatsApp() {
         return;
     }
 let nome = prompt("Qual é o seu nome?");
+let tipoPedido = prompt("Digite:\n1 - Entrega\n2 - Retirada");
 
+let endereco = "";
+
+if (tipoPedido == "1") {
+    endereco = prompt("Digite seu endereço:");
+}
 let mensagem = "Olá! Meu nome é " + nome + ".%0A%0AGostaria de fazer este pedido:%0A%0A";
     let total = 0;
 
