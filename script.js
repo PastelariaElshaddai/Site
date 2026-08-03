@@ -64,6 +64,6 @@ mensagem += "Gostaria de fazer este pedido:\n\n";
     });
 
     mensagem += "\n💰 Total: R$ " + total.toFixed(2);
-alert("https://wa.me/5585988944421?text=" + encodeURIComponent(mensagem));
+
     location.href = "https://wa.me/5585988944421?text=" + encodeURIComponent(mensagem);
 }
