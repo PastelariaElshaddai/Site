@@ -14,5 +14,21 @@ function adicionarProduto(nome, preco) {
 }
 
 function verCarrinho() {
-  alert("Em breve o carrinho será aberto!");
+
+    if (carrinho.length === 0) {
+        alert("Seu carrinho está vazio!");
+        return;
+    }
+
+    let mensagem = "🛒 Seu Carrinho:\n\n";
+    let total = 0;
+
+    carrinho.forEach(produto => {
+        mensagem += produto.nome + " - R$ " + produto.preco.toFixed(2) + "\n";
+        total += produto.preco;
+    });
+
+    mensagem += "\n💰 Total: R$ " + total.toFixed(2);
+
+    alert(mensagem);
 }
