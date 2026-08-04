@@ -38,7 +38,7 @@ Retirada
 
 <button onclick="enviarPedido()">Enviar para WhatsApp</button>
 <script>
-function enviarPedido() {
+let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];function enviarPedido() {
 
     let nome = document.getElementById("nome").value;
     let telefone = document.getElementById("telefone").value;
