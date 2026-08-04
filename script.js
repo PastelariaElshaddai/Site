@@ -67,3 +67,10 @@ mensagem += "Gostaria de fazer este pedido:\n\n";
 
     location.href = "https://wa.me/5585988944421?text=" + encodeURIComponent(mensagem);
 }
+function irParaPedido() {
+
+    localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+    window.location.href = "pedido.html";
+
+}
