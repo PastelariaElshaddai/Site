@@ -46,7 +46,11 @@ let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
     let tipo = document.querySelector('input[name="tipo"]:checked').value;
     let endereco = document.getElementById("endereco").value;
     let observacao = document.getElementById("observacao").value;
+let pedidos = "";
 
+carrinho.forEach(item => {
+    pedidos += `• ${item.nome} - R$ ${item.preco}\n`;
+});
     let mensagem =
 `🍴 *Novo Pedido - Pastelaria El Shaddai*
 
