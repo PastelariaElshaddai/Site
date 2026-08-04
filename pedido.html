@@ -37,6 +37,31 @@ Retirada
 <br><br>
 
 <button onclick="enviarPedido()">Enviar para WhatsApp</button>
+<script>
+function enviarPedido() {
 
+    let nome = document.getElementById("nome").value;
+    let telefone = document.getElementById("telefone").value;
+    let tipo = document.querySelector('input[name="tipo"]:checked').value;
+    let endereco = document.getElementById("endereco").value;
+    let observacao = document.getElementById("observacao").value;
+
+    let mensagem =
+`🍴 *Novo Pedido - Pastelaria El Shaddai*
+
+👤 Nome: ${nome}
+📞 Telefone: ${telefone}
+🚚 Tipo: ${tipo}
+📍 Endereço: ${endereco}
+
+📝 Observações:
+${observacao}`;
+
+    window.open(
+        "https://wa.me/5585988944421?text=" + encodeURIComponent(mensagem),
+        "_blank"
+    );
+}
+</script>
 </body>
 </html>
