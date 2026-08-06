@@ -51,8 +51,7 @@ let pedidos = "";
 carrinho.forEach(item => {
     pedidos += `• ${item.nome} - R$ ${item.preco}\n`;
 });
-    let mensagem =
-`🍴 *Novo Pedido - Pastelaria El Shaddai*
+    let mensagem = `*Novo Pedido - Pastelaria El Shaddai*
 
 👤 Nome: ${nome}
 📞 Telefone: ${telefone}
@@ -60,9 +59,10 @@ carrinho.forEach(item => {
 📍 Endereço: ${endereco}
 
 📝 Observações:
-${observacao}`;
+${observacao}
+
 🛒 Pedido:
-${pedidos}
+${pedidos}`;
     window.open(
         "https://wa.me/5585988944421?text=" + encodeURIComponent(mensagem),
         "_blank"
