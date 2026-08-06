@@ -36,40 +36,47 @@ Retirada
 
 <br><br>
 
-<button onclick="enviarPedido()">Enviar para WhatsApp</button>
+<button onclick="enviarPedido()">📦 Enviar Pedido</button>
+
 <script>
+
 let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-    function enviarPedido() {
+
+function enviarPedido() {
 
     let nome = document.getElementById("nome").value;
     let telefone = document.getElementById("telefone").value;
     let tipo = document.querySelector('input[name="tipo"]:checked').value;
     let endereco = document.getElementById("endereco").value;
     let observacao = document.getElementById("observacao").value;
-let pedidos = "";
 
-carrinho.forEach(item => {
-    pedidos += `• ${item.nome} - R$ ${item.preco}\n`;
-});
-    let mensagem = `*Novo Pedido - Pastelaria El Shaddai*
+    let pedidos = "";
 
-👤 Nome: ${nome}
-📞 Telefone: ${telefone}
-🚚 Tipo: ${tipo}
-📍 Endereço: ${endereco}
+    carrinho.forEach(item => {
+        pedidos += "• " + item.nome + " - R$ " + item.preco + "\n";
+    });
 
-📝 Observações:
-${observacao}
+    let mensagem =
+"*Novo Pedido - Pastelaria El Shaddai*\n\n" +
+"👤 Nome: " + nome + "\n" +
+"📞 Telefone: " + telefone + "\n" +
+"🚚 Tipo: " + tipo + "\n" +
+"📍 Endereço: " + endereco + "\n\n" +
+"📝 Observações:\n" +
+observacao + "\n\n" +
+"🛒 Pedido:\n" +
+pedidos;
 
-🛒 Pedido:
-${pedidos}`;
     window.open(
-        "https://wa.me/5585988944421?text=" + encodeURIComponent(mensagem),
+        "https://api.whatsapp.com/send?phone=5585988944421&text=" + encodeURIComponent(mensagem),
         "_blank"
     );
-        localStorage.removeItem("carrinho");
-window.location.href = "index.html";
+
+    localStorage.removeItem("carrinho");
+
 }
+
 </script>
+
 </body>
 </html>
