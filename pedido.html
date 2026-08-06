@@ -51,7 +51,7 @@ function enviarPedido() {
     let observacao = document.getElementById("observacao").value;
 
     let pedidos = "";
-
+let total = 0;
     carrinho.forEach(item => {
         pedidos += "• " + item.nome + " - R$ " + item.preco + "\n";
     });
