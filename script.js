@@ -6,7 +6,7 @@ function adicionarProduto(nome, preco) {
     nome: nome,
     preco: preco
   });
-
+localStorage.setItem("carrinho", JSON.stringify(carrinho));
   quantidade++;
   document.getElementById("contador").innerHTML = quantidade;
 
