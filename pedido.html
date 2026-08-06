@@ -53,8 +53,9 @@ function enviarPedido() {
     let pedidos = "";
 let total = 0;
     carrinho.forEach(item => {
-        pedidos += "• " + item.nome + " - R$ " + item.preco + "\n";
-    });
+    pedidos += "• " + item.nome + " - R$ " + item.preco + "\n";
+    total += Number(item.preco);
+});
 
     let mensagem =
 "*Novo Pedido - Pastelaria El Shaddai*\n\n" +
