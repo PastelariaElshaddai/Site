@@ -66,8 +66,8 @@ let total = 0;
 "📝 Observações:\n" +
 observacao + "\n\n" +
 "🛒 Pedido:\n" +
-pedidos;
-
+pedidos +
+"\n💰 Total: R$ " + total.toFixed(2);
     window.open(
         "https://api.whatsapp.com/send?phone=5585988944421&text=" + encodeURIComponent(mensagem),
         "_blank"
