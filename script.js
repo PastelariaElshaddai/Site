@@ -16,19 +16,28 @@ localStorage.setItem("carrinho", JSON.stringify(carrinho));
 function verCarrinho() {
 
     if (carrinho.length === 0) {
-        alert("Seu carrinho está vazio!");
+        alert("🛒 Seu carrinho está vazio!");
         return;
     }
 
-    let mensagem = "🛒 Seu Carrinho:\n\n";
+    let mensagem = "🛒 SEU CARRINHO:\n\n";
     let total = 0;
 
-    carrinho.forEach(produto => {
-        mensagem += produto.nome + " - R$ " + produto.preco.toFixed(2) + "\n";
-        total += produto.preco;
+    carrinho.forEach((produto, index) => {
+
+        mensagem +=
+            (index + 1) + ". " +
+            produto.nome +
+            " - R$ " +
+            Number(produto.preco).toFixed(2) +
+            "\n";
+
+        total += Number(produto.preco);
     });
 
-    mensagem += "\n💰 Total: R$ " + total.toFixed(2);
+    mensagem +=
+        "\n💰 TOTAL: R$ " +
+        total.toFixed(2);
 
     alert(mensagem);
 }
