@@ -69,13 +69,14 @@ observacao + "\n\n" +
 pedidos + 
 "\n💰 Total: R$ " + total.toFixed(2);
     alert("Total = " + total);
-    window.open(
-        "https://api.whatsapp.com/send?phone=5585988944421&text=" + encodeURIComponent(mensagem),
-        "_blank"
-    );
-
     localStorage.removeItem("carrinho");
 
+window.open(
+    "https://api.whatsapp.com/send?phone=5585988944421&text=" + encodeURIComponent(mensagem),
+    "_blank"
+);
+
+window.location.href = "index.html";
 }
 
 </script>
