@@ -513,7 +513,8 @@ function enviarwhatsApp() {
         mensagem +=
             "• " +
             produto.nome +
-            " - R$ "      Number(produto.preco).toFixed(2) +
+            " - R$ " +
+            Number(produto.preco).toFixed(2) +
             "\n";
 
 
@@ -558,4 +559,4 @@ function irParaPedido() {
 
     window.location.href = "pedido.html";
 
-        }
+}
