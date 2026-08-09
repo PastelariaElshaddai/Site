@@ -20,26 +20,186 @@ function verCarrinho() {
         return;
     }
 
-    let mensagem = "🛒 SEU CARRINHO:\n\n";
-    let total = 0;
+    let grupos = {};
 
-    carrinho.forEach((produto, index) => {
+    carrinho.forEach(produto => {
+        let chave = produto.nome + "|" + produto.preco;
 
-        mensagem +=
-            (index + 1) + ". " +
-            produto.nome +
-            " - R$ " +
-            Number(produto.preco).toFixed(2) +
-            "\n";
+        if (!grupos[chave]) {
+            grupos[chave] = {
+                nome: produto.nome,
+                preco: Number(produto.preco),
+                quantidade: 0
+            };
+        }
 
-        total += Number(produto.preco);
+        grupos[chave].quantidade++;
     });
 
-    mensagem +=
-        "\n💰 TOTAL: R$ " +
-        total.toFixed(2);
+    let fundo = document.createElement("div");
 
-    alert(mensagem);
+    fundo.id = "fundoCarrinho";
+
+    fundo.style.cssText = `
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background:rgba(0,0,0,0.6);
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        z-index:9999;
+    `;
+
+    let caixa = document.createElement("div");
+
+    caixa.style.cssText = `
+        background:white;
+        width:90%;
+        max-width:450px;
+        max-height:80%;
+        overflow:auto;
+        border-radius:15px;
+        padding:20px;
+        box-sizing:border-box;
+    `;
+
+    let titulo = document.createElement("h2");
+    titulo.innerHTML = "🛒 Seu Carrinho";
+    caixa.appendChild(titulo);
+
+    let total = 0;
+
+    Object.values(grupos).forEach(produto => {
+
+        total += produto.preco * produto.quantidade;
+
+        let item = document.createElement("div");
+
+        item.style.cssText = `
+            border-bottom:1px solid #ddd;
+            padding:12px 0;
+        `;
+
+        item.innerHTML = `
+            <strong>${produto.nome}</strong><br>
+            R$ ${produto.preco.toFixed(2)} cada<br><br>
+
+            <button onclick="diminuirProduto('${produto.nome}', ${produto.preco})">
+                ➖
+            </button>
+
+            <strong style="margin:0 15px;">
+                ${produto.quantidade}
+            </strong>
+
+            <button onclick="aumentarProduto('${produto.nome}', ${produto.preco})">
+                ➕
+            </button>
+
+            <button onclick="removerProduto('${produto.nome}', ${produto.preco})"
+                style="margin-left:15px;">
+                🗑️
+            </button>
+        `;
+
+        caixa.appendChild(item);
+    });
+
+    let totalTexto = document.createElement("h2");
+
+    totalTexto.innerHTML =
+        "💰 Total: R$ " + total.toFixed(2);
+
+    caixa.appendChild(totalTexto);
+
+    let fechar = document.createElement("button");
+
+    fechar.innerHTML = "❌ Fechar";
+
+    fechar.style.cssText = `
+        width:100%;
+        padding:12px;
+        margin-top:10px;
+    `;
+
+    fechar.onclick = function() {
+        fundo.remove();
+    };
+
+    caixa.appendChild(fechar);
+
+    fundo.appendChild(caixa);
+
+    document.body.appendChild(fundo);
+}
+
+
+function aumentarProduto(nome, preco) {
+
+    carrinho.push({
+        nome: nome,
+        preco: preco
+    });
+
+    localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+    quantidade = carrinho.length;
+    document.getElementById("contador").innerHTML = quantidade;
+
+    document.getElementById("fundoCarrinho").remove();
+
+    verCarrinho();
+}
+
+
+function diminuirProduto(nome, preco) {
+
+    let indice = carrinho.findIndex(
+        produto => produto.nome === nome && Number(produto.preco) === Number(preco)
+    );
+
+    if (indice !== -1) {
+        carrinho.splice(indice, 1);
+    }
+
+    localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+    quantidade = carrinho.length;
+    document.getElementById("contador").innerHTML = quantidade;
+
+    document.getElementById("fundoCarrinho").remove();
+
+    if (carrinho.length > 0) {
+        verCarrinho();
+    } else {
+        alert("🛒 Seu carrinho está vazio!");
+    }
+}
+
+
+function removerProduto(nome, preco) {
+
+    carrinho = carrinho.filter(
+        produto =>
+            !(produto.nome === nome &&
+              Number(produto.preco) === Number(preco))
+    );
+
+    localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+    quantidade = carrinho.length;
+    document.getElementById("contador").innerHTML = quantidade;
+
+    document.getElementById("fundoCarrinho").remove();
+
+    if (carrinho.length > 0) {
+        verCarrinho();
+    } else {
+        alert("🛒 Seu carrinho está vazio!");
+    }
 }
 function enviarWhatsApp() {
 
