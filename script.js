@@ -35,7 +35,7 @@ function verCarrinho() {
 
     if (carrinho.length === 0) {
 
-        alert("🛒 Seu carrinho está vazio!");
+        alert("Seu carrinho está vazio!");
 
         return;
     }
@@ -69,8 +69,6 @@ function verCarrinho() {
     });
 
 
-    // FUNDO
-
     let fundo = document.createElement("div");
 
     fundo.id = "fundoCarrinho";
@@ -90,8 +88,6 @@ function verCarrinho() {
     `;
 
 
-    // CAIXA
-
     let caixa = document.createElement("div");
 
 
@@ -107,11 +103,9 @@ function verCarrinho() {
     `;
 
 
-    // TÍTULO
-
     let titulo = document.createElement("h2");
 
-    titulo.innerHTML = "🛒 Seu Carrinho";
+    titulo.innerHTML = "Seu Carrinho";
 
     caixa.appendChild(titulo);
 
@@ -119,10 +113,7 @@ function verCarrinho() {
     let total = 0;
 
 
-    // PRODUTOS
-
     Object.values(grupos).forEach(produto => {
-
 
         total += produto.preco * produto.quantidade;
 
@@ -146,23 +137,17 @@ function verCarrinho() {
 
 
             <button onclick="diminuirProduto('${produto.nome}', ${produto.preco})">
-
-                ➖
-
+                −
             </button>
 
 
             <strong style="margin:0 15px;">
-
                 ${produto.quantidade}
-
             </strong>
 
 
             <button onclick="aumentarProduto('${produto.nome}', ${produto.preco})">
-
-                ➕
-
+                +
             </button>
 
 
@@ -170,7 +155,7 @@ function verCarrinho() {
                 onclick="removerProduto('${produto.nome}', ${produto.preco})"
                 style="margin-left:15px;">
 
-                🗑️
+                Remover
 
             </button>
 
@@ -182,13 +167,11 @@ function verCarrinho() {
     });
 
 
-    // TOTAL
-
     let totalTexto = document.createElement("h2");
 
 
     totalTexto.innerHTML =
-        "💰 Total: R$ " +
+        "Total: R$ " +
         total.toFixed(2);
 
 
@@ -202,7 +185,7 @@ function verCarrinho() {
     let finalizar = document.createElement("button");
 
 
-    finalizar.innerHTML = "📦 Fazer Pedido";
+    finalizar.innerHTML = "Fazer pedido";
 
 
     finalizar.style.cssText = `
@@ -239,7 +222,7 @@ function verCarrinho() {
     let fechar = document.createElement("button");
 
 
-    fechar.innerHTML = "❌ Fechar";
+    fechar.innerHTML = "Fechar";
 
 
     fechar.style.cssText = `
@@ -374,7 +357,7 @@ function diminuirProduto(nome, preco) {
 
     } else {
 
-        alert("🛒 Seu carrinho está vazio!");
+        alert("Seu carrinho está vazio!");
 
     }
 
@@ -436,7 +419,7 @@ function removerProduto(nome, preco) {
 
     } else {
 
-        alert("🛒 Seu carrinho está vazio!");
+        alert("Seu carrinho está vazio!");
 
     }
 
@@ -486,17 +469,17 @@ function enviarwhatsApp() {
     if (tipoPedido === "1") {
 
         mensagem +=
-            "🚚 Pedido para ENTREGA\n";
+            "Pedido para ENTREGA\n";
 
         mensagem +=
-            "📍 Endereço: " +
+            "Endereço: " +
             endereco +
             "\n";
 
     } else {
 
         mensagem +=
-            "🛍️ Pedido para RETIRADA\n";
+            "Pedido para RETIRADA\n";
 
     }
 
@@ -524,7 +507,7 @@ function enviarwhatsApp() {
 
 
     mensagem +=
-        "\n💰 Total: R$ " +
+        "\nTotal: R$ " +
         total.toFixed(2);
 
 
@@ -544,7 +527,7 @@ function irParaPedido() {
 
     if (carrinho.length === 0) {
 
-        alert("🛒 Seu carrinho está vazio!");
+        alert("Seu carrinho está vazio!");
 
         return;
 
@@ -559,4 +542,4 @@ function irParaPedido() {
 
     window.location.href = "pedido.html";
 
-}
+        }
