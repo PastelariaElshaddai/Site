@@ -1,18 +1,26 @@
-let carrinho = [];
-let quantidade = 0;
+let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+let quantidade = carrinho.length;
 
+
+// ADICIONAR PRODUTO
 function adicionarProduto(nome, preco) {
-  carrinho.push({
-    nome: nome,
-    preco: preco
-  });
-localStorage.setItem("carrinho", JSON.stringify(carrinho));
-  quantidade++;
-  document.getElementById("contador").innerHTML = quantidade;
 
-  alert(nome + " foi adicionado ao carrinho!");
+    carrinho.push({
+        nome: nome,
+        preco: preco
+    });
+
+    localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+    quantidade = carrinho.length;
+
+    document.getElementById("contador").innerHTML = quantidade;
+
+    alert(nome + " foi adicionado ao carrinho!");
 }
 
+
+// ABRIR CARRINHO
 function verCarrinho() {
 
     if (carrinho.length === 0) {
@@ -23,9 +31,11 @@ function verCarrinho() {
     let grupos = {};
 
     carrinho.forEach(produto => {
+
         let chave = produto.nome + "|" + produto.preco;
 
         if (!grupos[chave]) {
+
             grupos[chave] = {
                 nome: produto.nome,
                 preco: Number(produto.preco),
@@ -35,6 +45,7 @@ function verCarrinho() {
 
         grupos[chave].quantidade++;
     });
+
 
     let fundo = document.createElement("div");
 
@@ -53,6 +64,7 @@ function verCarrinho() {
         z-index:9999;
     `;
 
+
     let caixa = document.createElement("div");
 
     caixa.style.cssText = `
@@ -66,15 +78,21 @@ function verCarrinho() {
         box-sizing:border-box;
     `;
 
+
     let titulo = document.createElement("h2");
+
     titulo.innerHTML = "🛒 Seu Carrinho";
+
     caixa.appendChild(titulo);
 
+
     let total = 0;
+
 
     Object.values(grupos).forEach(produto => {
 
         total += produto.preco * produto.quantidade;
+
 
         let item = document.createElement("div");
 
@@ -82,6 +100,7 @@ function verCarrinho() {
             border-bottom:1px solid #ddd;
             padding:12px 0;
         `;
+
 
         item.innerHTML = `
             <strong>${produto.nome}</strong><br>
@@ -105,8 +124,10 @@ function verCarrinho() {
             </button>
         `;
 
+
         caixa.appendChild(item);
     });
+
 
     let totalTexto = document.createElement("h2");
 
@@ -115,6 +136,36 @@ function verCarrinho() {
 
     caixa.appendChild(totalTexto);
 
+
+    // BOTÃO FINALIZAR PEDIDO
+    let finalizar = document.createElement("button");
+
+    finalizar.innerHTML = "📦 Finalizar Pedido";
+
+    finalizar.style.cssText = `
+        width:100%;
+        padding:12px;
+        margin-top:10px;
+        font-size:16px;
+        font-weight:bold;
+    `;
+
+
+    finalizar.onclick = function() {
+
+        localStorage.setItem(
+            "carrinho",
+            JSON.stringify(carrinho)
+        );
+
+        window.location.href = "pedido.html";
+    };
+
+
+    caixa.appendChild(finalizar);
+
+
+    // BOTÃO FECHAR
     let fechar = document.createElement("button");
 
     fechar.innerHTML = "❌ Fechar";
@@ -125,9 +176,13 @@ function verCarrinho() {
         margin-top:10px;
     `;
 
+
     fechar.onclick = function() {
+
         fundo.remove();
+
     };
+
 
     caixa.appendChild(fechar);
 
@@ -137,6 +192,8 @@ function verCarrinho() {
 }
 
 
+
+// AUMENTAR QUANTIDADE
 function aumentarProduto(nome, preco) {
 
     carrinho.push({
@@ -144,9 +201,13 @@ function aumentarProduto(nome, preco) {
         preco: preco
     });
 
-    localStorage.setItem("carrinho", JSON.stringify(carrinho));
+    localStorage.setItem(
+        "carrinho",
+        JSON.stringify(carrinho)
+    );
 
     quantidade = carrinho.length;
+
     document.getElementById("contador").innerHTML = quantidade;
 
     document.getElementById("fundoCarrinho").remove();
@@ -155,91 +216,190 @@ function aumentarProduto(nome, preco) {
 }
 
 
+
+// DIMINUIR QUANTIDADE
 function diminuirProduto(nome, preco) {
 
     let indice = carrinho.findIndex(
-        produto => produto.nome === nome && Number(produto.preco) === Number(preco)
+        produto =>
+            produto.nome === nome &&
+            Number(produto.preco) === Number(preco)
     );
 
+
     if (indice !== -1) {
+
         carrinho.splice(indice, 1);
+
     }
 
-    localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+    localStorage.setItem(
+        "carrinho",
+        JSON.stringify(carrinho)
+    );
+
 
     quantidade = carrinho.length;
+
     document.getElementById("contador").innerHTML = quantidade;
+
 
     document.getElementById("fundoCarrinho").remove();
 
+
     if (carrinho.length > 0) {
+
         verCarrinho();
+
     } else {
+
         alert("🛒 Seu carrinho está vazio!");
+
     }
 }
 
 
+
+// REMOVER PRODUTO
 function removerProduto(nome, preco) {
 
     carrinho = carrinho.filter(
         produto =>
-            !(produto.nome === nome &&
-              Number(produto.preco) === Number(preco))
+            !(
+                produto.nome === nome &&
+                Number(produto.preco) === Number(preco)
+            )
     );
 
-    localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+    localStorage.setItem(
+        "carrinho",
+        JSON.stringify(carrinho)
+    );
+
 
     quantidade = carrinho.length;
+
     document.getElementById("contador").innerHTML = quantidade;
+
 
     document.getElementById("fundoCarrinho").remove();
 
+
     if (carrinho.length > 0) {
+
         verCarrinho();
+
     } else {
+
         alert("🛒 Seu carrinho está vazio!");
+
     }
 }
-function enviarWhatsApp() {
+
+
+
+// ENVIAR PEDIDO DIRETO PELO WHATSAPP
+function enviarwhatsApp() {
 
     if (carrinho.length === 0) {
+
         alert("Seu carrinho está vazio!");
+
         return;
     }
-let nome = prompt("Qual é o seu nome?");
-let tipoPedido = prompt("Digite:\n1 - Entrega\n2 - Retirada");
 
-let endereco = "";
 
-if (tipoPedido == "1") {
-    endereco = prompt("Digite seu endereço:");
-}
-let mensagem = "Olá! Meu nome é " + nome + ".\n";
+    let nome = prompt("Qual é o seu nome?");
 
-if (tipoPedido == "1") {
-    mensagem += "📦 Pedido para ENTREGA\n";
-    mensagem += "📍 Endereço: " + endereco + "\n\n";
-} else {
-    mensagem += "🛍️ Pedido para RETIRADA\n\n";
-}
+    let tipoPedido =
+        prompt("Digite: 1 - Entrega\n2 - Retirada");
 
-mensagem += "Gostaria de fazer este pedido:\n\n";
+
+    let endereco = "";
+
+
+    if (tipoPedido === "1") {
+
+        endereco = prompt("Digite seu endereço:");
+
+    }
+
+
+    let mensagem =
+        "Olá! Meu nome é " +
+        nome +
+        ".\n";
+
+
+    if (tipoPedido === "1") {
+
+        mensagem +=
+            "🚚 Pedido para ENTREGA\n";
+
+        mensagem +=
+            "📍 Endereço: " +
+            endereco +
+            "\n";
+
+    } else {
+
+        mensagem +=
+            "🛍️ Pedido para RETIRADA\n";
+
+    }
+
+
+    mensagem +=
+        "\nGostaria de fazer este pedido:\n\n";
+
+
     let total = 0;
 
+
     carrinho.forEach(produto => {
-        mensagem += "• " + produto.nome + " - R$ " + produto.preco.toFixed(2) + "\n";
-        total += produto.preco;
+
+        mensagem +=
+            "• " +
+            produto.nome +
+            " - R$ " +
+            Number(produto.preco).toFixed(2) +
+            "\n";
+
+        total += Number(produto.preco);
+
     });
 
-    mensagem += "\n💰 Total: R$ " + total.toFixed(2);
 
-    location.href = "https://wa.me/5585988944421?text=" + encodeURIComponent(mensagem);
+    mensagem +=
+        "\n💰 Total: R$ " +
+        total.toFixed(2);
+
+
+    location.href =
+        "https://wa.me/5585988944421?text=" +
+        encodeURIComponent(mensagem);
 }
+
+
+
+// IR PARA FINALIZAÇÃO
 function irParaPedido() {
 
-    localStorage.setItem("carrinho", JSON.stringify(carrinho));
+    if (carrinho.length === 0) {
+
+        alert("🛒 Seu carrinho está vazio!");
+
+        return;
+    }
+
+
+    localStorage.setItem(
+        "carrinho",
+        JSON.stringify(carrinho)
+    );
+
 
     window.location.href = "pedido.html";
-
 }
