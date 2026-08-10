@@ -1,85 +1,325 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Finalizar Pedido</title>
+
+<title>Finalizar Pedido - Pastelaria El Shaddai</title>
+
 </head>
 
 <body>
 
-<h1>🍴 Finalizar Pedido</h1>
+<h1>Finalizar Pedido</h1>
 
-<p>Nome:</p>
-<input type="text" id="nome">
+<h2>Dados do cliente</h2>
 
-<p>Telefone:</p>
-<input type="tel" id="telefone">
-
-<p>Como deseja receber?</p>
-
-<label>
-<input type="radio" name="tipo" value="Entrega" checked>
-Entrega
-</label>
-
-<label>
-<input type="radio" name="tipo" value="Retirada">
-Retirada
-</label>
-
-<p>Endereço:</p>
-<textarea id="endereco"></textarea>
-
-<p>Observações:</p>
-<textarea id="observacao"></textarea>
+<label>Nome:</label>
+<br>
+<input type="text" id="nome" placeholder="Seu nome">
 
 <br><br>
 
-<button onclick="enviarPedido()">📦 Enviar Pedido</button>
+<label>Telefone:</label>
+<br>
+<input type="tel" id="telefone" placeholder="Seu telefone">
+
+<br><br>
+
+<h2>Como deseja receber?</h2>
+
+<label>
+<input
+type="radio"
+name="tipo"
+value="Entrega"
+checked
+onchange="mostrarEndereco()">
+Entrega
+</label>
+
+<br>
+
+<label>
+<input
+type="radio"
+name="tipo"
+value="Retirada"
+onchange="mostrarEndereco()">
+Retirada
+</label>
+
+
+<div id="areaEndereco">
+
+<h2>Endereço de entrega</h2>
+
+<label>Rua:</label>
+<br>
+<input
+type="text"
+id="rua"
+placeholder="Nome da rua">
+
+<br><br>
+
+<label>Número:</label>
+<br>
+<input
+type="text"
+id="numero"
+placeholder="Número">
+
+<br><br>
+
+<label>Complemento:</label>
+<br>
+<input
+type="text"
+id="complemento"
+placeholder="Casa, apartamento, bloco...">
+
+<br><br>
+
+<label>Ponto de referência:</label>
+<br>
+<input
+type="text"
+id="referencia"
+placeholder="Ex.: perto da praça">
+
+</div>
+
+
+<h2>Observações</h2>
+
+<textarea
+id="observacao"
+placeholder="Alguma observação sobre o pedido?">
+</textarea>
+
+<br><br>
+
+<button onclick="enviarPedido()">
+Enviar Pedido
+</button>
+
 
 <script>
 
-let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+let carrinho =
+JSON.parse(localStorage.getItem("carrinho")) || [];
+
+
+// ==========================================
+// MOSTRAR OU ESCONDER ENDEREÇO
+// ==========================================
+
+function mostrarEndereco() {
+
+    let tipo =
+    document.querySelector(
+        'input[name="tipo"]:checked'
+    ).value;
+
+    let area =
+    document.getElementById("areaEndereco");
+
+    if (tipo === "Entrega") {
+
+        area.style.display = "block";
+
+    } else {
+
+        area.style.display = "none";
+
+    }
+}
+
+
+// ==========================================
+// ENVIAR PEDIDO
+// ==========================================
 
 function enviarPedido() {
 
-    let nome = document.getElementById("nome").value;
-    let telefone = document.getElementById("telefone").value;
-    let tipo = document.querySelector('input[name="tipo"]:checked').value;
-    let endereco = document.getElementById("endereco").value;
-    let observacao = document.getElementById("observacao").value;
+    let nome =
+    document.getElementById("nome").value;
+
+    let telefone =
+    document.getElementById("telefone").value;
+
+    let tipo =
+    document.querySelector(
+        'input[name="tipo"]:checked'
+    ).value;
+
+    let observacao =
+    document.getElementById("observacao").value;
+
 
     let pedidos = "";
-let total = 0;
-    carrinho.forEach(item => {
-    pedidos += "• " + item.nome + " - R$ " + item.preco + "\n";
-    total += Number(item.preco);
-});
+
+    let total = 0;
+
+
+    // ======================================
+    // PRODUTOS DO CARRINHO
+    // ======================================
+
+    carrinho.forEach(function(item) {
+
+        pedidos +=
+        "• " +
+        item.nome +
+        " - R$ " +
+        Number(item.preco).toFixed(2) +
+        "\n";
+
+        total += Number(item.preco);
+
+    });
+
+
+    // ======================================
+    // MENSAGEM
+    // ======================================
 
     let mensagem =
-"*Novo Pedido - Pastelaria El Shaddai*\n\n" +
-"👤 Nome: " + nome + "\n" +
-"📞 Telefone: " + telefone + "\n" +
-"🚚 Tipo: " + tipo + "\n" +
-"📍 Endereço: " + endereco + "\n\n" +
-"📝 Observações:\n" +
-observacao + "\n\n" +
-"🛒 Pedido:\n" +
-pedidos + 
-"\n💰 Total: R$ " + total.toFixed(2);
-    alert("Total = " + total);
+    "*NOVO PEDIDO - PASTELARIA EL SHADDAI*" +
+    "\n\n" +
+
+    "Nome: " +
+    nome +
+    "\n" +
+
+    "Telefone: " +
+    telefone +
+    "\n" +
+
+    "Tipo: " +
+    tipo +
+    "\n";
+
+
+    // ======================================
+    // ENDEREÇO DE ENTREGA
+    // ======================================
+
+    if (tipo === "Entrega") {
+
+        let rua =
+        document.getElementById("rua").value;
+
+        let numero =
+        document.getElementById("numero").value;
+
+        let complemento =
+        document.getElementById("complemento").value;
+
+        let referencia =
+        document.getElementById("referencia").value;
+
+
+        mensagem +=
+
+        "\n*ENDEREÇO DE ENTREGA*" +
+        "\n" +
+
+        "Rua: " +
+        rua +
+        "\n" +
+
+        "Número: " +
+        numero +
+        "\n" +
+
+        "Complemento: " +
+        complemento +
+        "\n" +
+
+        "Ponto de referência: " +
+        referencia +
+        "\n";
+
+    }
+
+
+    // ======================================
+    // PEDIDO
+    // ======================================
+
+    mensagem +=
+
+    "\n*PEDIDO*" +
+    "\n" +
+
+    pedidos +
+
+    "\n*TOTAL: R$ " +
+    total.toFixed(2) +
+    "*";
+
+
+    // ======================================
+    // OBSERVAÇÕES
+    // ======================================
+
+    if (observacao.trim() !== "") {
+
+        mensagem +=
+
+        "\n\n*OBSERVAÇÕES*" +
+        "\n" +
+
+        observacao;
+
+    }
+
+
+    // ======================================
+    // ABRIR WHATSAPP
+    // ======================================
+
+    window.open(
+
+        "https://api.whatsapp.com/send?phone=5585988944421&text=" +
+        encodeURIComponent(mensagem),
+
+        "_blank"
+
+    );
+
+
+    // ======================================
+    // LIMPAR CARRINHO
+    // ======================================
+
     localStorage.removeItem("carrinho");
 
-window.open(
-    "https://api.whatsapp.com/send?phone=5585988944421&text=" + encodeURIComponent(mensagem),
-    "_blank"
-);
 
-window.location.href = "index.html";
+    // ======================================
+    // VOLTAR PARA O INDEX
+    // ======================================
+
+    setTimeout(function() {
+
+        window.location.href = "index.html";
+
+    }, 1000);
+
 }
+
+
+// ==========================================
+// INICIAR PÁGINA
+// ==========================================
+
+mostrarEndereco();
 
 </script>
 
 </body>
+
 </html>
