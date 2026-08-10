@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,118 +13,269 @@
 <body>
 
 <header>
+
 <h1>🍴 Pastelaria El Shaddai</h1>
+
 <p>Feito a dois, no ponto pra você!</p>
+
 </header>
 
+
 <div class="container">
+
+
 <div class="topo-info">
-    <p>🚚 Entrega • 🛍️ Retirada • 💳 Pix, Cartão e Dinheiro</p>
+
+<p>🚚 Entrega • 🛍️ Retirada • 💳 Pix, Cartão e Dinheiro</p>
+
 </div>
 
-<input type="text" placeholder="🔍 Pesquisar pastel..." class="pesquisa">
+
+<input
+type="text"
+placeholder="🔍 Pesquisar pastel..."
+class="pesquisa"
+>
+
 
 <div class="categorias">
 
-<button class="botao">🥟 Pastéis</button>
+<button class="botao">
+🥟 Pastéis
+</button>
 
-<button class="botao">🥤 Bebidas</button>
+<button class="botao">
+🥤 Bebidas
+</button>
 
-<button class="botao">🔥 Combos</button>
+<button class="botao">
+🔥 Combos
+</button>
 
-<button class="botao">🍫 Doces</button>
+<button class="botao">
+🍫 Doces
+</button>
 
 </div>
+
+
 <div class="banner-promocao">
 
 <h2>🔥 PROMOÇÃO DA SEMANA</h2>
 
-<p>Na compra de 2 pastéis, ganhe um refrigerante com desconto.</p>
+<p>
+Na compra de 2 pastéis, ganhe um refrigerante com desconto.
+</p>
 
 </div>
+
 
 <div class="acoes">
 
-<button class="botao" onclick="verCarrinho()">🛒 Carrinho (<span id="contador">0</span>)</button>
-<button class="botao" onclick="irParaPedido()">📦 Enviar Pedido</button>
-<button class="botao">📍 Localização</button>
+<button
+class="botao"
+onclick="verCarrinho()">
+
+🛒 Carrinho
+(<span id="contador">0</span>)
+
+</button>
+
+
+<button
+class="botao"
+onclick="irParaPedido()">
+
+📦 Fazer pedido
+
+</button>
+
+
+<button class="botao">
+
+📍 Localização
+
+</button>
 
 </div>
+
+
 <h2>⭐ Mais vendidos</h2>
+
+
 <div class="produtos">
+
+
+<!-- PASTEL DE CARNE -->
 
 <div class="card-produto">
 
-<img src="https://via.placeholder.com/300x200?text=Pastel+de+Carne" alt="Pastel de Carne">
+<img
+src="https://via.placeholder.com/300x200?text=Pastel+de+Carne"
+alt="Pastel de Carne"
+>
 
 <h3>Pastel de Carne</h3>
 
-<p>Massa crocante e recheio especial.</p>
+<p>
+Massa crocante e recheio especial.
+</p>
 
-<p class="preco">R$ 15,00</p>
+<p class="preco">
+R$ 15,00
+</p>
 
-<button class="botao" onclick="adicionarProduto('Pastel de Carne',15)">🛒 Adicionar</button>
-<div class="card-produto">
-<h3>Pastel de Frango</h3>
-    
-<p>Frango desfiado com catupiry.</p>
+<button
+class="botao"
+onclick="adicionarProduto('Pastel de Carne',15)">
 
-<p class="preco">R$ 16,00</p>
-<button class="botao" onclick="adicionarProduto('Pastel de Frango',16)">🛒 Adicionar</button>
+Adicionar
+
+</button>
+
 </div>
 
+
+<!-- PASTEL DE FRANGO -->
+
 <div class="card-produto">
 
-<img src="https://via.placeholder.com/300x200?text=Pastel+de+Pizza" alt="Pastel de Pizza">
+<h3>Pastel de Frango</h3>
+
+<p>
+Frango desfiado com catupiry.
+</p>
+
+<p class="preco">
+R$ 16,00
+</p>
+
+<button
+class="botao"
+onclick="adicionarProduto('Pastel de Frango',16)">
+
+Adicionar
+
+</button>
+
+</div>
+
+
+<!-- PASTEL DE PIZZA -->
+
+<div class="card-produto">
+
+<img
+src="https://via.placeholder.com/300x200?text=Pastel+de+Pizza"
+alt="Pastel de Pizza"
+>
 
 <h3>Pastel de Pizza</h3>
 
-<p>Mussarela, presunto e tomate.</p>
+<p>
+Mussarela, presunto e tomate.
+</p>
 
-<p class="preco">R$ 17,00</p>
+<p class="preco">
+R$ 17,00
+</p>
 
-<button class="botao" onclick="adicionarProduto('Pastel de Pizza',17)">Adicionar</button>
+<button
+class="botao"
+onclick="adicionarProduto('Pastel de Pizza',17)">
+
+Adicionar
+
+</button>
+
 </div>
-    
+
+
+</div>
+
+
 <div class="banner">
+
 <h2>🥟 Os melhores pastéis da cidade!</h2>
-<p>Feitos na hora, com ingredientes selecionados.</p>
+
+<p>
+Feitos na hora, com ingredientes selecionados.
+</p>
+
 </div>
 
-<h2>Bem-vindo à Pastelaria El Shaddai</h2>
 
-<p>Escolha uma opção abaixo:</p>
+<h2>
+Bem-vindo à Pastelaria El Shaddai
+</h2>
+
+<p>
+Escolha uma opção abaixo:
+</p>
+
 
 <h3>Categorias</h3>
 
-<button class="botao">🥟 Pastéis</button>
 
-<button class="botao">🥤 Bebidas</button>
+<button class="botao">
+🥟 Pastéis
+</button>
 
-<button class="botao">🔥 Combos</button>
+<button class="botao">
+🥤 Bebidas
+</button>
 
-<button class="botao">🍫 Doces</button>
+<button class="botao">
+🔥 Combos
+</button>
 
-<button class="botao">📦 Acompanhar Pedido</button>
+<button class="botao">
+🍫 Doces
+</button>
 
-<button class="botao">📲 WhatsApp</button>
+<button class="botao">
+📦 Acompanhar Pedido
+</button>
 
-<button class="botao">📍 Localização</button>
+<button class="botao">
+📲 WhatsApp
+</button>
+
+<button class="botao">
+📍 Localização
+</button>
+
+
 </div>
+
+
 <footer>
 
-<h3>Pastelaria El Shaddai</h3>
+<h3>
+Pastelaria El Shaddai
+</h3>
 
-<p>📍 Retirada no local e entrega</p>
+<p>
+📍 Retirada no local e entrega
+</p>
 
-<p>📲 WhatsApp: (colocaremos seu número depois)</p>
+<p>
+📲 WhatsApp: (colocaremos seu número depois)
+</p>
 
-<p>🕒 Funcionamento: 18:00 às 23:00</p>
+<p>
+🕒 Funcionamento: 18:00 às 23:00
+</p>
 
-<p>💳 Aceitamos Pix, Dinheiro e Cartão</p>
+<p>
+💳 Aceitamos Pix, Dinheiro e Cartão
+</p>
 
 </footer>
+
+
 <script src="script.js"></script>
 
 </body>
+
 </html>
