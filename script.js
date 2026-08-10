@@ -34,7 +34,7 @@ function verCarrinho() {
 
     if (carrinho.length === 0) {
 
-        alert("Seu carrinho está vazio!");
+        
 
         return;
     }
