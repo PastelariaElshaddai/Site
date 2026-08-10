@@ -23,8 +23,7 @@ function adicionarProduto(nome, preco) {
         contador.innerHTML = quantidade;
     }
 
-    alert(nome + " foi adicionado ao carrinho!");
-}
+    
 
 
 // ===============================
