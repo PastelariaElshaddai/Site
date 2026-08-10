@@ -22,7 +22,7 @@ function adicionarProduto(nome, preco) {
     if (contador) {
         contador.innerHTML = quantidade;
     }
-
+}
     
 
 
