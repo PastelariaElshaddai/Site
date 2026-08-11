@@ -420,3 +420,79 @@ function irParaPedido() {
 document.addEventListener("DOMContentLoaded", function() {
     atualizarContador();
 });
+// ==========================================
+// PERSONALIZAR PRODUTO
+// ==========================================
+
+function personalizarProduto(nome, preco, ingredientes, adicionais) {
+
+    let escolha = {};
+
+    ingredientes.forEach(function(ingrediente) {
+
+        let resposta = confirm(
+            "Deseja adicionar " + ingrediente + "?"
+        );
+
+        escolha[ingrediente] = resposta;
+
+    });
+
+    let adicionaisEscolhidos = [];
+
+    adicionais.forEach(function(adicional) {
+
+        let adicionar = confirm(
+            "Adicionar " +
+            adicional.nome +
+            " por R$ " +
+            Number(adicional.preco).toFixed(2) +
+            "?"
+        );
+
+        if (adicionar) {
+
+            adicionaisEscolhidos.push(adicional);
+
+        }
+
+    });
+
+    let precoFinal = Number(preco);
+
+    adicionaisEscolhidos.forEach(function(adicional) {
+
+        precoFinal += Number(adicional.preco);
+
+    });
+
+    let nomeFinal = nome;
+
+    if (adicionaisEscolhidos.length > 0) {
+
+        nomeFinal += " + " +
+            adicionaisEscolhidos
+                .map(function(adicional) {
+                    return adicional.nome;
+                })
+                .join(", ");
+
+    }
+
+    carrinho.push({
+
+        nome: nomeFinal,
+
+        preco: precoFinal
+
+    });
+
+    salvarCarrinho();
+
+    alert(
+        "✅ Produto adicionado ao carrinho!\n\n" +
+        nomeFinal +
+        "\nR$ " +
+        precoFinal.toFixed(2)
+    );
+}
