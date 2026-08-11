@@ -667,15 +667,17 @@ function verCarrinho() {
 
 
     caixa.style.cssText = `
-        background:white;
-        width:100%;
-        max-width:450px;
-        max-height:85vh;
-        overflow:auto;
-        border-radius:15px;
-        padding:20px;
-        box-sizing:border-box;
-    `;
+    background:linear-gradient(135deg, #fff8e1, #ffffff);
+    width:100%;
+    max-width:450px;
+    max-height:85vh;
+    overflow:auto;
+    border-radius:18px;
+    padding:20px;
+    box-sizing:border-box;
+    box-shadow:0 10px 35px rgba(0,0,0,0.25);
+    border:2px solid #ffb300;
+`;
 
 
     let titulo =
@@ -684,7 +686,11 @@ function verCarrinho() {
 
     titulo.innerHTML =
         "Seu Carrinho";
-
+titulo.style.cssText = `
+    color:#d84315;
+    margin-top:0;
+    font-size:28px;
+`;
 
     caixa.appendChild(titulo);
 
