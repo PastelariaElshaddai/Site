@@ -5,7 +5,8 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>Finalizar Pedido - Pastelaria El Shaddai</title>
 
@@ -16,160 +17,330 @@
 }
 
 body {
+
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: #fff8e7;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: #fff8e1;
+
     color: #222;
+
 }
+
+
+/* =====================================
+   CABEÇALHO
+===================================== */
 
 header {
-    background: linear-gradient(135deg, #d92323, #ffb300);
+
+    background: linear-gradient(
+        135deg,
+        #e53935,
+        #ffb300
+    );
+
     color: white;
+
     text-align: center;
-    padding: 25px 15px;
+
+    padding: 25px 20px;
+
+    box-shadow:
+        0 3px 10px rgba(0,0,0,0.15);
+
 }
+
 
 header h1 {
-    margin: 0;
+
+    margin: 0 0 8px;
+
     font-size: 28px;
+
 }
+
 
 header p {
-    margin: 8px 0 0;
+
+    margin: 0;
+
     font-size: 16px;
+
 }
 
-.container-pedido {
+
+/* =====================================
+   CONTAINER
+===================================== */
+
+.container {
+
     width: 92%;
+
     max-width: 600px;
-    margin: 25px auto 40px;
-}
 
-.card {
-    background: white;
+    margin: 25px auto;
+
+    background: #ffffff;
+
+    border-radius: 18px;
+
     padding: 22px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.12);
+
+    border: 2px solid #ffb300;
+
+}
+
+
+/* =====================================
+   TÍTULOS
+===================================== */
+
+h2 {
+
+    color: #d84315;
+
+    margin-top: 10px;
+
+}
+
+
+h3 {
+
+    color: #e65100;
+
+}
+
+
+/* =====================================
+   CAMPOS
+===================================== */
+
+.grupo {
+
     margin-bottom: 18px;
-    border-radius: 16px;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.10);
+
 }
 
-.card h2 {
-    margin-top: 0;
-    color: #c62828;
-    font-size: 22px;
-}
 
-label {
+.grupo label {
+
     display: block;
+
     font-weight: bold;
-    margin-top: 15px;
-    margin-bottom: 6px;
+
+    margin-bottom: 7px;
+
 }
+
 
 input,
-select,
-textarea {
+textarea,
+select {
+
     width: 100%;
+
     padding: 13px;
+
     border: 1px solid #ccc;
+
     border-radius: 9px;
+
     font-size: 16px;
-    background: white;
+
+    outline: none;
+
+    background: #fffdf7;
+
 }
 
-textarea {
-    min-height: 80px;
-    resize: vertical;
+
+input:focus,
+textarea:focus,
+select:focus {
+
+    border-color: #ffb300;
+
+    box-shadow:
+        0 0 0 2px rgba(255,179,0,0.15);
+
 }
+
+
+textarea {
+
+    min-height: 90px;
+
+    resize: vertical;
+
+}
+
+
+/* =====================================
+   ENTREGA / RETIRADA
+===================================== */
 
 .opcoes {
+
     display: flex;
-    gap: 15px;
-    margin-top: 10px;
+
+    gap: 10px;
+
 }
+
 
 .opcao {
+
     flex: 1;
+
     border: 2px solid #ddd;
-    padding: 13px;
+
     border-radius: 10px;
-    cursor: pointer;
+
+    padding: 13px;
+
     text-align: center;
-    font-weight: bold;
+
+    cursor: pointer;
+
 }
+
 
 .opcao input {
+
     width: auto;
-    margin-right: 6px;
+
+    margin-right: 5px;
+
 }
 
-#areaEntrega {
-    margin-top: 10px;
+
+/* =====================================
+   ENDEREÇO
+===================================== */
+
+#areaEndereco {
+
+    margin-top: 15px;
+
 }
 
-.salvar {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 18px;
-    font-weight: normal;
+
+/* =====================================
+   RESUMO DO PEDIDO
+===================================== */
+
+.resumo {
+
+    margin-top: 25px;
+
+    padding: 18px;
+
+    background: #fff8e1;
+
+    border: 1px solid #ffcc80;
+
+    border-radius: 12px;
+
 }
 
-.salvar input {
-    width: auto;
+
+.resumo h3 {
+
+    margin-top: 0;
+
 }
 
-.item-pedido {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
+
+#listaPedido {
+
+    line-height: 1.6;
+
 }
 
-.resumo-linha {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 12px;
-}
 
 .total {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 18px;
-    padding-top: 15px;
-    border-top: 2px solid #ddd;
+
     font-size: 22px;
+
     font-weight: bold;
-    color: #c62828;
+
+    color: #d84315;
+
+    margin-top: 15px;
+
 }
+
+
+/* =====================================
+   BOTÃO
+===================================== */
 
 .botao-enviar {
+
     width: 100%;
-    border: none;
+
     padding: 16px;
+
+    margin-top: 20px;
+
+    border: none;
+
     border-radius: 10px;
-    background: #ffb300;
-    color: #222;
-    font-size: 19px;
+
+    background: linear-gradient(
+        135deg,
+        #e53935,
+        #ffb300
+    );
+
+    color: white;
+
+    font-size: 18px;
+
     font-weight: bold;
+
     cursor: pointer;
+
 }
+
+
+.botao-enviar:active {
+
+    transform: scale(0.98);
+
+}
+
+
+/* =====================================
+   VOLTAR
+===================================== */
 
 .botao-voltar {
-    width: 100%;
-    margin-top: 10px;
-    padding: 13px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    background: white;
-    font-size: 16px;
-}
 
-.aviso {
-    font-size: 14px;
-    color: #666;
-    margin-top: 8px;
+    width: 100%;
+
+    padding: 13px;
+
+    margin-top: 10px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 10px;
+
+    background: white;
+
+    color: #555;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
 }
 
 </style>
@@ -184,20 +355,25 @@ textarea {
 
 <h1>Pastelaria El Shaddai</h1>
 
-<p>Finalizar pedido</p>
+<p>Feito a dois, no ponto pra você!</p>
 
 </header>
 
 
-<div class="container-pedido">
+<div class="container">
 
 
-<!-- DADOS DO CLIENTE -->
+<h2>Finalizar Pedido</h2>
 
-<div class="card">
 
-<h2>Dados do cliente</h2>
+<!-- =====================================
+     DADOS DO CLIENTE
+===================================== -->
 
+<h3>Dados do cliente</h3>
+
+
+<div class="grupo">
 
 <label for="nome">
 Nome
@@ -209,6 +385,10 @@ id="nome"
 placeholder="Seu nome"
 >
 
+</div>
+
+
+<div class="grupo">
 
 <label for="telefone">
 Telefone
@@ -220,29 +400,20 @@ id="telefone"
 placeholder="Seu telefone"
 >
 
-
-<label class="salvar">
-
-<input
-type="checkbox"
-id="salvarDados"
->
-
-Salvar meus dados para próximos pedidos
-
-</label>
-
 </div>
 
 
-<!-- ENTREGA OU RETIRADA -->
+<!-- =====================================
+     ENTREGA / RETIRADA
+===================================== -->
 
-<div class="card">
-
-<h2>Como deseja receber?</h2>
+<h3>
+Como deseja receber?
+</h3>
 
 
 <div class="opcoes">
+
 
 <label class="opcao">
 
@@ -251,7 +422,7 @@ type="radio"
 name="tipo"
 value="Entrega"
 checked
-onchange="mostrarEntrega()"
+onchange="mostrarEndereco()"
 >
 
 Entrega
@@ -265,53 +436,30 @@ Entrega
 type="radio"
 name="tipo"
 value="Retirada"
-onchange="mostrarEntrega()"
+onchange="mostrarEndereco()"
 >
 
 Retirada
 
 </label>
 
+
 </div>
 
 
-<div id="areaEntrega">
+<!-- =====================================
+     ENDEREÇO
+===================================== -->
+
+<div id="areaEndereco">
 
 
-<label for="bairro">
-Bairro
-</label>
+<h3>
+Endereço de entrega
+</h3>
 
-<select id="bairro" onchange="calcularTaxa()">
 
-<option value="">
-Selecione seu bairro
-</option>
-
-<!-- TAXAS DE TESTE -->
-
-<option value="5">
-Centro - R$ 5,00
-</option>
-
-<option value="6">
-Jereissati - R$ 6,00
-</option>
-
-<option value="7">
-Nova Metrópole - R$ 7,00
-</option>
-
-<option value="8">
-Outro bairro - R$ 8,00
-</option>
-
-</select>
-
-<p class="aviso">
-As taxas acima são apenas para teste. Depois colocaremos seus bairros e valores reais.
-</p>
-
+<div class="grupo">
 
 <label for="rua">
 Rua
@@ -323,6 +471,10 @@ id="rua"
 placeholder="Nome da rua"
 >
 
+</div>
+
+
+<div class="grupo">
 
 <label for="numero">
 Número
@@ -331,9 +483,13 @@ Número
 <input
 type="text"
 id="numero"
-placeholder="Número da casa"
+placeholder="Número"
 >
 
+</div>
+
+
+<div class="grupo">
 
 <label for="complemento">
 Complemento
@@ -345,6 +501,10 @@ id="complemento"
 placeholder="Casa, apartamento, bloco..."
 >
 
+</div>
+
+
+<div class="grupo">
 
 <label for="referencia">
 Ponto de referência
@@ -358,14 +518,34 @@ placeholder="Ex.: perto da praça"
 
 </div>
 
+
+<div class="grupo">
+
+<label for="bairro">
+Bairro
+</label>
+
+<input
+type="text"
+id="bairro"
+placeholder="Seu bairro"
+>
+
 </div>
 
 
-<!-- OBSERVAÇÕES -->
+</div>
 
-<div class="card">
 
-<h2>Observações</h2>
+<!-- =====================================
+     OBSERVAÇÕES
+===================================== -->
+
+<div class="grupo">
+
+<label for="observacao">
+Observações
+</label>
 
 <textarea
 id="observacao"
@@ -375,74 +555,53 @@ placeholder="Alguma observação sobre seu pedido?"
 </div>
 
 
-<!-- RESUMO -->
+<!-- =====================================
+     RESUMO
+===================================== -->
 
-<div class="card">
+<div class="resumo">
 
-<h2>Resumo do pedido</h2>
+<h3>
+Resumo do pedido
+</h3>
 
-<div id="listaPedido"></div>
 
-
-<div class="resumo-linha">
-
-<span>Subtotal</span>
-
-<strong id="subtotal">
-R$ 0,00
-</strong>
-
+<div id="listaPedido">
+Carregando pedido...
 </div>
 
 
-<div class="resumo-linha">
+<div
+class="total"
+id="totalPedido">
 
-<span>Taxa de entrega</span>
-
-<strong id="taxa">
-R$ 0,00
-</strong>
-
-</div>
-
-
-<div class="total">
-
-<span>Total</span>
-
-<span id="total">
-R$ 0,00
-</span>
+Total: R$ 0,00
 
 </div>
 
 </div>
 
 
-<!-- BOTÕES -->
-
-<div class="card">
+<!-- =====================================
+     BOTÕES
+===================================== -->
 
 <button
 class="botao-enviar"
-onclick="enviarPedido()"
->
+onclick="enviarPedido()">
 
-Enviar pedido
+Enviar pedido pelo WhatsApp
 
 </button>
 
 
 <button
 class="botao-voltar"
-onclick="window.location.href='index.html'"
->
+onclick="window.location.href='index.html'">
 
 Voltar para o cardápio
 
 </button>
-
-</div>
 
 
 </div>
@@ -451,9 +610,9 @@ Voltar para o cardápio
 <script>
 
 
-// ===============================
+// ==========================================
 // CARRINHO
-// ===============================
+// ==========================================
 
 let carrinho =
 JSON.parse(
@@ -461,19 +620,22 @@ localStorage.getItem("carrinho")
 ) || [];
 
 
-// ===============================
-// MOSTRAR ENTREGA
-// ===============================
+// ==========================================
+// MOSTRAR / ESCONDER ENDEREÇO
+// ==========================================
 
-function mostrarEntrega() {
+function mostrarEndereco() {
 
     let tipo =
     document.querySelector(
         'input[name="tipo"]:checked'
     ).value;
 
+
     let area =
-    document.getElementById("areaEntrega");
+    document.getElementById(
+        "areaEndereco"
+    );
 
 
     if (tipo === "Entrega") {
@@ -484,257 +646,150 @@ function mostrarEntrega() {
 
         area.style.display = "none";
 
-        document.getElementById("taxa").innerText =
-        "R$ 0,00";
-
-        atualizarTotal();
-
     }
 
 }
 
 
-// ===============================
-// CALCULAR TAXA
-// ===============================
+// ==========================================
+// MOSTRAR RESUMO
+// ==========================================
 
-function calcularTaxa() {
-
-    let tipo =
-    document.querySelector(
-        'input[name="tipo"]:checked'
-    ).value;
-
-
-    if (tipo !== "Entrega") {
-
-        document.getElementById("taxa").innerText =
-        "R$ 0,00";
-
-        atualizarTotal();
-
-        return;
-    }
-
-
-    let bairro =
-    document.getElementById("bairro").value;
-
-
-    let taxa =
-    Number(bairro || 0);
-
-
-    document.getElementById("taxa").innerText =
-    "R$ " + taxa.toFixed(2).replace(".", ",");
-
-
-    atualizarTotal();
-
-}
-
-
-// ===============================
-// MOSTRAR CARRINHO
-// ===============================
-
-function mostrarPedido() {
+function mostrarResumo() {
 
     let lista =
-    document.getElementById("listaPedido");
-
-    lista.innerHTML = "";
-
-
-    let subtotal = 0;
-
-
-    carrinho.forEach(item => {
-
-        let preco =
-        Number(item.preco);
-
-
-        subtotal += preco;
-
-
-        let div =
-        document.createElement("div");
-
-
-        div.className =
-        "item-pedido";
-
-
-        div.innerHTML = `
-            <span>${item.nome}</span>
-            <strong>R$ ${preco.toFixed(2).replace(".", ",")}</strong>
-        `;
-
-
-        lista.appendChild(div);
-
-    });
-
-
-    document.getElementById("subtotal").innerText =
-    "R$ " +
-    subtotal.toFixed(2).replace(".", ",");
-
-
-    atualizarTotal();
-
-}
-
-
-// ===============================
-// ATUALIZAR TOTAL
-// ===============================
-
-function atualizarTotal() {
-
-    let subtotal = 0;
-
-
-    carrinho.forEach(item => {
-
-        subtotal += Number(item.preco);
-
-    });
-
-
-    let tipo =
-    document.querySelector(
-        'input[name="tipo"]:checked'
-    ).value;
-
-
-    let taxa = 0;
-
-
-    if (tipo === "Entrega") {
-
-        taxa =
-        Number(
-            document.getElementById("bairro").value || 0
-        );
-
-    }
-
-
-    let total =
-    subtotal + taxa;
-
-
-    document.getElementById("total").innerText =
-    "R$ " +
-    total.toFixed(2).replace(".", ",");
-
-}
-
-
-// ===============================
-// SALVAR DADOS
-// ===============================
-
-function salvarDadosCliente() {
-
-    let dados = {
-
-        nome:
-        document.getElementById("nome").value,
-
-        telefone:
-        document.getElementById("telefone").value,
-
-        bairro:
-        document.getElementById("bairro").value,
-
-        rua:
-        document.getElementById("rua").value,
-
-        numero:
-        document.getElementById("numero").value,
-
-        complemento:
-        document.getElementById("complemento").value,
-
-        referencia:
-        document.getElementById("referencia").value
-
-    };
-
-
-    localStorage.setItem(
-        "dadosCliente",
-        JSON.stringify(dados)
-    );
-
-}
-
-
-// ===============================
-// CARREGAR DADOS SALVOS
-// ===============================
-
-function carregarDadosCliente() {
-
-    let dados =
-    JSON.parse(
-        localStorage.getItem("dadosCliente")
+    document.getElementById(
+        "listaPedido"
     );
 
 
-    if (!dados) {
+    let total = 0;
+
+
+    if (carrinho.length === 0) {
+
+        lista.innerHTML =
+        "Seu carrinho está vazio.";
 
         return;
 
     }
 
 
-    document.getElementById("nome").value =
-    dados.nome || "";
+    let grupos = {};
 
 
-    document.getElementById("telefone").value =
-    dados.telefone || "";
+    carrinho.forEach(function(item) {
+
+        let detalhes =
+        item.detalhes
+        ? item.detalhes.join(", ")
+        : "";
 
 
-    document.getElementById("bairro").value =
-    dados.bairro || "";
+        let chave =
+        item.nome +
+        "|" +
+        item.preco +
+        "|" +
+        detalhes;
 
 
-    document.getElementById("rua").value =
-    dados.rua || "";
+        if (!grupos[chave]) {
+
+            grupos[chave] = {
+
+                nome: item.nome,
+
+                preco: Number(item.preco),
+
+                detalhes:
+                item.detalhes || [],
+
+                quantidade: 0
+
+            };
+
+        }
 
 
-    document.getElementById("numero").value =
-    dados.numero || "";
+        grupos[chave].quantidade++;
+
+    });
 
 
-    document.getElementById("complemento").value =
-    dados.complemento || "";
+    let html = "";
 
 
-    document.getElementById("referencia").value =
-    dados.referencia || "";
+    Object.values(grupos).forEach(
+    function(item) {
 
 
-    calcularTaxa();
+        let subtotal =
+        item.preco *
+        item.quantidade;
+
+
+        total += subtotal;
+
+
+        html +=
+        "<strong>" +
+        item.quantidade +
+        "x " +
+        item.nome +
+        "</strong>";
+
+
+        if (
+            item.detalhes &&
+            item.detalhes.length > 0
+        ) {
+
+            html +=
+            "<br><small>" +
+            item.detalhes.join("<br>") +
+            "</small>";
+
+        }
+
+
+        html +=
+        "<br>R$ " +
+        subtotal
+        .toFixed(2)
+        .replace(".", ",") +
+        "<br><br>";
+
+    });
+
+
+    lista.innerHTML = html;
+
+
+    document.getElementById(
+        "totalPedido"
+    ).innerHTML =
+    "Total: R$ " +
+    total
+    .toFixed(2)
+    .replace(".", ",");
 
 }
 
 
-// ===============================
+// ==========================================
 // ENVIAR PEDIDO
-// ===============================
+// ==========================================
 
 function enviarPedido() {
 
 
     if (carrinho.length === 0) {
 
-        alert("Seu carrinho está vazio.");
+        alert(
+            "Seu carrinho está vazio."
+        );
 
         return;
 
@@ -742,22 +797,15 @@ function enviarPedido() {
 
 
     let nome =
-    document.getElementById("nome").value.trim();
+    document.getElementById(
+        "nome"
+    ).value.trim();
 
 
     let telefone =
-    document.getElementById("telefone").value.trim();
-
-
-    if (!nome || !telefone) {
-
-        alert(
-            "Preencha seu nome e telefone."
-        );
-
-        return;
-
-    }
+    document.getElementById(
+        "telefone"
+    ).value.trim();
 
 
     let tipo =
@@ -766,131 +814,97 @@ function enviarPedido() {
     ).value;
 
 
-    let bairro = "";
+    if (!nome) {
 
-    let rua = "";
-
-    let numero = "";
-
-    let complemento = "";
-
-    let referencia = "";
-
-    let taxa = 0;
-
-
-    if (tipo === "Entrega") {
-
-        bairro =
-        document.getElementById("bairro").options[
-            document.getElementById("bairro").selectedIndex
-        ].text;
-
-
-        taxa =
-        Number(
-            document.getElementById("bairro").value || 0
+        alert(
+            "Digite seu nome."
         );
 
-
-        rua =
-        document.getElementById("rua").value.trim();
-
-
-        numero =
-        document.getElementById("numero").value.trim();
-
-
-        complemento =
-        document.getElementById("complemento").value.trim();
-
-
-        referencia =
-        document.getElementById("referencia").value.trim();
-
-
-        if (!document.getElementById("bairro").value) {
-
-            alert("Selecione seu bairro.");
-
-            return;
-
-        }
-
-
-        if (!rua || !numero) {
-
-            alert(
-                "Preencha a rua e o número."
-            );
-
-            return;
-
-        }
+        return;
 
     }
 
 
-    let observacao =
-    document.getElementById("observacao").value.trim();
+    if (!telefone) {
 
+        alert(
+            "Digite seu telefone."
+        );
 
-    let subtotal = 0;
+        return;
 
-    let pedidos = "";
-
-
-    carrinho.forEach(item => {
-
-        let preco =
-        Number(item.preco);
-
-
-        subtotal += preco;
-
-
-        pedidos +=
-        "• " +
-        item.nome +
-        " - R$ " +
-        preco.toFixed(2) +
-        "\n";
-
-    });
-
-
-    let total =
-    subtotal + taxa;
+    }
 
 
     let mensagem =
-    "*NOVO PEDIDO - PASTELARIA EL SHADDAI*\n\n";
+    "*NOVO PEDIDO - PASTELARIA EL SHADDAI*"
+    + "\n\n";
 
 
     mensagem +=
-    "Nome: " +
+    "*Cliente:* " +
     nome +
     "\n";
 
 
     mensagem +=
-    "Telefone: " +
+    "*Telefone:* " +
     telefone +
-    "\n\n";
+    "\n";
 
 
     mensagem +=
-    "Tipo: " +
+    "*Forma de recebimento:* " +
     tipo +
     "\n";
 
 
     if (tipo === "Entrega") {
 
+
+        let rua =
+        document.getElementById(
+            "rua"
+        ).value.trim();
+
+
+        let numero =
+        document.getElementById(
+            "numero"
+        ).value.trim();
+
+
+        let complemento =
+        document.getElementById(
+            "complemento"
+        ).value.trim();
+
+
+        let referencia =
+        document.getElementById(
+            "referencia"
+        ).value.trim();
+
+
+        let bairro =
+        document.getElementById(
+            "bairro"
+        ).value.trim();
+
+
+        if (!rua || !numero || !bairro) {
+
+            alert(
+                "Preencha rua, número e bairro."
+            );
+
+            return;
+
+        }
+
+
         mensagem +=
-        "Bairro: " +
-        bairro +
-        "\n";
+        "\n*ENDEREÇO DE ENTREGA*\n";
 
 
         mensagem +=
@@ -902,6 +916,12 @@ function enviarPedido() {
         mensagem +=
         "Número: " +
         numero +
+        "\n";
+
+
+        mensagem +=
+        "Bairro: " +
+        bairro +
         "\n";
 
 
@@ -924,92 +944,116 @@ function enviarPedido() {
 
         }
 
+    }
+
+
+    let observacao =
+    document.getElementById(
+        "observacao"
+    ).value.trim();
+
+
+    if (observacao) {
 
         mensagem +=
-        "Taxa de entrega: R$ " +
-        taxa.toFixed(2) +
+        "\n*Observações:*\n" +
+        observacao +
         "\n";
 
     }
 
 
     mensagem +=
-    "\n*PEDIDO:*\n" +
-    pedidos;
+    "\n*PEDIDO:*\n";
 
 
-    mensagem +=
-    "\nSubtotal: R$ " +
-    subtotal.toFixed(2);
+    let total = 0;
 
 
-    mensagem +=
-    "\nTaxa: R$ " +
-    taxa.toFixed(2);
+    carrinho.forEach(function(item) {
+
+        let preco =
+        Number(item.preco);
+
+
+        total += preco;
+
+
+        mensagem +=
+        "• " +
+        item.nome;
+
+
+        if (
+            item.detalhes &&
+            item.detalhes.length > 0
+        ) {
+
+            mensagem +=
+            " (" +
+            item.detalhes.join(", ") +
+            ")";
+
+        }
+
+
+        mensagem +=
+        " - R$ " +
+        preco
+        .toFixed(2)
+        .replace(".", ",") +
+        "\n";
+
+    });
 
 
     mensagem +=
     "\n*TOTAL: R$ " +
-    total.toFixed(2) +
+    total
+    .toFixed(2)
+    .replace(".", ",") +
     "*";
 
 
-    if (observacao) {
-
-        mensagem +=
-        "\n\nObservações:\n" +
-        observacao;
-
-    }
+    localStorage.removeItem(
+        "carrinho"
+    );
 
 
-    // SALVAR DADOS SE MARCADO
+    window.open(
 
-    if (
-        document.getElementById("salvarDados").checked
-    ) {
+        "https://api.whatsapp.com/send?phone=5585988944421&text=" +
+        encodeURIComponent(mensagem),
 
-        salvarDadosCliente();
+        "_blank"
 
-    }
-
-
-    // ==================================
-    // COLOQUE SEU WHATSAPP AQUI
-    // ==================================
-
-    let numeroWhatsApp =
-    "5585988944421";
+    );
 
 
-    let url =
-    "https://wa.me/" +
-    numeroWhatsApp +
-    "?text=" +
-    encodeURIComponent(mensagem);
-
-
-    localStorage.removeItem("carrinho");
-
-
-    window.location.href = url;
+    window.location.href =
+    "index.html";
 
 }
 
 
-// ===============================
-// INICIAR PÁGINA
-// ===============================
+// ==========================================
+// INICIAR
+// ==========================================
 
-carregarDadosCliente();
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
 
-mostrarPedido();
+        mostrarEndereco();
 
-mostrarEntrega();
+        mostrarResumo();
+
+    }
+);
 
 </script>
 
 
 </body>
 
-    </html>
+</html>
