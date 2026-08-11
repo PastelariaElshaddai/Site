@@ -1,24 +1,16 @@
 // ======================================================
-// PASTELARIA EL SHADDAI - SCRIPT.JS
+// PASTELARIA EL SHADDAI
+// SCRIPT COMPLETO
 // ======================================================
-
-let carrinho =
-    JSON.parse(localStorage.getItem("carrinho")) || [];
 
 
 // ======================================================
-// CONTADOR
+// CARRINHO
 // ======================================================
 
-function atualizarContador() {
-
-    const contador =
-        document.getElementById("contador");
-
-    if (contador) {
-        contador.innerHTML = carrinho.length;
-    }
-}
+let carrinho = JSON.parse(
+    localStorage.getItem("carrinho")
+) || [];
 
 
 // ======================================================
@@ -37,6 +29,23 @@ function salvarCarrinho() {
 
 
 // ======================================================
+// CONTADOR
+// ======================================================
+
+function atualizarContador() {
+
+    const contador =
+        document.getElementById("contador");
+
+    if (contador) {
+
+        contador.innerHTML =
+            carrinho.length;
+    }
+}
+
+
+// ======================================================
 // ADICIONAR PRODUTO SIMPLES
 // ======================================================
 
@@ -51,6 +60,10 @@ function adicionarProduto(nome, preco) {
     });
 
     salvarCarrinho();
+
+    alert(
+        "Produto adicionado ao carrinho!"
+    );
 }
 
 
@@ -65,7 +78,7 @@ function personalizarProduto(
     adicionais
 ) {
 
-    // Remove uma janela anterior, se existir
+    // Remove janela anterior
     const antiga =
         document.getElementById(
             "modalPersonalizar"
@@ -85,6 +98,7 @@ function personalizarProduto(
 
     fundo.id =
         "modalPersonalizar";
+
 
     fundo.style.cssText = `
         position:fixed;
@@ -108,17 +122,18 @@ function personalizarProduto(
     const caixa =
         document.createElement("div");
 
+
     caixa.style.cssText = `
+        background:#fff8e7;
         width:100%;
-        max-width:450px;
+        max-width:500px;
         max-height:90vh;
         overflow-y:auto;
-        background:#fff8e7;
         border:4px solid #ffb300;
-        border-radius:22px;
+        border-radius:25px;
         padding:20px;
         box-sizing:border-box;
-        box-shadow:0 10px 35px rgba(0,0,0,0.35);
+        box-shadow:0 10px 30px rgba(0,0,0,0.35);
     `;
 
 
@@ -129,15 +144,18 @@ function personalizarProduto(
     const titulo =
         document.createElement("h2");
 
+
     titulo.innerHTML =
         "Personalize seu pedido";
 
+
     titulo.style.cssText = `
-        text-align:center;
         color:#c62828;
-        margin-top:0;
-        margin-bottom:18px;
+        text-align:center;
+        margin:5px 0 20px;
+        font-size:28px;
     `;
+
 
     caixa.appendChild(titulo);
 
@@ -146,33 +164,41 @@ function personalizarProduto(
     // PRODUTO
     // ==================================================
 
-    const produto =
+    const produtoInfo =
         document.createElement("div");
 
-    produto.style.cssText = `
+
+    produtoInfo.style.cssText = `
         background:white;
-        border-radius:12px;
-        padding:15px;
-        margin-bottom:20px;
-        border:1px solid #ffd166;
+        border:2px solid #ffd166;
+        border-radius:18px;
+        padding:18px;
+        margin-bottom:25px;
     `;
 
-    produto.innerHTML = `
-        <strong style="font-size:20px;">
+
+    produtoInfo.innerHTML = `
+
+        <strong style="
+            font-size:24px;
+            color:#222;
+        ">
             ${nome}
         </strong>
 
         <div style="
             color:#c62828;
-            font-size:20px;
+            font-size:24px;
             font-weight:bold;
-            margin-top:5px;
+            margin-top:8px;
         ">
             R$ ${Number(preco).toFixed(2)}
         </div>
+
     `;
 
-    caixa.appendChild(produto);
+
+    caixa.appendChild(produtoInfo);
 
 
     // ==================================================
@@ -187,13 +213,17 @@ function personalizarProduto(
         const tituloIngredientes =
             document.createElement("h3");
 
+
         tituloIngredientes.innerHTML =
             "Ingredientes";
 
+
         tituloIngredientes.style.cssText = `
             color:#c62828;
+            font-size:22px;
             margin-bottom:10px;
         `;
+
 
         caixa.appendChild(
             tituloIngredientes
@@ -201,40 +231,47 @@ function personalizarProduto(
 
 
         ingredientes.forEach(
-            function(ingrediente) {
+            function(ingrediente, indice) {
 
                 const linha =
                     document.createElement("label");
+
 
                 linha.style.cssText = `
                     display:flex;
                     align-items:center;
                     justify-content:space-between;
                     background:white;
-                    padding:13px;
-                    margin:8px 0;
-                    border-radius:10px;
-                    border:1px solid #ddd;
-                    font-size:17px;
+                    border:2px solid #ddd;
+                    border-radius:15px;
+                    padding:15px;
+                    margin-bottom:10px;
                     cursor:pointer;
+                    box-sizing:border-box;
                 `;
 
+
                 linha.innerHTML = `
-                    <span>
+
+                    <span style="
+                        font-size:19px;
+                    ">
                         ${ingrediente}
                     </span>
 
                     <input
                         type="checkbox"
-                        class="ingrediente-checkbox"
-                        value="${ingrediente}"
                         checked
                         style="
-                            width:22px;
-                            height:22px;
+                            width:28px;
+                            height:28px;
+                            accent-color:#ffb300;
                         "
+                        data-ingrediente="${indice}"
                     >
+
                 `;
+
 
                 caixa.appendChild(linha);
             }
@@ -246,6 +283,9 @@ function personalizarProduto(
     // ADICIONAIS
     // ==================================================
 
+    const caixasAdicionais = [];
+
+
     if (
         adicionais &&
         adicionais.length > 0
@@ -254,14 +294,18 @@ function personalizarProduto(
         const tituloAdicionais =
             document.createElement("h3");
 
+
         tituloAdicionais.innerHTML =
             "Adicionais";
 
+
         tituloAdicionais.style.cssText = `
             color:#c62828;
-            margin-top:22px;
+            font-size:22px;
+            margin-top:25px;
             margin-bottom:10px;
         `;
+
 
         caixa.appendChild(
             tituloAdicionais
@@ -269,49 +313,71 @@ function personalizarProduto(
 
 
         adicionais.forEach(
-            function(adicional, index) {
+            function(adicional, indice) {
 
                 const linha =
                     document.createElement("label");
+
 
                 linha.style.cssText = `
                     display:flex;
                     align-items:center;
                     justify-content:space-between;
                     background:white;
-                    padding:13px;
-                    margin:8px 0;
-                    border-radius:10px;
-                    border:1px solid #ddd;
-                    font-size:17px;
+                    border:2px solid #ddd;
+                    border-radius:15px;
+                    padding:15px;
+                    margin-bottom:10px;
                     cursor:pointer;
+                    box-sizing:border-box;
                 `;
 
+
                 linha.innerHTML = `
-                    <span>
+
+                    <span style="
+                        font-size:18px;
+                    ">
+
                         ${adicional.nome}
 
                         <strong style="
                             color:#c62828;
-                            margin-left:5px;
+                            margin-left:8px;
                         ">
-                            + R$
-                            ${Number(
+                            + R$ ${Number(
                                 adicional.preco
                             ).toFixed(2)}
                         </strong>
+
                     </span>
 
                     <input
                         type="checkbox"
-                        class="adicional-checkbox"
-                        data-index="${index}"
                         style="
-                            width:22px;
-                            height:22px;
+                            width:28px;
+                            height:28px;
+                            accent-color:#ffb300;
                         "
+                        data-adicional="${indice}"
                     >
+
                 `;
+
+
+                const checkbox =
+                    linha.querySelector(
+                        "input"
+                    );
+
+
+                caixasAdicionais.push({
+                    adicional:
+                        adicional,
+                    checkbox:
+                        checkbox
+                });
+
 
                 caixa.appendChild(linha);
             }
@@ -323,89 +389,91 @@ function personalizarProduto(
     // TOTAL
     // ==================================================
 
-    const areaTotal =
+    const totalCaixa =
         document.createElement("div");
 
-    areaTotal.style.cssText = `
+
+    totalCaixa.style.cssText = `
         background:white;
         border:2px solid #ffd166;
-        border-radius:12px;
-        padding:15px;
-        margin-top:20px;
+        border-radius:18px;
+        padding:18px;
+        margin-top:25px;
         text-align:center;
     `;
 
-    caixa.appendChild(areaTotal);
+
+    const totalTexto =
+        document.createElement("div");
 
 
-    function calcularTotal() {
+    totalTexto.style.cssText = `
+        color:#c62828;
+        font-size:25px;
+        font-weight:bold;
+    `;
+
+
+    function atualizarTotalPersonalizado() {
 
         let total =
             Number(preco);
 
 
-        const marcados =
-            caixa.querySelectorAll(
-                ".adicional-checkbox:checked"
-            );
+        caixasAdicionais.forEach(
+            function(item) {
 
+                if (
+                    item.checkbox.checked
+                ) {
 
-        marcados.forEach(
-            function(campo) {
-
-                const index =
-                    Number(
-                        campo.dataset.index
-                    );
-
-                total +=
-                    Number(
-                        adicionais[index].preco
-                    );
+                    total +=
+                        Number(
+                            item.adicional.preco
+                        );
+                }
             }
         );
 
 
-        areaTotal.innerHTML = `
-            <strong style="
-                font-size:22px;
-                color:#c62828;
-            ">
-                Total: R$ ${total.toFixed(2)}
-            </strong>
-        `;
-
-
-        return total;
+        totalTexto.innerHTML =
+            "Total: R$ " +
+            total.toFixed(2);
     }
 
 
-    calcularTotal();
+    totalCaixa.appendChild(
+        totalTexto
+    );
 
 
-    // Atualiza o total quando marcar adicional
-    caixa.addEventListener(
-        "change",
-        function(event) {
+    caixa.appendChild(
+        totalCaixa
+    );
 
-            if (
-                event.target.classList.contains(
-                    "adicional-checkbox"
-                )
-            ) {
 
-                calcularTotal();
-            }
+    caixasAdicionais.forEach(
+        function(item) {
+
+            item.checkbox.addEventListener(
+                "change",
+                atualizarTotalPersonalizado
+            );
+
         }
     );
 
 
+    atualizarTotalPersonalizado();
+
+
     // ==================================================
-    // BOTÃO ADICIONAR
+    // BOTÃO ADICIONAR AO CARRINHO
     // ==================================================
 
     const botaoAdicionar =
         document.createElement("button");
+
 
     botaoAdicionar.innerHTML =
         "Adicionar ao carrinho";
@@ -413,13 +481,13 @@ function personalizarProduto(
 
     botaoAdicionar.style.cssText = `
         width:100%;
-        padding:16px;
-        margin-top:20px;
-        border:0;
-        border-radius:12px;
+        padding:17px;
+        margin-top:18px;
         background:#ffb300;
         color:#222;
-        font-size:18px;
+        border:none;
+        border-radius:15px;
+        font-size:19px;
         font-weight:bold;
         cursor:pointer;
     `;
@@ -428,111 +496,68 @@ function personalizarProduto(
     botaoAdicionar.onclick =
         function() {
 
-            const escolhidos = [];
-
-
-            const marcados =
-                caixa.querySelectorAll(
-                    ".adicional-checkbox:checked"
-                );
-
-
-            marcados.forEach(
-                function(campo) {
-
-                    const index =
-                        Number(
-                            campo.dataset.index
-                        );
-
-                    escolhidos.push(
-                        adicionais[index]
-                    );
-                }
-            );
-
-
-            // Ingredientes mantidos
-            const ingredientesEscolhidos = [];
-
-
-            const ingredientesMarcados =
-                caixa.querySelectorAll(
-                    ".ingrediente-checkbox:checked"
-                );
-
-
-            ingredientesMarcados.forEach(
-                function(campo) {
-
-                    ingredientesEscolhidos.push(
-                        campo.value
-                    );
-                }
-            );
-
-
-            // Preço final
             let precoFinal =
                 Number(preco);
 
 
-            escolhidos.forEach(
-                function(adicional) {
+            let nomesAdicionais =
+                [];
 
-                    precoFinal +=
-                        Number(
-                            adicional.preco
+
+            caixasAdicionais.forEach(
+                function(item) {
+
+                    if (
+                        item.checkbox.checked
+                    ) {
+
+                        precoFinal +=
+                            Number(
+                                item.adicional.preco
+                            );
+
+
+                        nomesAdicionais.push(
+                            item.adicional.nome
                         );
+                    }
                 }
             );
 
 
-            // Nome final
             let nomeFinal =
                 nome;
 
 
             if (
-                escolhidos.length > 0
+                nomesAdicionais.length > 0
             ) {
 
                 nomeFinal +=
                     " + " +
-                    escolhidos
-                        .map(
-                            function(adicional) {
-                                return adicional.nome;
-                            }
-                        )
-                        .join(", ");
+                    nomesAdicionais.join(", ");
             }
 
 
-            // Adiciona ao carrinho
             carrinho.push({
 
-                nome: nomeFinal,
+                nome:
+                    nomeFinal,
 
-                preco: precoFinal,
+                preco:
+                    precoFinal
 
-                ingredientes:
-                    ingredientesEscolhidos,
-
-                adicionais:
-                    escolhidos.map(
-                        function(adicional) {
-                            return adicional.nome;
-                        }
-                    )
             });
 
 
             salvarCarrinho();
 
 
-            // Fecha a janela
             fundo.remove();
+
+
+            // Abre o carrinho automaticamente
+            verCarrinho();
         };
 
 
@@ -542,11 +567,12 @@ function personalizarProduto(
 
 
     // ==================================================
-    // CANCELAR
+    // BOTÃO CANCELAR
     // ==================================================
 
     const botaoCancelar =
         document.createElement("button");
+
 
     botaoCancelar.innerHTML =
         "Cancelar";
@@ -554,13 +580,13 @@ function personalizarProduto(
 
     botaoCancelar.style.cssText = `
         width:100%;
-        padding:14px;
+        padding:15px;
         margin-top:10px;
-        border:2px solid #c62828;
-        border-radius:12px;
         background:white;
         color:#c62828;
-        font-size:17px;
+        border:3px solid #c62828;
+        border-radius:15px;
+        font-size:18px;
         font-weight:bold;
         cursor:pointer;
     `;
@@ -570,6 +596,7 @@ function personalizarProduto(
         function() {
 
             fundo.remove();
+
         };
 
 
@@ -582,36 +609,45 @@ function personalizarProduto(
     // MOSTRAR
     // ==================================================
 
-    fundo.appendChild(caixa);
+    fundo.appendChild(
+        caixa
+    );
 
-    document.body.appendChild(fundo);
+    document.body.appendChild(
+        fundo
+    );
 }
 
 
 // ======================================================
-// CARRINHO
+// VER CARRINHO
 // ======================================================
 
 function verCarrinho() {
 
-    if (
-        carrinho.length === 0
-    ) {
-        return;
-    }
-
-
-    const antigo =
+    const anterior =
         document.getElementById(
             "fundoCarrinho"
         );
 
-    if (antigo) {
-        antigo.remove();
+
+    if (anterior) {
+        anterior.remove();
     }
 
 
-    // Agrupar produtos
+    if (
+        carrinho.length === 0
+    ) {
+
+        return;
+    }
+
+
+    // ==================================================
+    // AGRUPAR PRODUTOS
+    // ==================================================
+
     const grupos = {};
 
 
@@ -619,9 +655,9 @@ function verCarrinho() {
         function(produto) {
 
             const chave =
-                produto.nome +
+                String(produto.nome) +
                 "|" +
-                produto.preco;
+                Number(produto.preco);
 
 
             if (!grupos[chave]) {
@@ -636,7 +672,8 @@ function verCarrinho() {
                             produto.preco
                         ),
 
-                    quantidade:0
+                    quantidade:
+                        0
                 };
             }
 
@@ -646,9 +683,13 @@ function verCarrinho() {
     );
 
 
-    // Fundo
+    // ==================================================
+    // FUNDO
+    // ==================================================
+
     const fundo =
         document.createElement("div");
+
 
     fundo.id =
         "fundoCarrinho";
@@ -657,17 +698,22 @@ function verCarrinho() {
     fundo.style.cssText = `
         position:fixed;
         inset:0;
+        width:100%;
+        height:100%;
         background:rgba(0,0,0,0.65);
         display:flex;
         justify-content:center;
         align-items:center;
-        z-index:9999;
+        z-index:99998;
         padding:15px;
         box-sizing:border-box;
     `;
 
 
-    // Caixa
+    // ==================================================
+    // CAIXA
+    // ==================================================
+
     const caixa =
         document.createElement("div");
 
@@ -675,32 +721,48 @@ function verCarrinho() {
     caixa.style.cssText = `
         background:#fff8e7;
         width:100%;
-        max-width:450px;
+        max-width:500px;
         max-height:85vh;
-        overflow:auto;
+        overflow-y:auto;
         border:4px solid #ffb300;
-        border-radius:22px;
+        border-radius:25px;
         padding:20px;
         box-sizing:border-box;
+        box-shadow:0 10px 30px rgba(0,0,0,0.4);
     `;
 
+
+    // ==================================================
+    // TÍTULO
+    // ==================================================
 
     const titulo =
         document.createElement("h2");
 
+
     titulo.innerHTML =
         "Seu Carrinho";
+
 
     titulo.style.cssText = `
         color:#c62828;
         text-align:center;
-        margin-top:0;
+        margin:5px 0 20px;
+        font-size:28px;
     `;
 
-    caixa.appendChild(titulo);
+
+    caixa.appendChild(
+        titulo
+    );
 
 
-    let total = 0;
+    // ==================================================
+    // TOTAL
+    // ==================================================
+
+    let total =
+        0;
 
 
     Object.values(grupos).forEach(
@@ -718,79 +780,92 @@ function verCarrinho() {
             item.style.cssText = `
                 background:white;
                 border:2px solid #ffd166;
-                border-radius:14px;
+                border-radius:15px;
                 padding:15px;
                 margin-bottom:12px;
+                box-sizing:border-box;
             `;
 
 
-            item.innerHTML = `
+            // Nome
+            const nomeProduto =
+                document.createElement("strong");
 
-                <strong style="
-                    font-size:18px;
-                ">
-                    ${produto.nome}
-                </strong>
 
-                <br>
+            nomeProduto.innerHTML =
+                produto.nome;
 
-                R$ ${produto.preco.toFixed(2)}
-                cada
 
-                <br><br>
-
-                <button
-                    class="btnMenos"
-                    style="
-                        padding:10px 16px;
-                        border:0;
-                        border-radius:8px;
-                        background:#ffb300;
-                        font-size:20px;
-                    "
-                >
-                    −
-                </button>
-
-                <strong style="
-                    margin:0 15px;
-                    font-size:19px;
-                ">
-                    ${produto.quantidade}
-                </strong>
-
-                <button
-                    class="btnMais"
-                    style="
-                        padding:10px 16px;
-                        border:0;
-                        border-radius:8px;
-                        background:#ffb300;
-                        font-size:20px;
-                    "
-                >
-                    +
-                </button>
-
-                <button
-                    class="btnRemover"
-                    style="
-                        margin-left:8px;
-                        padding:10px;
-                        border:0;
-                        border-radius:8px;
-                        background:#c62828;
-                        color:white;
-                    "
-                >
-                    Remover
-                </button>
+            nomeProduto.style.cssText = `
+                display:block;
+                font-size:19px;
+                color:#222;
+                margin-bottom:6px;
             `;
 
 
-            item.querySelector(
-                ".btnMenos"
-            ).onclick =
+            item.appendChild(
+                nomeProduto
+            );
+
+
+            // Preço
+            const precoProduto =
+                document.createElement("div");
+
+
+            precoProduto.innerHTML =
+                "R$ " +
+                produto.preco.toFixed(2) +
+                " cada";
+
+
+            precoProduto.style.cssText = `
+                color:#555;
+                margin-bottom:15px;
+            `;
+
+
+            item.appendChild(
+                precoProduto
+            );
+
+
+            // Área dos botões
+            const controles =
+                document.createElement("div");
+
+
+            controles.style.cssText = `
+                display:flex;
+                align-items:center;
+                gap:10px;
+            `;
+
+
+            // MENOS
+            const menos =
+                document.createElement("button");
+
+
+            menos.innerHTML =
+                "−";
+
+
+            menos.style.cssText = `
+                background:#ffb300;
+                color:#222;
+                border:none;
+                border-radius:10px;
+                width:48px;
+                height:45px;
+                font-size:25px;
+                font-weight:bold;
+                cursor:pointer;
+            `;
+
+
+            menos.onclick =
                 function() {
 
                     diminuirProduto(
@@ -800,9 +875,45 @@ function verCarrinho() {
                 };
 
 
-            item.querySelector(
-                ".btnMais"
-            ).onclick =
+            // QUANTIDADE
+            const quantidade =
+                document.createElement("strong");
+
+
+            quantidade.innerHTML =
+                produto.quantidade;
+
+
+            quantidade.style.cssText = `
+                font-size:20px;
+                min-width:30px;
+                text-align:center;
+            `;
+
+
+            // MAIS
+            const mais =
+                document.createElement("button");
+
+
+            mais.innerHTML =
+                "+";
+
+
+            mais.style.cssText = `
+                background:#ffb300;
+                color:#222;
+                border:none;
+                border-radius:10px;
+                width:48px;
+                height:45px;
+                font-size:25px;
+                font-weight:bold;
+                cursor:pointer;
+            `;
+
+
+            mais.onclick =
                 function() {
 
                     aumentarProduto(
@@ -812,9 +923,29 @@ function verCarrinho() {
                 };
 
 
-            item.querySelector(
-                ".btnRemover"
-            ).onclick =
+            // REMOVER
+            const remover =
+                document.createElement("button");
+
+
+            remover.innerHTML =
+                "Remover";
+
+
+            remover.style.cssText = `
+                background:#c62828;
+                color:white;
+                border:none;
+                border-radius:10px;
+                padding:12px;
+                font-size:15px;
+                font-weight:bold;
+                cursor:pointer;
+                margin-left:auto;
+            `;
+
+
+            remover.onclick =
                 function() {
 
                     removerProduto(
@@ -824,143 +955,33 @@ function verCarrinho() {
                 };
 
 
-            caixa.appendChild(item);
+            controles.appendChild(
+                menos
+            );
+
+            controles.appendChild(
+                quantidade
+            );
+
+            controles.appendChild(
+                mais
+            );
+
+            controles.appendChild(
+                remover
+            );
+
+
+            item.appendChild(
+                controles
+            );
+
+
+            caixa.appendChild(
+                item
+            );
         }
     );
 
 
-    // Total
-    const totalTexto =
-        document.createElement("h2");
-
-
-    totalTexto.innerHTML =
-        "💰 Total: R$ " +
-        total.toFixed(2);
-
-
-    totalTexto.style.cssText = `
-        color:#c62828;
-        text-align:center;
-    `;
-
-
-    caixa.appendChild(
-        totalTexto
-    );
-
-
-    // Fazer pedido
-    const finalizar =
-        document.createElement("button");
-
-
-    finalizar.innerHTML =
-        "Fazer pedido";
-
-
-    finalizar.style.cssText = `
-        width:100%;
-        padding:16px;
-        margin-top:10px;
-        border:0;
-        border-radius:12px;
-        background:#ffb300;
-        font-size:18px;
-        font-weight:bold;
-        cursor:pointer;
-    `;
-
-
-    finalizar.onclick =
-        function() {
-
-            salvarCarrinho();
-
-            window.location.href =
-                "pedido.html";
-        };
-
-
-    caixa.appendChild(
-        finalizar
-    );
-
-
-    // Fechar
-    const fechar =
-        document.createElement("button");
-
-
-    fechar.innerHTML =
-        "Fechar";
-
-
-    fechar.style.cssText = `
-        width:100%;
-        padding:14px;
-        margin-top:10px;
-        border:2px solid #c62828;
-        border-radius:12px;
-        background:white;
-        color:#c62828;
-        font-weight:bold;
-    `;
-
-
-    fechar.onclick =
-        function() {
-
-            fundo.remove();
-        };
-
-
-    caixa.appendChild(
-        fechar
-    );
-
-
-    fundo.appendChild(caixa);
-
-    document.body.appendChild(fundo);
-}
-
-
-// ======================================================
-// AUMENTAR
-// ======================================================
-
-function aumentarProduto(
-    nome,
-    preco
-) {
-
-    carrinho.push({
-
-        nome:nome,
-
-        preco:Number(preco)
-    });
-
-
-    salvarCarrinho();
-
-
-    const fundo =
-        document.getElementById(
-            "fundoCarrinho"
-        );
-
-
-    if (fundo) {
-        fundo.remove();
-    }
-
-
-    verCarrinho();
-}
-
-
-// ======================================================
-// DIMINUIR
-// ========================================
+    // =================================================
