@@ -309,71 +309,127 @@ function personalizarProduto(nome, preco, ingredientes, adicionais) {
     // ==================================================
 
     document.getElementById(
-        "btnAdicionarPersonalizado"
-    ).onclick = function() {
+    "btnAdicionarPersonalizado"
+).onclick = function() {
 
-        let total = Number(preco);
+    let total = Number(preco);
 
-        let escolhidos = [];
+    let adicionaisEscolhidos = [];
 
-
-        document
-            .querySelectorAll(
-                "#personalizarModal .adicional"
-            )
-            .forEach(check => {
-
-                if (check.checked) {
-
-                    const index =
-                        Number(check.dataset.index);
-
-                    const adicional =
-                        adicionais[index];
-
-                    total +=
-                        Number(adicional.preco);
-
-                    escolhidos.push(
-                        adicional.nome
-                    );
-                }
-
-            });
+    let ingredientesRetirados = [];
 
 
-        let nomeFinal = nome;
+    // ==============================================
+    // VERIFICAR INGREDIENTES RETIRADOS
+    // ==============================================
 
+    document
+        .querySelectorAll(
+            "#personalizarModal .ingrediente"
+        )
+        .forEach(function(check) {
 
-        if (escolhidos.length > 0) {
+            if (!check.checked) {
 
-            nomeFinal +=
-                " + " +
-                escolhidos.join(", ");
-        }
+                ingredientesRetirados.push(
+                    check.dataset.nome
+                );
 
+            }
 
-        carrinho.push({
-            nome: nomeFinal,
-            preco: total,
-            quantidade: 1
         });
 
 
-        salvarCarrinho();
+    // ==============================================
+    // VERIFICAR ADICIONAIS
+    // ==============================================
+
+    document
+        .querySelectorAll(
+            "#personalizarModal .adicional"
+        )
+        .forEach(function(check) {
+
+            if (check.checked) {
+
+                const index =
+                    Number(check.dataset.index);
+
+                const adicional =
+                    adicionais[index];
+
+                total +=
+                    Number(adicional.preco);
+
+                adicionaisEscolhidos.push(
+                    adicional.nome
+                );
+
+            }
+
+        });
 
 
-        fundo.remove();
+    // ==============================================
+    // NOME DO PRODUTO
+    // ==============================================
+
+    let nomeFinal = nome;
 
 
-        verCarrinho();
+    // ==============================================
+    // DETALHES DO PEDIDO
+    // ==============================================
 
-    };
+    let detalhes = [];
 
 
-    // ==================================================
-    // FECHAR
-    // ==================================================
+    if (ingredientesRetirados.length > 0) {
+
+        detalhes.push(
+            "Sem: " +
+            ingredientesRetirados.join(", ")
+        );
+
+    }
+
+
+    if (adicionaisEscolhidos.length > 0) {
+
+        detalhes.push(
+            "Adicional: " +
+            adicionaisEscolhidos.join(", ")
+        );
+
+    }
+
+
+    // ==============================================
+    // SALVAR NO CARRINHO
+    // ==============================================
+
+    carrinho.push({
+
+        nome: nomeFinal,
+
+        preco: total,
+
+        quantidade: 1,
+
+        detalhes: detalhes
+
+    });
+
+
+    salvarCarrinho();
+
+
+    fundo.remove();
+
+
+    verCarrinho();
+
+};
 
     document.getElementById(
         "btnFecharPersonalizar"
