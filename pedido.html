@@ -232,7 +232,7 @@ textarea {
 
 
 /* =====================================
-   RESUMO DO PEDIDO
+   RESUMO
 ===================================== */
 
 .resumo {
@@ -260,6 +260,51 @@ textarea {
 #listaPedido {
 
     line-height: 1.6;
+
+}
+
+
+.item-resumo {
+
+    padding: 12px 0;
+
+    border-bottom: 1px solid #ffd180;
+
+}
+
+
+.item-resumo:last-child {
+
+    border-bottom: none;
+
+}
+
+
+.nome-produto {
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+}
+
+
+.detalhes-produto {
+
+    margin-top: 5px;
+
+    color: #555;
+
+    font-size: 15px;
+
+}
+
+
+.preco-produto {
+
+    margin-top: 5px;
+
+    font-weight: bold;
 
 }
 
@@ -626,13 +671,20 @@ localStorage.getItem("carrinho")
 
 function mostrarEndereco() {
 
-    let tipo =
+    const selecionado =
     document.querySelector(
         'input[name="tipo"]:checked'
-    ).value;
+    );
 
 
-    let area =
+    if (!selecionado) return;
+
+
+    const tipo =
+    selecionado.value;
+
+
+    const area =
     document.getElementById(
         "areaEndereco"
     );
@@ -657,9 +709,15 @@ function mostrarEndereco() {
 
 function mostrarResumo() {
 
-    let lista =
+    const lista =
     document.getElementById(
         "listaPedido"
+    );
+
+
+    const totalElemento =
+    document.getElementById(
+        "totalPedido"
     );
 
 
@@ -671,105 +729,119 @@ function mostrarResumo() {
         lista.innerHTML =
         "Seu carrinho está vazio.";
 
+        totalElemento.innerHTML =
+        "Total: R$ 0,00";
+
         return;
 
     }
 
 
-    let grupos = {};
+    let html = "";
 
 
     carrinho.forEach(function(item) {
 
-        let detalhes =
-        item.detalhes
-        ? item.detalhes.join(", ")
-        : "";
+
+        // ==================================
+        // QUANTIDADE REAL
+        // ==================================
+
+        const quantidade =
+        Number(item.quantidade || 1);
 
 
-        let chave =
-        item.nome +
-        "|" +
-        item.preco +
-        "|" +
-        detalhes;
+        // ==================================
+        // PREÇO UNITÁRIO
+        // ==================================
+
+        const precoUnitario =
+        Number(item.preco || 0);
 
 
-        if (!grupos[chave]) {
+        // ==================================
+        // SUBTOTAL
+        // ==================================
 
-            grupos[chave] = {
-
-                nome: item.nome,
-
-                preco: Number(item.preco),
-
-                detalhes:
-                item.detalhes || [],
-
-                quantidade: 0
-
-            };
-
-        }
-
-
-        grupos[chave].quantidade++;
-
-    });
-
-
-    let html = "";
-
-
-    Object.values(grupos).forEach(
-    function(item) {
-
-
-        let subtotal =
-        item.preco *
-        item.quantidade;
+        const subtotal =
+        precoUnitario * quantidade;
 
 
         total += subtotal;
 
 
-        html +=
-        "<strong>" +
-        item.quantidade +
-        "x " +
-        item.nome +
-        "</strong>";
+        // ==================================
+        // NOME
+        // ==================================
 
+        html += `
+        
+            <div class="item-resumo">
+
+                <div class="nome-produto">
+                    ${quantidade}x ${item.nome}
+                </div>
+        `;
+
+
+        // ==================================
+        // DETALHES
+        // ==================================
 
         if (
             item.detalhes &&
             item.detalhes.length > 0
         ) {
 
-            html +=
-            "<br><small>" +
-            item.detalhes.join("<br>") +
-            "</small>";
+            html += `
+            
+                <div class="detalhes-produto">
+
+                    ${item.detalhes.join("<br>")}
+
+                </div>
+            
+            `;
 
         }
 
 
-        html +=
-        "<br>R$ " +
-        subtotal
-        .toFixed(2)
-        .replace(".", ",") +
-        "<br><br>";
+        // ==================================
+        // PREÇO
+        // ==================================
+
+        html += `
+        
+                <div class="preco-produto">
+
+                    R$ ${precoUnitario
+                        .toFixed(2)
+                        .replace(".", ",")
+                    }
+                    cada
+
+                    <br>
+
+                    Subtotal:
+                    R$ ${subtotal
+                        .toFixed(2)
+                        .replace(".", ",")
+                    }
+
+                </div>
+
+            </div>
+        
+        `;
 
     });
 
 
-    lista.innerHTML = html;
+    lista.innerHTML =
+    html;
 
 
-    document.getElementById(
-        "totalPedido"
-    ).innerHTML =
+    totalElemento.innerHTML =
     "Total: R$ " +
     total
     .toFixed(2)
@@ -785,6 +857,10 @@ function mostrarResumo() {
 function enviarPedido() {
 
 
+    // ======================================
+    // VERIFICAR CARRINHO
+    // ======================================
+
     if (carrinho.length === 0) {
 
         alert(
@@ -796,23 +872,46 @@ function enviarPedido() {
     }
 
 
-    let nome =
+    // ======================================
+    // DADOS DO CLIENTE
+    // ======================================
+
+    const nome =
     document.getElementById(
         "nome"
     ).value.trim();
 
 
-    let telefone =
+    const telefone =
     document.getElementById(
         "telefone"
     ).value.trim();
 
 
-    let tipo =
+    const tipoSelecionado =
     document.querySelector(
         'input[name="tipo"]:checked'
-    ).value;
+    );
 
+
+    if (!tipoSelecionado) {
+
+        alert(
+            "Escolha entrega ou retirada."
+        );
+
+        return;
+
+    }
+
+
+    const tipo =
+    tipoSelecionado.value;
+
+
+    // ======================================
+    // VALIDAR NOME
+    // ======================================
 
     if (!nome) {
 
@@ -825,6 +924,10 @@ function enviarPedido() {
     }
 
 
+    // ======================================
+    // VALIDAR TELEFONE
+    // ======================================
+
     if (!telefone) {
 
         alert(
@@ -835,6 +938,10 @@ function enviarPedido() {
 
     }
 
+
+    // ======================================
+    // COMEÇAR MENSAGEM
+    // ======================================
 
     let mensagem =
     "*NOVO PEDIDO - PASTELARIA EL SHADDAI*"
@@ -859,40 +966,48 @@ function enviarPedido() {
     "\n";
 
 
+    // ======================================
+    // ENDEREÇO
+    // ======================================
+
     if (tipo === "Entrega") {
 
 
-        let rua =
+        const rua =
         document.getElementById(
             "rua"
         ).value.trim();
 
 
-        let numero =
+        const numero =
         document.getElementById(
             "numero"
         ).value.trim();
 
 
-        let complemento =
+        const complemento =
         document.getElementById(
             "complemento"
         ).value.trim();
 
 
-        let referencia =
+        const referencia =
         document.getElementById(
             "referencia"
         ).value.trim();
 
 
-        let bairro =
+        const bairro =
         document.getElementById(
             "bairro"
         ).value.trim();
 
 
-        if (!rua || !numero || !bairro) {
+        if (
+            !rua ||
+            !numero ||
+            !bairro
+        ) {
 
             alert(
                 "Preencha rua, número e bairro."
@@ -947,7 +1062,11 @@ function enviarPedido() {
     }
 
 
-    let observacao =
+    // ======================================
+    // OBSERVAÇÃO
+    // ======================================
+
+    const observacao =
     document.getElementById(
         "observacao"
     ).value.trim();
@@ -963,6 +1082,10 @@ function enviarPedido() {
     }
 
 
+    // ======================================
+    // PEDIDO
+    // ======================================
+
     mensagem +=
     "\n*PEDIDO:*\n";
 
@@ -972,40 +1095,91 @@ function enviarPedido() {
 
     carrinho.forEach(function(item) {
 
-        let preco =
-        Number(item.preco);
+
+        // ==================================
+        // QUANTIDADE REAL
+        // ==================================
+
+        const quantidade =
+        Number(item.quantidade || 1);
 
 
-        total += preco;
+        // ==================================
+        // PREÇO UNITÁRIO
+        // ==================================
 
+        const preco =
+        Number(item.preco || 0);
+
+
+        // ==================================
+        // SUBTOTAL
+        // ==================================
+
+        const subtotal =
+        preco * quantidade;
+
+
+        total += subtotal;
+
+
+        // ==================================
+        // PRODUTO
+        // ==================================
 
         mensagem +=
-        "• " +
+        "\n• " +
+        quantidade +
+        "x " +
         item.nome;
 
+
+        // ==================================
+        // DETALHES
+        // ==================================
 
         if (
             item.detalhes &&
             item.detalhes.length > 0
         ) {
 
-            mensagem +=
-            " (" +
-            item.detalhes.join(", ") +
-            ")";
+            item.detalhes.forEach(
+            function(detalhe) {
+
+                mensagem +=
+                "\n   " +
+                detalhe;
+
+            });
 
         }
 
 
+        // ==================================
+        // PREÇO
+        // ==================================
+
         mensagem +=
-        " - R$ " +
+        "\n   R$ " +
         preco
+        .toFixed(2)
+        .replace(".", ",") +
+        " cada";
+
+
+        mensagem +=
+        "\n   Subtotal: R$ " +
+        subtotal
         .toFixed(2)
         .replace(".", ",") +
         "\n";
 
     });
 
+
+    // ======================================
+    // TOTAL FINAL
+    // ======================================
 
     mensagem +=
     "\n*TOTAL: R$ " +
@@ -1015,20 +1189,33 @@ function enviarPedido() {
     "*";
 
 
+    // ======================================
+    // ABRIR WHATSAPP
+    // ======================================
+
+    const url =
+    "https://api.whatsapp.com/send?phone=5585988944421&text=" +
+    encodeURIComponent(mensagem);
+
+
+    window.open(
+        url,
+        "_blank"
+    );
+
+
+    // ======================================
+    // LIMPAR CARRINHO
+    // ======================================
+
     localStorage.removeItem(
         "carrinho"
     );
 
 
-    window.open(
-
-        "https://api.whatsapp.com/send?phone=5585988944421&text=" +
-        encodeURIComponent(mensagem),
-
-        "_blank"
-
-    );
-
+    // ======================================
+    // VOLTAR AO CARDÁPIO
+    // ======================================
 
     window.location.href =
     "index.html";
