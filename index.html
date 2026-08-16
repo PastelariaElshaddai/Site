@@ -8,15 +8,131 @@
 <title>Pastelaria El Shaddai</title>
 
 <link rel="stylesheet" href="style.css">
+
+<style>
+
+/* ==========================================
+   CATEGORIAS
+========================================== */
+
+.categorias {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 10px 0;
+    margin-bottom: 15px;
+}
+
+.categorias .botao {
+    white-space: nowrap;
+}
+
+
+/* ==========================================
+   SEÇÕES
+========================================== */
+
+.categoria-secao {
+    margin-top: 30px;
+    scroll-margin-top: 20px;
+}
+
+.categoria-titulo {
+    color: #c62828;
+    border-bottom: 3px solid #ffb300;
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+}
+
+
+/* ==========================================
+   PRODUTOS
+========================================== */
+
+.produtos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.card-produto {
+    background: white;
+    border: 2px solid #ffd166;
+    border-radius: 15px;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+.card-produto img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 8px;
+}
+
+.card-produto h3 {
+    color: #c62828;
+    margin: 5px 0;
+}
+
+.card-produto p {
+    font-size: 14px;
+}
+
+.card-produto .preco {
+    color: #c62828;
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.card-produto .botao {
+    width: 100%;
+    margin-top: 5px;
+}
+
+
+/* ==========================================
+   BOTÃO PERSONALIZAR
+========================================== */
+
+.botao-personalizar {
+    width: 100%;
+    margin-top: 7px;
+}
+
+
+/* ==========================================
+   RESPONSIVO
+========================================== */
+
+@media (max-width: 500px) {
+
+    .produtos {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+
 </head>
+
 
 <body>
 
+
+<!-- ==========================================
+     CABEÇALHO
+========================================== -->
+
 <header>
 
-<h1>🍴 Pastelaria El Shaddai</h1>
+<h1>Pastelaria El Shaddai</h1>
 
-<p>Feito a dois, no ponto pra você!</p>
+<p>
+Feito a dois, no ponto pra você!
+</p>
 
 </header>
 
@@ -24,44 +140,94 @@
 <div class="container">
 
 
+<!-- ==========================================
+     INFORMAÇÕES
+========================================== -->
+
 <div class="topo-info">
 
-<p>🚚 Entrega • 🛍️ Retirada • 💳 Pix, Cartão e Dinheiro</p>
+<p>
+Entrega • Retirada • Pix, Cartão e Dinheiro
+</p>
 
 </div>
 
+
+<!-- ==========================================
+     PESQUISA
+========================================== -->
 
 <input
 type="text"
-placeholder="🔍 Pesquisar pastel..."
+id="pesquisa"
+placeholder="Pesquisar produto..."
 class="pesquisa"
+onkeyup="pesquisarProdutos()"
 >
 
 
+<!-- ==========================================
+     CATEGORIAS
+========================================== -->
+
 <div class="categorias">
 
-<button class="botao">
-🥟 Pastéis
+<button
+class="botao"
+onclick="irCategoria('pastéis')">
+
+Pastéis
+
 </button>
 
-<button class="botao">
-🥤 Bebidas
+
+<button
+class="botao"
+onclick="irCategoria('combos')">
+
+Combos
+
 </button>
 
-<button class="botao">
-🔥 Combos
+
+<button
+class="botao"
+onclick="irCategoria('bebidas')">
+
+Bebidas
+
 </button>
 
-<button class="botao">
-🍫 Doces
+
+<button
+class="botao"
+onclick="irCategoria('pizza')">
+
+Pizza
+
+</button>
+
+
+<button
+class="botao"
+onclick="irCategoria('batata')">
+
+Batata
+
 </button>
 
 </div>
 
 
+<!-- ==========================================
+     PROMOÇÃO
+========================================== -->
+
 <div class="banner-promocao">
 
-<h2>🔥 PROMOÇÃO DA SEMANA</h2>
+<h2>
+PROMOÇÃO DA SEMANA
+</h2>
 
 <p>
 Na compra de 2 pastéis, ganhe um refrigerante com desconto.
@@ -70,13 +236,17 @@ Na compra de 2 pastéis, ganhe um refrigerante com desconto.
 </div>
 
 
+<!-- ==========================================
+     AÇÕES
+========================================== -->
+
 <div class="acoes">
 
 <button
 class="botao"
 onclick="verCarrinho()">
 
-🛒 Carrinho
+Carrinho
 (<span id="contador">0</span>)
 
 </button>
@@ -86,39 +256,53 @@ onclick="verCarrinho()">
 class="botao"
 onclick="irParaPedido()">
 
-📦 Fazer pedido
+Fazer pedido
 
 </button>
 
 
-<button class="botao">
+<button
+class="botao"
+onclick="window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})">
 
-📍 Localização
+Localização
 
 </button>
 
 </div>
 
 
-<h2>⭐ Mais vendidos</h2>
+
+<!-- ==================================================
+     PASTÉIS
+================================================== -->
+
+<section
+id="pastéis"
+class="categoria-secao">
+
+<h2 class="categoria-titulo">
+Pastéis
+</h2>
 
 
 <div class="produtos">
 
 
-<!-- PASTEL DE CARNE -->
+<!-- CARNE -->
 
 <div class="card-produto">
 
 <img
 src="https://via.placeholder.com/300x200?text=Pastel+de+Carne"
-alt="Pastel de Carne"
->
+alt="Pastel de Carne">
 
-<h3>Pastel de Carne</h3>
+<h3>
+Pastel de Carne
+</h3>
 
 <p>
-Massa crocante e recheio especial.
+Carne temperada e recheio especial.
 </p>
 
 <p class="preco">
@@ -127,20 +311,34 @@ R$ 15,00
 
 <button
 class="botao"
-onclick="adicionarProduto('Pastel de Carne',15)">
+onclick="personalizarProduto(
+'Pastel de Carne',
+15,
+['carne'],
+[
+{nome:'Catupiry',preco:2},
+{nome:'Queijo',preco:2}
+]
+)">
 
-Adicionar
+Personalizar
 
 </button>
 
 </div>
 
 
-<!-- PASTEL DE FRANGO -->
+<!-- FRANGO -->
 
 <div class="card-produto">
 
-<h3>Pastel de Frango</h3>
+<img
+src="https://via.placeholder.com/300x200?text=Pastel+de+Frango"
+alt="Pastel de Frango">
+
+<h3>
+Pastel de Frango
+</h3>
 
 <p>
 Frango desfiado com catupiry.
@@ -152,25 +350,34 @@ R$ 16,00
 
 <button
 class="botao"
-onclick="adicionarProduto('Pastel de Frango',16)">
+onclick="personalizarProduto(
+'Pastel de Frango',
+16,
+['frango'],
+[
+{nome:'Catupiry',preco:2},
+{nome:'Queijo',preco:2}
+]
+)">
 
-Adicionar
+Personalizar
 
 </button>
 
 </div>
 
 
-<!-- PASTEL DE PIZZA -->
+<!-- PIZZA -->
 
 <div class="card-produto">
 
 <img
-src="https://via.placeholder.com/300x200?text=Pastel+de+Pizza"
-alt="Pastel de Pizza"
->
+src="https://via.placeholder.com/300x200?text=Pastel+Pizza"
+alt="Pastel de Pizza">
 
-<h3>Pastel de Pizza</h3>
+<h3>
+Pastel de Pizza
+</h3>
 
 <p>
 Mussarela, presunto e tomate.
@@ -183,17 +390,134 @@ R$ 17,00
 <button
 class="botao"
 onclick="personalizarProduto(
-    'Pastel de Pizza',
-    17,
-    ['milho', 'tomate', 'presunto'],
-    [
-        {
-            nome: 'Catupiry',
-            preco: 2
-        }
-    ]
+'Pastel de Pizza',
+17,
+['mussarela','presunto','tomate'],
+[
+{nome:'Catupiry',preco:2},
+{nome:'Milho',preco:1}
+]
 )">
+
 Personalizar
+
+</button>
+
+</div>
+
+
+<!-- QUEIJO -->
+
+<div class="card-produto">
+
+<img
+src="https://via.placeholder.com/300x200?text=Pastel+Queijo"
+alt="Pastel de Queijo">
+
+<h3>
+Pastel de Queijo
+</h3>
+
+<p>
+Queijo mussarela derretido.
+</p>
+
+<p class="preco">
+R$ 15,00
+</p>
+
+<button
+class="botao"
+onclick="personalizarProduto(
+'Pastel de Queijo',
+15,
+['queijo'],
+[
+{nome:'Catupiry',preco:2},
+{nome:'Orégano',preco:1}
+]
+)">
+
+Personalizar
+
+</button>
+
+</div>
+
+
+<!-- CALABRESA -->
+
+<div class="card-produto">
+
+<img
+src="https://via.placeholder.com/300x200?text=Pastel+Calabresa"
+alt="Pastel de Calabresa">
+
+<h3>
+Pastel de Calabresa
+</h3>
+
+<p>
+Calabresa acebolada e queijo.
+</p>
+
+<p class="preco">
+R$ 16,00
+</p>
+
+<button
+class="botao"
+onclick="personalizarProduto(
+'Pastel de Calabresa',
+16,
+['calabresa','cebola','queijo'],
+[
+{nome:'Catupiry',preco:2},
+{nome:'Milho',preco:1}
+]
+)">
+
+Personalizar
+
+</button>
+
+</div>
+
+
+<!-- PRESUNTO E QUEIJO -->
+
+<div class="card-produto">
+
+<img
+src="https://via.placeholder.com/300x200?text=Presunto+Queijo"
+alt="Pastel de Presunto e Queijo">
+
+<h3>
+Presunto e Queijo
+</h3>
+
+<p>
+Presunto e mussarela.
+</p>
+
+<p class="preco">
+R$ 16,00
+</p>
+
+<button
+class="botao"
+onclick="personalizarProduto(
+'Pastel de Presunto e Queijo',
+16,
+['presunto','queijo'],
+[
+{nome:'Catupiry',preco:2},
+{nome:'Tomate',preco:1}
+]
+)">
+
+Personalizar
+
 </button>
 
 </div>
@@ -201,10 +525,497 @@ Personalizar
 
 </div>
 
+</section>
+
+
+
+<!-- ==================================================
+     COMBOS
+================================================== -->
+
+<section
+id="combos"
+class="categoria-secao">
+
+<h2 class="categoria-titulo">
+Combos
+</h2>
+
+
+<div class="produtos">
+
+
+<div class="card-produto">
+
+<img
+src="https://via.placeholder.com/300x200?text=Combo+1"
+alt="Combo 1">
+
+<h3>
+Combo 1
+</h3>
+
+<p>
+1 pastel + 1 refrigerante.
+</p>
+
+<p class="preco">
+R$ 25,00
+</p>
+
+<button
+class="botao"
+onclick="adicionarProduto('Combo 1',25)">
+
+Adicionar
+
+</button>
+
+</div>
+
+
+<div class="card-produto">
+
+<img
+src="https://via.placeholder.com/300x200?text=Combo+2"
+alt="Combo 2">
+
+<h3>
+Combo 2
+</h3>
+
+<p>
+2 pastéis + 2 refrigerantes.
+</p>
+
+<p class="preco">
+R$ 32,00
+</p>
+
+<button
+class="botao"
+onclick="adicionarProduto('Combo 2',32)">
+
+Adicionar
+
+</button>
+
+</div>
+
+
+<div class="card-produto">
+
+<img
+src="https://via.placeholder.com/300x200?text=Combo+Familia"
+alt="Combo Família">
+
+<h3>
+Combo Família
+</h3>
+
+<p>
+3 pastéis + 2 refrigerantes.
+</p>
+
+<p class="preco">
+R$ 45,00
+</p>
+
+<button
+class="botao"
+onclick="adicionarProduto('Combo Família',45)">
+
+Adicionar
+
+</button>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- ==================================================
+     BEBIDAS
+================================================== -->
+
+<section
+id="bebidas"
+class="categoria-secao">
+
+<h2 class="categoria-titulo">
+Bebidas
+</h2>
+
+
+<div class="produtos">
+
+
+<div class="card-produto">
+
+<img
+src="https://via.placeholder.com/300x200?text=Coca+Cola"
+alt="Coca-Cola lata">
+
+<h3>
+Coca-Cola lata
+</h3>
+
+<p class="preco">
+R$ 6,00
+</p>
+
+<button
+class="botao"
+onclick="adicionarProduto('Coca-Cola lata',6)">
+
+Adicionar
+
+</button>
+
+</div>
+
+
+<div class="card-produto">
+
+<img
+src="https://via.placeholder.com/300x200?text=Guarana"
+alt="Guaraná lata">
+
+<h3>
+Guaraná lata
+</h3>
+
+<p class="preco">
+R$ 5,00
+</p>
+
+<button
+class="botao"
+onclick="adicionarProduto('Guaraná lata',5)">
+
+Adicionar
+
+</button>
+
+</div>
+
+
+<div class="card-produto">
+
+<img
+src="https://via.placeholder.com/300x200?text=Coca+1L"
+alt="Coca-Cola 1L">
+
+<h3>
+Coca-Cola 1L
+</h3>
+
+<p class="preco">
+R$ 10,00
+</p>
+
+<button
+class="botao"
+onclick="adicionarProduto('Coca-Cola 1L',10)">
+
+Adicionar
+
+</button>
+
+</div>
+
+
+<div class="card-produto">
+
+<img
+src="https://via.placeholder.com/300x200?text=Agua"
+alt="Água">
+
+<h3>
+Água
+</h3>
+
+<p class="preco">
+R$ 3,00
+</p>
+
+<button
+class="botao"
+onclick="adicionarProduto('Água',3)">
+
+Adicionar
+
+</button>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- ==================================================
+     PIZZA
+================================================== -->
+
+<section
+id="pizza"
+class="categoria-secao">
+
+<h2 class="categoria-titulo">
+Pizza
+</h2>
+
+
+<div class="produtos">
+
+
+<div class="card-produto">
+
+<img
+src="https://via.placeholder.com/300x200?text=Pizza+Mussarela"
+alt="Pizza Mussarela">
+
+<h3>
+Mussarela
+</h3>
+
+<p>
+Pizza de mussarela.
+</p>
+
+<p class="preco">
+R$ 30,00
+</p>
+
+<button
+class="botao"
+onclick="adicionarProduto('Pizza Mussarela',30)">
+
+Adicionar
+
+</button>
+
+</div>
+
+
+<div class="card-produto">
+
+<img
+src="https://via.placeholder.com/300x200?text=Pizza+Calabresa"
+alt="Pizza Calabresa">
+
+<h3>
+Calabresa
+</h3>
+
+<p>
+Calabresa, cebola e queijo.
+</p>
+
+<p class="preco">
+R$ 32,00
+</p>
+
+<button
+class="botao"
+onclick="adicionarProduto('Pizza Calabresa',32)">
+
+Adicionar
+
+</button>
+
+</div>
+
+
+<div class="card-produto">
+
+<img
+src="https://via.placeholder.com/300x200?text=Pizza+Frango"
+alt="Pizza Frango Catupiry">
+
+<h3>
+Frango com Catupiry
+</h3>
+
+<p>
+Frango desfiado e catupiry.
+</p>
+
+<p class="preco">
+R$ 35,00
+</p>
+
+<button
+class="botao"
+onclick="adicionarProduto('Pizza Frango com Catupiry',35)">
+
+Adicionar
+
+</button>
+
+</div>
+
+
+<div class="card-produto">
+
+<img
+src="https://via.placeholder.com/300x200?text=Pizza+El+Shaddai"
+alt="Pizza El Shaddai">
+
+<h3>
+Pizza El Shaddai
+</h3>
+
+<p>
+Recheio especial da casa.
+</p>
+
+<p class="preco">
+R$ 38,00
+</p>
+
+<button
+class="botao"
+onclick="adicionarProduto('Pizza El Shaddai',38)">
+
+Adicionar
+
+</button>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- ==================================================
+     BATATA
+================================================== -->
+
+<section
+id="batata"
+class="categoria-secao">
+
+<h2 class="categoria-titulo">
+Batata
+</h2>
+
+
+<div class="produtos">
+
+
+<div class="card-produto">
+
+<img
+src="https://via.placeholder.com/300x200?text=Batata+Pequena"
+alt="Batata pequena">
+
+<h3>
+Batata Pequena
+</h3>
+
+<p>
+Batata crocante.
+</p>
+
+<p class="preco">
+R$ 10,00
+</p>
+
+<button
+class="botao"
+onclick="adicionarProduto('Batata Pequena',10)">
+
+Adicionar
+
+</button>
+
+</div>
+
+
+<div class="card-produto">
+
+<img
+src="https://via.placeholder.com/300x200?text=Batata+Media"
+alt="Batata média">
+
+<h3>
+Batata Média
+</h3>
+
+<p>
+Batata crocante.
+</p>
+
+<p class="preco">
+R$ 15,00
+</p>
+
+<button
+class="botao"
+onclick="adicionarProduto('Batata Média',15)">
+
+Adicionar
+
+</button>
+
+</div>
+
+
+<div class="card-produto">
+
+<img
+src="https://via.placeholder.com/300x200?text=Batata+Grande"
+alt="Batata grande">
+
+<h3>
+Batata Grande
+</h3>
+
+<p>
+Batata crocante para compartilhar.
+</p>
+
+<p class="preco">
+R$ 20,00
+</p>
+
+<button
+class="botao"
+onclick="adicionarProduto('Batata Grande',20)">
+
+Adicionar
+
+</button>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- ==================================================
+     BANNER
+================================================== -->
 
 <div class="banner">
 
-<h2>🥟 Os melhores pastéis da cidade!</h2>
+<h2>
+Os melhores pastéis da cidade!
+</h2>
 
 <p>
 Feitos na hora, com ingredientes selecionados.
@@ -213,49 +1024,9 @@ Feitos na hora, com ingredientes selecionados.
 </div>
 
 
-<h2>
-Bem-vindo à Pastelaria El Shaddai
-</h2>
-
-<p>
-Escolha uma opção abaixo:
-</p>
-
-
-<h3>Categorias</h3>
-
-
-<button class="botao">
-🥟 Pastéis
-</button>
-
-<button class="botao">
-🥤 Bebidas
-</button>
-
-<button class="botao">
-🔥 Combos
-</button>
-
-<button class="botao">
-🍫 Doces
-</button>
-
-<button class="botao">
-📦 Acompanhar Pedido
-</button>
-
-<button class="botao">
-📲 WhatsApp
-</button>
-
-<button class="botao">
-📍 Localização
-</button>
-
-
-</div>
-
+<!-- ==================================================
+     RODAPÉ
+================================================== -->
 
 <footer>
 
@@ -264,26 +1035,92 @@ Pastelaria El Shaddai
 </h3>
 
 <p>
-📍 Retirada no local e entrega
+Retirada no local e entrega
 </p>
 
 <p>
-📲 WhatsApp: (colocaremos seu número depois)
+WhatsApp: (85) 98894-4421
 </p>
 
 <p>
-🕒 Funcionamento: 18:00 às 23:00
+Funcionamento: 18:00 às 23:00
 </p>
 
 <p>
-💳 Aceitamos Pix, Dinheiro e Cartão
+Aceitamos Pix, Dinheiro e Cartão
 </p>
 
 </footer>
+
+
+</div>
+
+
+<script>
+
+/* ==========================================
+   IR PARA CATEGORIA
+========================================== */
+
+function irCategoria(id) {
+
+    const elemento =
+        document.getElementById(id);
+
+    if (elemento) {
+
+        elemento.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    }
+
+}
+
+
+/* ==========================================
+   PESQUISAR PRODUTOS
+========================================== */
+
+function pesquisarProdutos() {
+
+    const campo =
+        document.getElementById("pesquisa");
+
+    const texto =
+        campo.value.toLowerCase().trim();
+
+
+    const produtos =
+        document.querySelectorAll(".card-produto");
+
+
+    produtos.forEach(function(card) {
+
+        const conteudo =
+            card.textContent.toLowerCase();
+
+
+        if (conteudo.includes(texto)) {
+
+            card.style.display = "";
+
+        } else {
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+}
+
+</script>
 
 
 <script src="script.js"></script>
 
 </body>
 
-</html>
+    </html>
