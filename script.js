@@ -1,18 +1,6 @@
 // ======================================================
 // PASTELARIA EL SHADDAI
-// SCRIPT COMPLETO
-// ======================================================
-
-
-// ======================================================
-// CONFIGURAÇÕES
-// ======================================================
-
-const WHATSAPP_PASTELARIA = "5585988944421";
-
-
-// ======================================================
-// CARRINHO
+// SCRIPT COMPLETO - CARRINHO + PERSONALIZAÇÃO
 // ======================================================
 
 let carrinho =
@@ -35,7 +23,7 @@ function salvarCarrinho() {
 
 
 // ======================================================
-// CONTADOR
+// CONTADOR DO CARRINHO
 // ======================================================
 
 function atualizarContador() {
@@ -49,24 +37,13 @@ function atualizarContador() {
 
     carrinho.forEach(function(item) {
 
-        quantidade +=
-            Number(item.quantidade || 1);
+        quantidade += Number(
+            item.quantidade || 1
+        );
 
     });
 
     contador.textContent = quantidade;
-}
-
-
-// ======================================================
-// FORMATAR DINHEIRO
-// ======================================================
-
-function dinheiro(valor) {
-
-    return Number(valor || 0)
-        .toFixed(2)
-        .replace(".", ",");
 }
 
 
@@ -282,9 +259,7 @@ function abrirPersonalizacao(config) {
         );
 
     if (antigo) {
-
         antigo.remove();
-
     }
 
 
@@ -294,20 +269,43 @@ function abrirPersonalizacao(config) {
     fundo.id =
         "personalizarModal";
 
-    fundo.className =
-        "modal-personalizar";
+    fundo.style.cssText = `
+        position:fixed;
+        inset:0;
+        background:rgba(0,0,0,.65);
+        z-index:99999;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        padding:15px;
+        box-sizing:border-box;
+    `;
 
 
     const caixa =
         document.createElement("div");
 
-    caixa.className =
-        "caixa-personalizar";
+    caixa.style.cssText = `
+        width:100%;
+        max-width:520px;
+        max-height:90vh;
+        overflow-y:auto;
+        background:#fff8e7;
+        border:4px solid #ffb300;
+        border-radius:22px;
+        padding:20px;
+        box-sizing:border-box;
+        font-family:Arial,sans-serif;
+    `;
 
 
     caixa.innerHTML = `
 
-        <h2>
+        <h2 style="
+            text-align:center;
+            color:#c62828;
+            margin-top:0;
+        ">
             Personalize seu pedido
         </h2>
 
@@ -322,6 +320,7 @@ function abrirPersonalizacao(config) {
             <strong style="
                 font-size:22px;
                 display:block;
+                margin-bottom:5px;
             ">
                 ${config.nome}
             </strong>
@@ -331,7 +330,9 @@ function abrirPersonalizacao(config) {
                 font-weight:bold;
                 font-size:20px;
             ">
-                R$ ${dinheiro(config.preco)}
+                R$ ${config.preco
+                    .toFixed(2)
+                    .replace(".", ",")}
             </span>
 
         </div>
@@ -340,7 +341,7 @@ function abrirPersonalizacao(config) {
 
 
     // ==================================================
-    // TAMANHO DA PIZZA
+    // TAMANHO PIZZA
     // ==================================================
 
     if (config.tipo === "pizza") {
@@ -351,61 +352,71 @@ function abrirPersonalizacao(config) {
                 Tamanho da pizza
             </h3>
 
-            <div id="tamanhosPizza">
+            <label style="
+                display:flex;
+                justify-content:space-between;
+                padding:12px;
+                margin:6px 0;
+                background:white;
+                border-radius:10px;
+                border:1px solid #ddd;
+            ">
+                <span>
+                    Broto
+                </span>
 
-                <label class="opcao-personalizar">
+                <input
+                    type="radio"
+                    name="tamanhoPizza"
+                    value="Broto"
+                    data-preco="0"
+                    checked
+                >
+            </label>
 
-                    <span>
-                        Broto
-                    </span>
+            <label style="
+                display:flex;
+                justify-content:space-between;
+                padding:12px;
+                margin:6px 0;
+                background:white;
+                border-radius:10px;
+                border:1px solid #ddd;
+            ">
+                <span>
+                    Média
+                    <b>+ R$ 8,00</b>
+                </span>
 
-                    <input
-                        type="radio"
-                        name="tamanhoPizza"
-                        value="Broto"
-                        data-preco="0"
-                        checked
-                    >
+                <input
+                    type="radio"
+                    name="tamanhoPizza"
+                    value="Média"
+                    data-preco="8"
+                >
+            </label>
 
-                </label>
+            <label style="
+                display:flex;
+                justify-content:space-between;
+                padding:12px;
+                margin:6px 0;
+                background:white;
+                border-radius:10px;
+                border:1px solid #ddd;
+            ">
+                <span>
+                    Grande
+                    <b>+ R$ 15,00</b>
+                </span>
 
-                <label class="opcao-personalizar">
-
-                    <span>
-                        Média
-                        <span class="preco-adicional">
-                            + R$ 8,00
-                        </span>
-                    </span>
-
-                    <input
-                        type="radio"
-                        name="tamanhoPizza"
-                        value="Média"
-                        data-preco="8"
-                    >
-
-                </label>
-
-                <label class="opcao-personalizar">
-
-                    <span>
-                        Grande
-                        <span class="preco-adicional">
-                            + R$ 15,00
-                        </span>
-                    </span>
-
-                    <input
-                        type="radio"
-                        name="tamanhoPizza"
-                        value="Grande"
-                        data-preco="15"
-                    >
-
-                </label>
-
-            </div>
+                <input
+                    type="radio"
+                    name="tamanhoPizza"
+                    value="Grande"
+                    data-preco="15"
+                >
+            </label>
 
         `;
 
@@ -413,7 +424,7 @@ function abrirPersonalizacao(config) {
 
 
     // ==================================================
-    // TAMANHO DA BATATA
+    // TAMANHO BATATA
     // ==================================================
 
     if (config.tipo === "batata") {
@@ -424,61 +435,71 @@ function abrirPersonalizacao(config) {
                 Tamanho
             </h3>
 
-            <div>
+            <label style="
+                display:flex;
+                justify-content:space-between;
+                padding:12px;
+                margin:6px 0;
+                background:white;
+                border-radius:10px;
+                border:1px solid #ddd;
+            ">
+                <span>
+                    Pequena
+                </span>
 
-                <label class="opcao-personalizar">
+                <input
+                    type="radio"
+                    name="tamanhoBatata"
+                    value="Pequena"
+                    data-preco="0"
+                    checked
+                >
+            </label>
 
-                    <span>
-                        Pequena
-                    </span>
+            <label style="
+                display:flex;
+                justify-content:space-between;
+                padding:12px;
+                margin:6px 0;
+                background:white;
+                border-radius:10px;
+                border:1px solid #ddd;
+            ">
+                <span>
+                    Média
+                    <b>+ R$ 5,00</b>
+                </span>
 
-                    <input
-                        type="radio"
-                        name="tamanhoBatata"
-                        value="Pequena"
-                        data-preco="0"
-                        checked
-                    >
+                <input
+                    type="radio"
+                    name="tamanhoBatata"
+                    value="Média"
+                    data-preco="5"
+                >
+            </label>
 
-                </label>
+            <label style="
+                display:flex;
+                justify-content:space-between;
+                padding:12px;
+                margin:6px 0;
+                background:white;
+                border-radius:10px;
+                border:1px solid #ddd;
+            ">
+                <span>
+                    Grande
+                    <b>+ R$ 10,00</b>
+                </span>
 
-                <label class="opcao-personalizar">
-
-                    <span>
-                        Média
-                        <span class="preco-adicional">
-                            + R$ 5,00
-                        </span>
-                    </span>
-
-                    <input
-                        type="radio"
-                        name="tamanhoBatata"
-                        value="Média"
-                        data-preco="5"
-                    >
-
-                </label>
-
-                <label class="opcao-personalizar">
-
-                    <span>
-                        Grande
-                        <span class="preco-adicional">
-                            + R$ 10,00
-                        </span>
-                    </span>
-
-                    <input
-                        type="radio"
-                        name="tamanhoBatata"
-                        value="Grande"
-                        data-preco="10"
-                    >
-
-                </label>
-
-            </div>
+                <input
+                    type="radio"
+                    name="tamanhoBatata"
+                    value="Grande"
+                    data-preco="10"
+                >
+            </label>
 
         `;
 
@@ -554,21 +575,53 @@ function abrirPersonalizacao(config) {
 
         <div
             id="totalPersonalizado"
-            class="total-personalizar"
+            style="
+                background:#c62828;
+                color:white;
+                padding:15px;
+                border-radius:12px;
+                text-align:center;
+                font-size:22px;
+                font-weight:bold;
+                margin-top:20px;
+            "
         >
-            Total: R$ ${dinheiro(config.preco)}
+            Total: R$ ${config.preco
+                .toFixed(2)
+                .replace(".", ",")}
         </div>
 
         <button
             id="btnConfirmarPersonalizacao"
-            class="botao-confirmar"
+            style="
+                width:100%;
+                padding:15px;
+                margin-top:15px;
+                border:0;
+                border-radius:12px;
+                background:#ffb300;
+                color:#5d2600;
+                font-size:18px;
+                font-weight:bold;
+                cursor:pointer;
+            "
         >
             Adicionar ao carrinho
         </button>
 
         <button
             id="btnFecharPersonalizacao"
-            class="botao-fechar"
+            style="
+                width:100%;
+                padding:13px;
+                margin-top:10px;
+                border:0;
+                border-radius:12px;
+                background:#ddd;
+                color:#333;
+                font-size:16px;
+                cursor:pointer;
+            "
         >
             Fechar
         </button>
@@ -598,7 +651,16 @@ function abrirPersonalizacao(config) {
 
                 listaIngredientes.innerHTML += `
 
-                    <label class="opcao-personalizar">
+                    <label style="
+                        display:flex;
+                        justify-content:space-between;
+                        align-items:center;
+                        padding:11px;
+                        margin:5px 0;
+                        background:white;
+                        border-radius:10px;
+                        border:1px solid #ddd;
+                    ">
 
                         <span>
                             ${ingrediente}
@@ -638,16 +700,25 @@ function abrirPersonalizacao(config) {
 
                 listaAdicionais.innerHTML += `
 
-                    <label class="opcao-personalizar">
+                    <label style="
+                        display:flex;
+                        justify-content:space-between;
+                        align-items:center;
+                        padding:11px;
+                        margin:5px 0;
+                        background:white;
+                        border-radius:10px;
+                        border:1px solid #ddd;
+                    ">
 
                         <span>
-
                             ${adicional.nome}
 
-                            <span class="preco-adicional">
-                                + R$ ${dinheiro(adicional.preco)}
-                            </span>
-
+                            <b style="color:#c62828;">
+                                + R$ ${Number(
+                                    adicional.preco
+                                ).toFixed(2).replace(".", ",")}
+                            </b>
                         </span>
 
                         <input
@@ -667,10 +738,10 @@ function abrirPersonalizacao(config) {
 
 
     // ==================================================
-    // CALCULAR TOTAL
+    // ATUALIZAR TOTAL
     // ==================================================
 
-    function calcularTotalPersonalizacao() {
+    function atualizarTotalPersonalizacao() {
 
         let total =
             Number(config.preco);
@@ -684,61 +755,42 @@ function abrirPersonalizacao(config) {
 
         if (tamanho) {
 
-            total +=
-                Number(
-                    tamanho.dataset.preco || 0
-                );
+            total += Number(
+                tamanho.dataset.preco || 0
+            );
 
         }
 
 
         caixa
-            .querySelectorAll(
-                ".check-adicional"
-            )
-            .forEach(
-                function(check) {
+            .querySelectorAll(".check-adicional")
+            .forEach(function(check) {
 
-                    if (check.checked) {
+                if (check.checked) {
 
-                        const index =
-                            Number(
-                                check.dataset.index
-                            );
+                    const index =
+                        Number(check.dataset.index);
 
-                        total +=
-                            Number(
-                                config.adicionais[index].preco
-                            );
-
-                    }
+                    total += Number(
+                        config.adicionais[index].preco
+                    );
 
                 }
-            );
+
+            });
 
 
-        return total;
-
-    }
-
-
-    function atualizarTotalPersonalizacao() {
-
-        const total =
-            calcularTotalPersonalizacao();
-
-
-        const elemento =
+        const totalElemento =
             caixa.querySelector(
                 "#totalPersonalizado"
             );
 
 
-        if (elemento) {
+        if (totalElemento) {
 
-            elemento.textContent =
+            totalElemento.textContent =
                 "Total: R$ " +
-                dinheiro(total);
+                total.toFixed(2).replace(".", ",");
 
         }
 
@@ -749,41 +801,33 @@ function abrirPersonalizacao(config) {
         .querySelectorAll(
             'input[name="tamanhoPizza"], input[name="tamanhoBatata"], .check-adicional'
         )
-        .forEach(
-            function(input) {
+        .forEach(function(input) {
 
-                input.addEventListener(
-                    "change",
-                    atualizarTotalPersonalizacao
-                );
+            input.addEventListener(
+                "change",
+                atualizarTotalPersonalizacao
+            );
 
-            }
-        );
+        });
 
 
     // ==================================================
     // CONFIRMAR PERSONALIZAÇÃO
     // ==================================================
 
-    const botaoConfirmar =
-        caixa.querySelector(
+    caixa
+        .querySelector(
             "#btnConfirmarPersonalizacao"
-        );
-
-
-    botaoConfirmar.onclick =
-        function() {
+        )
+        .onclick = function() {
 
             let total =
                 Number(config.preco);
 
+            let detalhes = [];
 
-            const detalhes = [];
 
-
-            // ------------------------------
             // TAMANHO
-            // ------------------------------
 
             const tamanho =
                 caixa.querySelector(
@@ -793,11 +837,9 @@ function abrirPersonalizacao(config) {
 
             if (tamanho) {
 
-                total +=
-                    Number(
-                        tamanho.dataset.preco || 0
-                    );
-
+                total += Number(
+                    tamanho.dataset.preco || 0
+                );
 
                 detalhes.push(
                     "Tamanho: " +
@@ -807,194 +849,89 @@ function abrirPersonalizacao(config) {
             }
 
 
-            // ------------------------------
             // INGREDIENTES RETIRADOS
-            // ------------------------------
 
-            const ingredientesRetirados = [];
+            const retirados = [];
 
 
             caixa
                 .querySelectorAll(
                     ".check-ingrediente"
                 )
-                .forEach(
-                    function(check) {
+                .forEach(function(check) {
 
-                        if (!check.checked) {
+                    if (!check.checked) {
 
-                            ingredientesRetirados.push(
-                                check.dataset.nome
-                            );
-
-                        }
+                        retirados.push(
+                            check.dataset.nome
+                        );
 
                     }
-                );
+
+                });
 
 
-            if (
-                ingredientesRetirados.length > 0
-            ) {
+            if (retirados.length > 0) {
 
                 detalhes.push(
                     "Sem: " +
-                    ingredientesRetirados.join(", ")
+                    retirados.join(", ")
                 );
 
             }
 
 
-            // ------------------------------
             // ADICIONAIS
-            // ------------------------------
 
-            const adicionaisEscolhidos = [];
+            const escolhidos = [];
 
 
             caixa
                 .querySelectorAll(
                     ".check-adicional"
                 )
-                .forEach(
-                    function(check) {
+                .forEach(function(check) {
 
-                        if (check.checked) {
+                    if (check.checked) {
 
-                            const index =
-                                Number(
-                                    check.dataset.index
-                                );
-
-
-                            const adicional =
-                                config.adicionais[index];
-
-
-                            total +=
-                                Number(
-                                    adicional.preco
-                                );
-
-
-                            adicionaisEscolhidos.push(
-                                adicional.nome
+                        const index =
+                            Number(
+                                check.dataset.index
                             );
 
-                        }
+                        const adicional =
+                            config.adicionais[index];
+
+
+                        total += Number(
+                            adicional.preco
+                        );
+
+
+                        escolhidos.push(
+                            adicional.nome
+                        );
 
                     }
-                );
+
+                });
 
 
-            if (
-                adicionaisEscolhidos.length > 0
-            ) {
+            if (escolhidos.length > 0) {
 
                 detalhes.push(
                     "Adicionais: " +
-                    adicionaisEscolhidos.join(", ")
+                    escolhidos.join(", ")
                 );
 
             }
 
 
-            // ------------------------------
             // ADICIONAR AO CARRINHO
-            // ------------------------------
 
             carrinho.push({
 
                 nome: config.nome,
 
                 preco: total,
-
-                quantidade: 1,
-
-                detalhes: detalhes
-
-            });
-
-
-            salvarCarrinho();
-
-
-            fundo.remove();
-
-
-            alert(
-                "Produto adicionado ao carrinho!"
-            );
-
-        };
-
-
-    // ==================================================
-    // FECHAR
-    // ==================================================
-
-    const botaoFechar =
-        caixa.querySelector(
-            "#btnFecharPersonalizacao"
-        );
-
-
-    botaoFechar.onclick =
-        function() {
-
-            fundo.remove();
-
-        };
-
-}
-
-
-// ======================================================
-// TOTAL DO CARRINHO
-// ======================================================
-
-function calcularTotalCarrinho() {
-
-    let total = 0;
-
-
-    carrinho.forEach(
-        function(item) {
-
-            total +=
-                Number(item.preco || 0) *
-                Number(item.quantidade || 1);
-
-        }
-    );
-
-
-    return total;
-
-}
-
-
-// ======================================================
-// RENDERIZAR CARRINHO
-// ======================================================
-
-function renderizarCarrinho(caixa) {
-
-    const lista =
-        caixa.querySelector(
-            "#listaCarrinho"
-        );
-
-
-    const totalElemento =
-        caixa.querySelector(
-            "#totalCarrinho"
-        );
-
-
-    if (!lista) return;
-
-
-    if (carrinho.length === 0) {
-
-        lista
+        
