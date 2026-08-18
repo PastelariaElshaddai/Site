@@ -5,6 +5,13 @@
 
 
 // ======================================================
+// CONFIGURAÇÕES
+// ======================================================
+
+const WHATSAPP_PASTELARIA = "5585988944421";
+
+
+// ======================================================
 // CARRINHO
 // ======================================================
 
@@ -13,7 +20,7 @@ let carrinho =
 
 
 // ======================================================
-// SALVAR
+// SALVAR CARRINHO
 // ======================================================
 
 function salvarCarrinho() {
@@ -52,17 +59,31 @@ function atualizarContador() {
 
 
 // ======================================================
+// FORMATAR DINHEIRO
+// ======================================================
+
+function dinheiro(valor) {
+
+    return Number(valor || 0)
+        .toFixed(2)
+        .replace(".", ",");
+}
+
+
+// ======================================================
 // ADICIONAR PRODUTO SIMPLES
 // ======================================================
 
 function adicionarProduto(nome, preco) {
+
+    preco = Number(preco);
 
     const existente =
         carrinho.find(function(item) {
 
             return (
                 item.nome === nome &&
-                Number(item.preco) === Number(preco) &&
+                Number(item.preco) === preco &&
                 (!item.detalhes ||
                  item.detalhes.length === 0)
             );
@@ -81,7 +102,7 @@ function adicionarProduto(nome, preco) {
 
             nome: nome,
 
-            preco: Number(preco),
+            preco: preco,
 
             quantidade: 1,
 
@@ -255,13 +276,16 @@ function personalizarBatata(
 
 function abrirPersonalizacao(config) {
 
-
     const antigo =
         document.getElementById(
             "personalizarModal"
         );
 
-    if (antigo) antigo.remove();
+    if (antigo) {
+
+        antigo.remove();
+
+    }
 
 
     const fundo =
@@ -302,15 +326,12 @@ function abrirPersonalizacao(config) {
                 ${config.nome}
             </strong>
 
-            <span
-                id="precoBasePersonalizacao"
-                style="
-                    color:#c62828;
-                    font-weight:bold;
-                    font-size:20px;
-                "
-            >
-                R$ ${config.preco.toFixed(2).replace(".", ",")}
+            <span style="
+                color:#c62828;
+                font-weight:bold;
+                font-size:20px;
+            ">
+                R$ ${dinheiro(config.preco)}
             </span>
 
         </div>
@@ -319,7 +340,7 @@ function abrirPersonalizacao(config) {
 
 
     // ==================================================
-    // TAMANHOS DE PIZZA
+    // TAMANHO DA PIZZA
     // ==================================================
 
     if (config.tipo === "pizza") {
@@ -348,7 +369,6 @@ function abrirPersonalizacao(config) {
 
                 </label>
 
-
                 <label class="opcao-personalizar">
 
                     <span>
@@ -366,7 +386,6 @@ function abrirPersonalizacao(config) {
                     >
 
                 </label>
-
 
                 <label class="opcao-personalizar">
 
@@ -394,7 +413,7 @@ function abrirPersonalizacao(config) {
 
 
     // ==================================================
-    // TAMANHOS DE BATATA
+    // TAMANHO DA BATATA
     // ==================================================
 
     if (config.tipo === "batata") {
@@ -423,7 +442,6 @@ function abrirPersonalizacao(config) {
 
                 </label>
 
-
                 <label class="opcao-personalizar">
 
                     <span>
@@ -441,7 +459,6 @@ function abrirPersonalizacao(config) {
                     >
 
                 </label>
-
 
                 <label class="opcao-personalizar">
 
@@ -530,7 +547,7 @@ function abrirPersonalizacao(config) {
 
 
     // ==================================================
-    // TOTAL
+    // TOTAL E BOTÕES
     // ==================================================
 
     caixa.innerHTML += `
@@ -539,9 +556,7 @@ function abrirPersonalizacao(config) {
             id="totalPersonalizado"
             class="total-personalizar"
         >
-            Total: R$ ${config.preco
-                .toFixed(2)
-                .replace(".", ",")}
+            Total: R$ ${dinheiro(config.preco)}
         </div>
 
         <button
@@ -579,7 +594,7 @@ function abrirPersonalizacao(config) {
     if (listaIngredientes) {
 
         config.ingredientes.forEach(
-            function(ingrediente, index) {
+            function(ingrediente) {
 
                 listaIngredientes.innerHTML += `
 
@@ -630,9 +645,7 @@ function abrirPersonalizacao(config) {
                             ${adicional.nome}
 
                             <span class="preco-adicional">
-                                + R$ ${Number(
-                                    adicional.preco
-                                ).toFixed(2).replace(".", ",")}
+                                + R$ ${dinheiro(adicional.preco)}
                             </span>
 
                         </span>
@@ -654,26 +667,26 @@ function abrirPersonalizacao(config) {
 
 
     // ==================================================
-    // ATUALIZAR TOTAL
+    // CALCULAR TOTAL
     // ==================================================
 
-    function atualizarTotal() {
+    function calcularTotalPersonalizacao() {
 
         let total =
             Number(config.preco);
 
 
-        const tamanhoSelecionado =
+        const tamanho =
             caixa.querySelector(
                 'input[name="tamanhoPizza"]:checked, input[name="tamanhoBatata"]:checked'
             );
 
 
-        if (tamanhoSelecionado) {
+        if (tamanho) {
 
             total +=
                 Number(
-                    tamanhoSelecionado.dataset.preco || 0
+                    tamanho.dataset.preco || 0
                 );
 
         }
@@ -704,15 +717,30 @@ function abrirPersonalizacao(config) {
             );
 
 
-        const totalElemento =
+        return total;
+
+    }
+
+
+    function atualizarTotalPersonalizacao() {
+
+        const total =
+            calcularTotalPersonalizacao();
+
+
+        const elemento =
             caixa.querySelector(
                 "#totalPersonalizado"
             );
 
 
-        totalElemento.textContent =
-            "Total: R$ " +
-            total.toFixed(2).replace(".", ",");
+        if (elemento) {
+
+            elemento.textContent =
+                "Total: R$ " +
+                dinheiro(total);
+
+        }
 
     }
 
@@ -726,7 +754,7 @@ function abrirPersonalizacao(config) {
 
                 input.addEventListener(
                     "change",
-                    atualizarTotal
+                    atualizarTotalPersonalizacao
                 );
 
             }
@@ -734,22 +762,23 @@ function abrirPersonalizacao(config) {
 
 
     // ==================================================
-    // CONFIRMAR
+    // CONFIRMAR PERSONALIZAÇÃO
     // ==================================================
 
-    caixa
-        .querySelector(
+    const botaoConfirmar =
+        caixa.querySelector(
             "#btnConfirmarPersonalizacao"
-        )
-        .onclick =
-        function() {
+        );
 
+
+    botaoConfirmar.onclick =
+        function() {
 
             let total =
                 Number(config.preco);
 
 
-            let detalhes = [];
+            const detalhes = [];
 
 
             // ------------------------------
@@ -769,6 +798,7 @@ function abrirPersonalizacao(config) {
                         tamanho.dataset.preco || 0
                     );
 
+
                 detalhes.push(
                     "Tamanho: " +
                     tamanho.value
@@ -778,7 +808,7 @@ function abrirPersonalizacao(config) {
 
 
             // ------------------------------
-            // INGREDIENTES
+            // INGREDIENTES RETIRADOS
             // ------------------------------
 
             const ingredientesRetirados = [];
@@ -836,6 +866,7 @@ function abrirPersonalizacao(config) {
                                     check.dataset.index
                                 );
 
+
                             const adicional =
                                 config.adicionais[index];
 
@@ -869,20 +900,12 @@ function abrirPersonalizacao(config) {
 
 
             // ------------------------------
-            // NOME
-            // ------------------------------
-
-            let nomeFinal =
-                config.nome;
-
-
-            // ------------------------------
-            // CARRINHO
+            // ADICIONAR AO CARRINHO
             // ------------------------------
 
             carrinho.push({
 
-                nome: nomeFinal,
+                nome: config.nome,
 
                 preco: total,
 
@@ -910,11 +933,13 @@ function abrirPersonalizacao(config) {
     // FECHAR
     // ==================================================
 
-    caixa
-        .querySelector(
+    const botaoFechar =
+        caixa.querySelector(
             "#btnFecharPersonalizacao"
-        )
-        .onclick =
+        );
+
+
+    botaoFechar.onclick =
         function() {
 
             fundo.remove();
@@ -925,59 +950,51 @@ function abrirPersonalizacao(config) {
 
 
 // ======================================================
-// CARRINHO
+// TOTAL DO CARRINHO
 // ======================================================
 
-function verCarrinho() {
+function calcularTotalCarrinho() {
 
-    const antigo =
-        document.getElementById(
-            "carrinhoModal"
+    let total = 0;
+
+
+    carrinho.forEach(
+        function(item) {
+
+            total +=
+                Number(item.preco || 0) *
+                Number(item.quantidade || 1);
+
+        }
+    );
+
+
+    return total;
+
+}
+
+
+// ======================================================
+// RENDERIZAR CARRINHO
+// ======================================================
+
+function renderizarCarrinho(caixa) {
+
+    const lista =
+        caixa.querySelector(
+            "#listaCarrinho"
         );
 
-    if (antigo) antigo.remove();
+
+    const totalElemento =
+        caixa.querySelector(
+            "#totalCarrinho"
+        );
 
 
-    const fundo =
-        document.createElement("div");
-
-    fundo.id =
-        "carrinhoModal";
-
-    fundo.style.cssText = `
-        position:fixed;
-        inset:0;
-        background:rgba(0,0,0,.65);
-        z-index:99998;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        padding:15px;
-    `;
+    if (!lista) return;
 
 
-    const caixa =
-        document.createElement("div");
+    if (carrinho.length === 0) {
 
-    caixa.style.cssText = `
-        width:100%;
-        max-width:520px;
-        max-height:90vh;
-        overflow:auto;
-        background:#fff8e7;
-        border:4px solid #ffb300;
-        border-radius:22px;
-        padding:20px;
-        box-sizing:border-box;
-    `;
-
-
-    caixa.innerHTML = `
-
-        <h2 style="
-            text-align:center;
-            color:#c62828;
-            margin-top:0;
-        ">
-            Seu Carrinho
-                                    </
+        lista
