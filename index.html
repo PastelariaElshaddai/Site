@@ -2,7 +2,9 @@
 <html lang="pt-BR">
 
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Pastelaria El Shaddai</title>
@@ -76,10 +78,6 @@ header p {
     cursor: pointer;
 }
 
-.botao:hover {
-    opacity: .9;
-}
-
 .acoes {
     display: flex;
     gap: 10px;
@@ -125,13 +123,6 @@ header p {
     box-shadow: 0 4px 12px rgba(0,0,0,.08);
 }
 
-.card-produto img {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-    border-radius: 12px;
-}
-
 .card-produto h3 {
     color: #c62828;
     margin-bottom: 8px;
@@ -154,98 +145,6 @@ footer {
     background: #c62828;
     color: white;
     text-align: center;
-}
-
-/* =====================================
-   JANELA DE PERSONALIZAÇÃO
-===================================== */
-
-.modal-personalizar {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,.65);
-    z-index: 99999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 15px;
-}
-
-.caixa-personalizar {
-    width: 100%;
-    max-width: 520px;
-    max-height: 92vh;
-    overflow-y: auto;
-    background: #fff8e7;
-    border: 4px solid #ffb300;
-    border-radius: 22px;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-.caixa-personalizar h2 {
-    color: #c62828;
-    text-align: center;
-}
-
-.opcao-personalizar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: white;
-    border: 2px solid #ddd;
-    border-radius: 12px;
-    padding: 14px;
-    margin: 8px 0;
-    font-size: 17px;
-    cursor: pointer;
-}
-
-.opcao-personalizar input {
-    width: 24px;
-    height: 24px;
-}
-
-.preco-adicional {
-    color: #c62828;
-    font-weight: bold;
-}
-
-.total-personalizar {
-    background: white;
-    border: 3px solid #ffd166;
-    border-radius: 15px;
-    padding: 15px;
-    text-align: center;
-    margin-top: 20px;
-    color: #c62828;
-    font-size: 23px;
-    font-weight: bold;
-}
-
-.botao-confirmar {
-    width: 100%;
-    background: #ffb300;
-    border: none;
-    border-radius: 12px;
-    padding: 16px;
-    margin-top: 18px;
-    font-size: 19px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.botao-fechar {
-    width: 100%;
-    background: white;
-    color: #c62828;
-    border: 2px solid #c62828;
-    border-radius: 12px;
-    padding: 14px;
-    margin-top: 10px;
-    font-size: 17px;
-    font-weight: bold;
-    cursor: pointer;
 }
 
 </style>
@@ -334,22 +233,27 @@ Na compra de 2 pastéis, ganhe um refrigerante com desconto.
 <button
 class="botao"
 onclick="verCarrinho()">
+
 Carrinho
 (<span id="contador">0</span>)
+
 </button>
+
 
 <button
 class="botao"
 onclick="irParaPedido()">
+
 Fazer pedido
+
 </button>
 
 </div>
 
 
-<!-- =====================================
+<!-- =========================
      PASTÉIS
-===================================== -->
+========================= -->
 
 <section
 id="pasteis"
@@ -377,16 +281,17 @@ class="botao"
 onclick="personalizarProduto(
 'Pastel de Carne',
 15,
-[
-'Carne'
-],
+['Carne'],
 [
 {nome:'Queijo',preco:2},
 {nome:'Catupiry',preco:2},
-{nome:'Bacon',preco:3}
+{nome:'Bacon',preco:3},
+{nome:'Milho',preco:1.5}
 ]
 )">
+
 Personalizar
+
 </button>
 
 </div>
@@ -409,17 +314,16 @@ class="botao"
 onclick="personalizarProduto(
 'Pastel de Frango',
 16,
-[
-'Frango',
-'Catupiry'
-],
+['Frango','Catupiry'],
 [
 {nome:'Queijo',preco:2},
 {nome:'Bacon',preco:3},
 {nome:'Milho',preco:1.5}
 ]
 )">
+
 Personalizar
+
 </button>
 
 </div>
@@ -442,18 +346,16 @@ class="botao"
 onclick="personalizarProduto(
 'Pastel de Pizza',
 17,
-[
-'Mussarela',
-'Presunto',
-'Tomate'
-],
+['Mussarela','Presunto','Tomate'],
 [
 {nome:'Catupiry',preco:2},
 {nome:'Bacon',preco:3},
 {nome:'Milho',preco:1.5}
 ]
 )">
+
 Personalizar
+
 </button>
 
 </div>
@@ -476,16 +378,16 @@ class="botao"
 onclick="personalizarProduto(
 'Pastel de Queijo',
 14,
-[
-'Mussarela'
-],
+['Mussarela'],
 [
 {nome:'Catupiry',preco:2},
 {nome:'Bacon',preco:3},
 {nome:'Milho',preco:1.5}
 ]
 )">
+
 Personalizar
+
 </button>
 
 </div>
@@ -496,9 +398,9 @@ Personalizar
 </section>
 
 
-<!-- =====================================
+<!-- =========================
      COMBOS
-===================================== -->
+========================= -->
 
 <section
 id="combos"
@@ -529,11 +431,12 @@ onclick="personalizarProduto(
 [],
 [
 {nome:'Coca-Cola 1L',preco:4},
-{nome:'Coca-Cola 2L',preco:7},
-{nome:'Batata pequena',preco:5}
+{nome:'Coca-Cola 2L',preco:7}
 ]
 )">
+
 Personalizar
+
 </button>
 
 </div>
@@ -560,10 +463,13 @@ onclick="personalizarProduto(
 [
 {nome:'Coca-Cola 1L',preco:4},
 {nome:'Coca-Cola 2L',preco:7},
-{nome:'Queijo na batata',preco:3}
+{nome:'Queijo na batata',preco:3},
+{nome:'Bacon na batata',preco:4}
 ]
 )">
+
 Personalizar
+
 </button>
 
 </div>
@@ -574,9 +480,9 @@ Personalizar
 </section>
 
 
-<!-- =====================================
+<!-- =========================
      BEBIDAS
-===================================== -->
+========================= -->
 
 <section
 id="bebidas"
@@ -595,6 +501,10 @@ class="secao">
 Escolha o tamanho.
 </p>
 
+<p class="preco">
+A partir de R$ 6,00
+</p>
+
 <button
 class="botao"
 onclick="personalizarProduto(
@@ -607,7 +517,9 @@ onclick="personalizarProduto(
 {nome:'2 litros',preco:14}
 ]
 )">
+
 Escolher tamanho
+
 </button>
 
 </div>
@@ -619,6 +531,10 @@ Escolher tamanho
 
 <p>
 Escolha o tamanho.
+</p>
+
+<p class="preco">
+A partir de R$ 5,00
 </p>
 
 <button
@@ -633,7 +549,9 @@ onclick="personalizarProduto(
 {nome:'2 litros',preco:13}
 ]
 )">
+
 Escolher tamanho
+
 </button>
 
 </div>
@@ -643,6 +561,10 @@ Escolher tamanho
 
 <h3>Água</h3>
 
+<p>
+Água mineral.
+</p>
+
 <p class="preco">
 R$ 3,00
 </p>
@@ -650,7 +572,9 @@ R$ 3,00
 <button
 class="botao"
 onclick="adicionarProduto('Água',3)">
+
 Adicionar
+
 </button>
 
 </div>
@@ -661,9 +585,9 @@ Adicionar
 </section>
 
 
-<!-- =====================================
+<!-- =========================
      PIZZAS
-===================================== -->
+========================= -->
 
 <section
 id="pizzas"
@@ -688,15 +612,20 @@ A partir de R$ 35,00
 
 <button
 class="botao"
-onclick="personalizarPizza(
+onclick="personalizarProduto(
 'Pizza de Mussarela',
 35,
+['Mussarela','Tomate'],
 [
-'Mussarela',
-'Tomate'
+{nome:'Catupiry',preco:4},
+{nome:'Bacon',preco:5},
+{nome:'Milho',preco:3},
+{nome:'Calabresa',preco:5}
 ]
 )">
+
 Personalizar pizza
+
 </button>
 
 </div>
@@ -716,16 +645,20 @@ A partir de R$ 38,00
 
 <button
 class="botao"
-onclick="personalizarPizza(
+onclick="personalizarProduto(
 'Pizza de Calabresa',
 38,
+['Calabresa','Cebola','Mussarela'],
 [
-'Calabresa',
-'Cebola',
-'Mussarela'
+{nome:'Catupiry',preco:4},
+{nome:'Bacon',preco:5},
+{nome:'Milho',preco:3},
+{nome:'Tomate',preco:2}
 ]
 )">
+
 Personalizar pizza
+
 </button>
 
 </div>
@@ -745,16 +678,20 @@ A partir de R$ 40,00
 
 <button
 class="botao"
-onclick="personalizarPizza(
+onclick="personalizarProduto(
 'Pizza de Frango',
 40,
+['Frango','Catupiry','Mussarela'],
 [
-'Frango',
-'Catupiry',
-'Mussarela'
+{nome:'Bacon',preco:5},
+{nome:'Milho',preco:3},
+{nome:'Tomate',preco:2},
+{nome:'Calabresa',preco:5}
 ]
 )">
+
 Personalizar pizza
+
 </button>
 
 </div>
@@ -765,9 +702,9 @@ Personalizar pizza
 </section>
 
 
-<!-- =====================================
+<!-- =========================
      BATATAS
-===================================== -->
+========================= -->
 
 <section
 id="batatas"
@@ -783,20 +720,31 @@ class="secao">
 <h3>Batata Frita</h3>
 
 <p>
-Escolha o tamanho e os adicionais.
+Escolha os adicionais.
 </p>
 
 <p class="preco">
-A partir de R$ 12,00
+R$ 12,00
 </p>
 
 <button
 class="botao"
-onclick="personalizarBatata(
+onclick="personalizarProduto(
 'Batata Frita',
-12
+12,
+[],
+[
+{nome:'Queijo',preco:3},
+{nome:'Cheddar',preco:4},
+{nome:'Catupiry',preco:4},
+{nome:'Bacon',preco:5},
+{nome:'Calabresa',preco:5},
+{nome:'Molho especial',preco:2}
+]
 )">
+
 Personalizar batata
+
 </button>
 
 </div>
@@ -807,20 +755,32 @@ Personalizar batata
 <h3>Batata Especial</h3>
 
 <p>
-Batata com opções de queijo, bacon e molhos.
+Batata com queijo, bacon e outros adicionais.
 </p>
 
 <p class="preco">
-A partir de R$ 18,00
+R$ 18,00
 </p>
 
 <button
 class="botao"
-onclick="personalizarBatata(
+onclick="personalizarProduto(
 'Batata Especial',
-18
+18,
+[],
+[
+{nome:'Queijo',preco:3},
+{nome:'Cheddar',preco:4},
+{nome:'Catupiry',preco:4},
+{nome:'Bacon',preco:5},
+{nome:'Calabresa',preco:5},
+{nome:'Milho',preco:2},
+{nome:'Molho especial',preco:2}
+]
 )">
+
 Personalizar batata
+
 </button>
 
 </div>
@@ -874,4 +834,4 @@ Aceitamos Pix, Dinheiro e Cartão
 
 </body>
 
-   </html>
+</html>
