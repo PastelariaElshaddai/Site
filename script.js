@@ -1317,3 +1317,20 @@ document.addEventListener(
 
     }
 );
+
+// ==========================================
+// BOTÕES DE CATEGORIAS
+// ==========================================
+
+function irParaSecao(id) {
+
+    const secao = document.getElementById(id);
+
+    if (!secao) return;
+
+    secao.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+
+    }
