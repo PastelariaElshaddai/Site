@@ -2,11 +2,8 @@
 <html lang="pt-BR">
 
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Finalizar Pedido - Pastelaria El Shaddai</title>
 
@@ -17,384 +14,163 @@ content="width=device-width, initial-scale=1.0">
 }
 
 body {
-
     margin: 0;
-
     font-family: Arial, Helvetica, sans-serif;
-
     background: #fff8e1;
-
     color: #222;
-
 }
-
-
-/* =====================================
-   CABEÇALHO
-===================================== */
 
 header {
-
-    background: linear-gradient(
-        135deg,
-        #e53935,
-        #ffb300
-    );
-
+    background: linear-gradient(135deg,#e53935,#ffb300);
     color: white;
-
     text-align: center;
-
     padding: 25px 20px;
-
-    box-shadow:
-        0 3px 10px rgba(0,0,0,0.15);
-
 }
-
 
 header h1 {
-
     margin: 0 0 8px;
-
     font-size: 28px;
-
 }
-
 
 header p {
-
     margin: 0;
-
-    font-size: 16px;
-
 }
-
-
-/* =====================================
-   CONTAINER
-===================================== */
 
 .container {
-
     width: 92%;
-
     max-width: 600px;
-
     margin: 25px auto;
-
-    background: #ffffff;
-
+    background: white;
     border-radius: 18px;
-
     padding: 22px;
-
-    box-shadow:
-        0 5px 20px rgba(0,0,0,0.12);
-
+    box-shadow: 0 5px 20px rgba(0,0,0,.12);
     border: 2px solid #ffb300;
-
 }
-
-
-/* =====================================
-   TÍTULOS
-===================================== */
 
 h2 {
-
     color: #d84315;
-
-    margin-top: 10px;
-
 }
-
 
 h3 {
-
     color: #e65100;
-
 }
-
-
-/* =====================================
-   CAMPOS
-===================================== */
 
 .grupo {
-
     margin-bottom: 18px;
-
 }
-
 
 .grupo label {
-
     display: block;
-
     font-weight: bold;
-
     margin-bottom: 7px;
-
 }
-
 
 input,
 textarea,
 select {
-
     width: 100%;
-
     padding: 13px;
-
     border: 1px solid #ccc;
-
     border-radius: 9px;
-
     font-size: 16px;
-
-    outline: none;
-
     background: #fffdf7;
-
 }
-
-
-input:focus,
-textarea:focus,
-select:focus {
-
-    border-color: #ffb300;
-
-    box-shadow:
-        0 0 0 2px rgba(255,179,0,0.15);
-
-}
-
 
 textarea {
-
     min-height: 90px;
-
     resize: vertical;
-
 }
-
-
-/* =====================================
-   ENTREGA / RETIRADA
-===================================== */
 
 .opcoes {
-
     display: flex;
-
     gap: 10px;
-
 }
-
 
 .opcao {
-
     flex: 1;
-
     border: 2px solid #ddd;
-
     border-radius: 10px;
-
     padding: 13px;
-
     text-align: center;
-
     cursor: pointer;
-
 }
-
 
 .opcao input {
-
     width: auto;
-
-    margin-right: 5px;
-
 }
-
-
-/* =====================================
-   ENDEREÇO
-===================================== */
-
-#areaEndereco {
-
-    margin-top: 15px;
-
-}
-
-
-/* =====================================
-   RESUMO
-===================================== */
 
 .resumo {
-
     margin-top: 25px;
-
     padding: 18px;
-
     background: #fff8e1;
-
     border: 1px solid #ffcc80;
-
     border-radius: 12px;
-
 }
-
-
-.resumo h3 {
-
-    margin-top: 0;
-
-}
-
 
 #listaPedido {
-
     line-height: 1.6;
-
 }
-
-
-.item-resumo {
-
-    padding: 12px 0;
-
-    border-bottom: 1px solid #ffd180;
-
-}
-
-
-.item-resumo:last-child {
-
-    border-bottom: none;
-
-}
-
-
-.nome-produto {
-
-    font-size: 18px;
-
-    font-weight: bold;
-
-}
-
-
-.detalhes-produto {
-
-    margin-top: 5px;
-
-    color: #555;
-
-    font-size: 15px;
-
-}
-
-
-.preco-produto {
-
-    margin-top: 5px;
-
-    font-weight: bold;
-
-}
-
 
 .total {
-
     font-size: 22px;
-
     font-weight: bold;
-
     color: #d84315;
-
     margin-top: 15px;
-
 }
 
+.pagamento {
+    display: grid;
+    gap: 10px;
+}
 
-/* =====================================
-   BOTÃO
-===================================== */
+.pagamento label {
+    background: #fff;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.pagamento input {
+    width: auto;
+    margin-right: 8px;
+}
+
+#areaTroco {
+    display: none;
+    margin-top: 12px;
+}
 
 .botao-enviar {
-
     width: 100%;
-
     padding: 16px;
-
     margin-top: 20px;
-
     border: none;
-
     border-radius: 10px;
-
-    background: linear-gradient(
-        135deg,
-        #e53935,
-        #ffb300
-    );
-
+    background: linear-gradient(135deg,#e53935,#ffb300);
     color: white;
-
     font-size: 18px;
-
     font-weight: bold;
-
     cursor: pointer;
-
 }
-
-
-.botao-enviar:active {
-
-    transform: scale(0.98);
-
-}
-
-
-/* =====================================
-   VOLTAR
-===================================== */
 
 .botao-voltar {
-
     width: 100%;
-
     padding: 13px;
-
     margin-top: 10px;
-
     border: 1px solid #ddd;
-
     border-radius: 10px;
-
     background: white;
-
     color: #555;
-
     font-size: 16px;
-
-    cursor: pointer;
-
 }
 
 </style>
 
 </head>
 
-
 <body>
-
 
 <header>
 
@@ -407,7 +183,6 @@ textarea {
 
 <div class="container">
 
-
 <h2>Finalizar Pedido</h2>
 
 
@@ -416,7 +191,6 @@ textarea {
 ===================================== -->
 
 <h3>Dados do cliente</h3>
-
 
 <div class="grupo">
 
@@ -449,16 +223,14 @@ placeholder="Seu telefone"
 
 
 <!-- =====================================
-     ENTREGA / RETIRADA
+     ENTREGA
 ===================================== -->
 
 <h3>
 Como deseja receber?
 </h3>
 
-
 <div class="opcoes">
-
 
 <label class="opcao">
 
@@ -488,7 +260,6 @@ Retirada
 
 </label>
 
-
 </div>
 
 
@@ -497,7 +268,6 @@ Retirada
 ===================================== -->
 
 <div id="areaEndereco">
-
 
 <h3>
 Endereço de entrega
@@ -578,12 +348,88 @@ placeholder="Seu bairro"
 
 </div>
 
+</div>
+
+
+<!-- =====================================
+     PAGAMENTO
+===================================== -->
+
+<h3>
+Forma de pagamento
+</h3>
+
+<div class="pagamento">
+
+<label>
+
+<input
+type="radio"
+name="pagamento"
+value="Pix"
+onchange="mostrarTroco()"
+>
+
+Pix
+
+</label>
+
+
+<label>
+
+<input
+type="radio"
+name="pagamento"
+value="Cartão"
+onchange="mostrarTroco()"
+>
+
+Cartão
+
+</label>
+
+
+<label>
+
+<input
+type="radio"
+name="pagamento"
+value="Dinheiro"
+onchange="mostrarTroco()"
+>
+
+Dinheiro
+
+</label>
 
 </div>
 
 
 <!-- =====================================
-     OBSERVAÇÕES
+     TROCO
+===================================== -->
+
+<div id="areaTroco">
+
+<div class="grupo">
+
+<label for="troco">
+Troco para quanto?
+</label>
+
+<input
+type="text"
+id="troco"
+placeholder="Ex.: R$ 50,00"
+>
+
+</div>
+
+</div>
+
+
+<!-- =====================================
+     OBSERVAÇÃO
 ===================================== -->
 
 <div class="grupo">
@@ -610,11 +456,9 @@ placeholder="Alguma observação sobre seu pedido?"
 Resumo do pedido
 </h3>
 
-
 <div id="listaPedido">
 Carregando pedido...
 </div>
-
 
 <div
 class="total"
@@ -648,12 +492,10 @@ Voltar para o cardápio
 
 </button>
 
-
 </div>
 
 
 <script>
-
 
 // ==========================================
 // CARRINHO
@@ -666,29 +508,20 @@ localStorage.getItem("carrinho")
 
 
 // ==========================================
-// MOSTRAR / ESCONDER ENDEREÇO
+// ENTREGA / RETIRADA
 // ==========================================
 
 function mostrarEndereco() {
 
-    const selecionado =
+    const tipo =
     document.querySelector(
         'input[name="tipo"]:checked'
-    );
-
-
-    if (!selecionado) return;
-
-
-    const tipo =
-    selecionado.value;
-
+    ).value;
 
     const area =
     document.getElementById(
         "areaEndereco"
     );
-
 
     if (tipo === "Entrega") {
 
@@ -704,7 +537,43 @@ function mostrarEndereco() {
 
 
 // ==========================================
-// MOSTRAR RESUMO
+// PAGAMENTO / TROCO
+// ==========================================
+
+function mostrarTroco() {
+
+    const pagamento =
+    document.querySelector(
+        'input[name="pagamento"]:checked'
+    );
+
+    const area =
+    document.getElementById(
+        "areaTroco"
+    );
+
+    if (
+        pagamento &&
+        pagamento.value === "Dinheiro"
+    ) {
+
+        area.style.display = "block";
+
+    } else {
+
+        area.style.display = "none";
+
+        document.getElementById(
+            "troco"
+        ).value = "";
+
+    }
+
+}
+
+
+// ==========================================
+// RESUMO
 // ==========================================
 
 function mostrarResumo() {
@@ -714,22 +583,16 @@ function mostrarResumo() {
         "listaPedido"
     );
 
-
-    const totalElemento =
-    document.getElementById(
-        "totalPedido"
-    );
-
-
     let total = 0;
-
 
     if (carrinho.length === 0) {
 
         lista.innerHTML =
         "Seu carrinho está vazio.";
 
-        totalElemento.innerHTML =
+        document.getElementById(
+            "totalPedido"
+        ).textContent =
         "Total: R$ 0,00";
 
         return;
@@ -742,51 +605,45 @@ function mostrarResumo() {
 
     carrinho.forEach(function(item) {
 
-
-        // ==================================
-        // QUANTIDADE REAL
-        // ==================================
-
         const quantidade =
         Number(item.quantidade || 1);
 
-
-        // ==================================
-        // PREÇO UNITÁRIO
-        // ==================================
-
-        const precoUnitario =
+        const preco =
         Number(item.preco || 0);
 
-
-        // ==================================
-        // SUBTOTAL
-        // ==================================
-
         const subtotal =
-        precoUnitario * quantidade;
-
+        preco * quantidade;
 
         total += subtotal;
 
 
-        // ==================================
-        // NOME
-        // ==================================
-
         html += `
-        
-            <div class="item-resumo">
+            <div style="
+                margin-bottom:14px;
+                padding-bottom:10px;
+                border-bottom:1px solid #ddd;
+            ">
 
-                <div class="nome-produto">
+                <strong>
                     ${quantidade}x ${item.nome}
-                </div>
+                </strong>
+
+                <br>
+
+                <span>
+                    R$ ${preco.toFixed(2).replace(".",",")}
+                    cada
+                </span>
+
+                <br>
+
+                <strong style="color:#c62828;">
+                    Subtotal:
+                    R$ ${subtotal.toFixed(2).replace(".",",")}
+                </strong>
+
         `;
 
-
-        // ==================================
-        // DETALHES
-        // ==================================
 
         if (
             item.detalhes &&
@@ -794,58 +651,30 @@ function mostrarResumo() {
         ) {
 
             html += `
-            
-                <div class="detalhes-produto">
-
+                <br>
+                <small>
                     ${item.detalhes.join("<br>")}
-
-                </div>
-            
+                </small>
             `;
 
         }
 
 
-        // ==================================
-        // PREÇO
-        // ==================================
-
         html += `
-        
-                <div class="preco-produto">
-
-                    R$ ${precoUnitario
-                        .toFixed(2)
-                        .replace(".", ",")
-                    }
-                    cada
-
-                    <br>
-
-                    Subtotal:
-                    R$ ${subtotal
-                        .toFixed(2)
-                        .replace(".", ",")
-                    }
-
-                </div>
-
             </div>
-        
         `;
 
     });
 
 
-    lista.innerHTML =
-    html;
+    lista.innerHTML = html;
 
 
-    totalElemento.innerHTML =
+    document.getElementById(
+        "totalPedido"
+    ).textContent =
     "Total: R$ " +
-    total
-    .toFixed(2)
-    .replace(".", ",");
+    total.toFixed(2).replace(".",",");
 
 }
 
@@ -855,11 +684,6 @@ function mostrarResumo() {
 // ==========================================
 
 function enviarPedido() {
-
-
-    // ======================================
-    // VERIFICAR CARRINHO
-    // ======================================
 
     if (carrinho.length === 0) {
 
@@ -871,10 +695,6 @@ function enviarPedido() {
 
     }
 
-
-    // ======================================
-    // DADOS DO CLIENTE
-    // ======================================
 
     const nome =
     document.getElementById(
@@ -888,30 +708,17 @@ function enviarPedido() {
     ).value.trim();
 
 
-    const tipoSelecionado =
+    const tipo =
     document.querySelector(
         'input[name="tipo"]:checked'
+    ).value;
+
+
+    const pagamento =
+    document.querySelector(
+        'input[name="pagamento"]:checked'
     );
 
-
-    if (!tipoSelecionado) {
-
-        alert(
-            "Escolha entrega ou retirada."
-        );
-
-        return;
-
-    }
-
-
-    const tipo =
-    tipoSelecionado.value;
-
-
-    // ======================================
-    // VALIDAR NOME
-    // ======================================
 
     if (!nome) {
 
@@ -924,10 +731,6 @@ function enviarPedido() {
     }
 
 
-    // ======================================
-    // VALIDAR TELEFONE
-    // ======================================
-
     if (!telefone) {
 
         alert(
@@ -939,9 +742,16 @@ function enviarPedido() {
     }
 
 
-    // ======================================
-    // COMEÇAR MENSAGEM
-    // ======================================
+    if (!pagamento) {
+
+        alert(
+            "Escolha a forma de pagamento."
+        );
+
+        return;
+
+    }
+
 
     let mensagem =
     "*NOVO PEDIDO - PASTELARIA EL SHADDAI*"
@@ -971,7 +781,6 @@ function enviarPedido() {
     // ======================================
 
     if (tipo === "Entrega") {
-
 
         const rua =
         document.getElementById(
@@ -1063,6 +872,45 @@ function enviarPedido() {
 
 
     // ======================================
+    // PAGAMENTO
+    // ======================================
+
+    mensagem +=
+    "\n*PAGAMENTO:* " +
+    pagamento.value +
+    "\n";
+
+
+    if (
+        pagamento.value === "Dinheiro"
+    ) {
+
+        const troco =
+        document.getElementById(
+            "troco"
+        ).value.trim();
+
+
+        if (!troco) {
+
+            alert(
+                "Informe o valor para o troco."
+            );
+
+            return;
+
+        }
+
+
+        mensagem +=
+        "Troco para: " +
+        troco +
+        "\n";
+
+    }
+
+
+    // ======================================
     // OBSERVAÇÃO
     // ======================================
 
@@ -1075,7 +923,7 @@ function enviarPedido() {
     if (observacao) {
 
         mensagem +=
-        "\n*Observações:*\n" +
+        "\n*OBSERVAÇÕES:*\n" +
         observacao +
         "\n";
 
@@ -1083,7 +931,7 @@ function enviarPedido() {
 
 
     // ======================================
-    // PEDIDO
+    // PEDIDOS
     // ======================================
 
     mensagem +=
@@ -1095,26 +943,13 @@ function enviarPedido() {
 
     carrinho.forEach(function(item) {
 
-
-        // ==================================
-        // QUANTIDADE REAL
-        // ==================================
-
         const quantidade =
         Number(item.quantidade || 1);
 
 
-        // ==================================
-        // PREÇO UNITÁRIO
-        // ==================================
-
         const preco =
         Number(item.preco || 0);
 
-
-        // ==================================
-        // SUBTOTAL
-        // ==================================
 
         const subtotal =
         preco * quantidade;
@@ -1123,74 +958,45 @@ function enviarPedido() {
         total += subtotal;
 
 
-        // ==================================
-        // PRODUTO
-        // ==================================
-
         mensagem +=
-        "\n• " +
+        "• " +
         quantidade +
         "x " +
         item.nome;
 
-
-        // ==================================
-        // DETALHES
-        // ==================================
 
         if (
             item.detalhes &&
             item.detalhes.length > 0
         ) {
 
-            item.detalhes.forEach(
-            function(detalhe) {
-
-                mensagem +=
-                "\n   " +
-                detalhe;
-
-            });
+            mensagem +=
+            "\n  Detalhes: " +
+            item.detalhes.join(", ");
 
         }
 
 
-        // ==================================
-        // PREÇO
-        // ==================================
-
         mensagem +=
-        "\n   R$ " +
-        preco
-        .toFixed(2)
-        .replace(".", ",") +
-        " cada";
-
-
-        mensagem +=
-        "\n   Subtotal: R$ " +
+        "\n  R$ " +
         subtotal
         .toFixed(2)
-        .replace(".", ",") +
+        .replace(".",",") +
         "\n";
 
     });
 
 
-    // ======================================
-    // TOTAL FINAL
-    // ======================================
-
     mensagem +=
     "\n*TOTAL: R$ " +
     total
     .toFixed(2)
-    .replace(".", ",") +
+    .replace(".",",") +
     "*";
 
 
     // ======================================
-    // ABRIR WHATSAPP
+    // WHATSAPP
     // ======================================
 
     const url =
@@ -1204,18 +1010,10 @@ function enviarPedido() {
     );
 
 
-    // ======================================
-    // LIMPAR CARRINHO
-    // ======================================
-
     localStorage.removeItem(
         "carrinho"
     );
 
-
-    // ======================================
-    // VOLTAR AO CARDÁPIO
-    // ======================================
 
     window.location.href =
     "index.html";
@@ -1233,6 +1031,8 @@ document.addEventListener(
 
         mostrarEndereco();
 
+        mostrarTroco();
+
         mostrarResumo();
 
     }
@@ -1240,7 +1040,6 @@ document.addEventListener(
 
 </script>
 
-
 </body>
 
-</html>
+    </html>
