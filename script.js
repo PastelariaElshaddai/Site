@@ -1,5 +1,6 @@
 // ======================================================
-// PASTELARIA EL SHADDAI - SCRIPT COMPLETO
+// PASTELARIA EL SHADDAI
+// SCRIPT COMPLETO
 // ======================================================
 
 
@@ -63,7 +64,7 @@ function adicionarProduto(nome, preco) {
                 item.nome === nome &&
                 Number(item.preco) === Number(preco) &&
                 (!item.detalhes ||
-                item.detalhes.length === 0)
+                 item.detalhes.length === 0)
             );
 
         });
@@ -93,373 +94,22 @@ function adicionarProduto(nome, preco) {
 
     salvarCarrinho();
 
-    alert("Produto adicionado ao carrinho!");
-
+    alert(
+        "Produto adicionado ao carrinho!"
+    );
 }
 
 
 // ======================================================
-// PERSONALIZAR PASTEL
+// PERSONALIZAR PRODUTO
 // ======================================================
 
 function personalizarProduto(
     nome,
     preco,
-    ingredientes,
-    adicionais
+    ingredientes = [],
+    adicionais = []
 ) {
-
-    abrirPersonalizacao({
-
-        tipo: "pastel",
-
-        nome: nome,
-
-        preco: Number(preco),
-
-        ingredientes: ingredientes || [],
-
-        adicionais: adicionais || []
-
-    });
-
-}
-
-
-// ======================================================
-// PERSONALIZAR PIZZA
-// ======================================================
-
-function personalizarPizza(
-    nome,
-    preco,
-    ingredientes
-) {
-
-    abrirPersonalizacao({
-
-        tipo: "pizza",
-
-        nome: nome,
-
-        preco: Number(preco),
-
-        ingredientes: ingredientes || [],
-
-        adicionais: [
-
-            {
-                nome: "Borda de Catupiry",
-                preco: 5
-            },
-
-            {
-                nome: "Borda de Cheddar",
-                preco: 5
-            },
-
-            {
-                nome: "Queijo extra",
-                preco: 4
-            },
-
-            {
-                nome: "Bacon",
-                preco: 5
-            },
-
-            {
-                nome: "Calabresa extra",
-                preco: 5
-            },
-
-            {
-                nome: "Catupiry extra",
-                preco: 4
-            }
-
-        ]
-
-    });
-
-}
-
-
-// ======================================================
-// PERSONALIZAR BATATA
-// ======================================================
-
-function personalizarBatata(
-    nome,
-    preco
-) {
-
-    abrirPersonalizacao({
-
-        tipo: "batata",
-
-        nome: nome,
-
-        preco: Number(preco),
-
-        ingredientes: [],
-
-        adicionais: [
-
-            {
-                nome: "Queijo",
-                preco: 3
-            },
-
-            {
-                nome: "Cheddar",
-                preco: 3
-            },
-
-            {
-                nome: "Catupiry",
-                preco: 4
-            },
-
-            {
-                nome: "Bacon",
-                preco: 5
-            },
-
-            {
-                nome: "Calabresa",
-                preco: 5
-            },
-
-            {
-                nome: "Frango",
-                preco: 5
-            },
-
-            {
-                nome: "Molho especial",
-                preco: 2
-            }
-
-        ]
-
-    });
-
-}
-
-
-// ======================================================
-// PERSONALIZAR BEBIDA
-// ======================================================
-
-function personalizarBebida(
-    nome,
-    preco1L,
-    preco2L
-) {
-
-    const fundo =
-        document.createElement("div");
-
-    fundo.className =
-        "modal-personalizar";
-
-    const caixa =
-        document.createElement("div");
-
-    caixa.className =
-        "caixa-personalizar";
-
-    caixa.innerHTML = `
-
-        <h2>
-            Escolha o tamanho
-        </h2>
-
-        <div style="
-            background:white;
-            border:2px solid #ffd166;
-            border-radius:15px;
-            padding:15px;
-            margin-bottom:18px;
-        ">
-
-            <strong style="
-                font-size:22px;
-            ">
-                ${nome}
-            </strong>
-
-        </div>
-
-        <label class="opcao-personalizar">
-
-            <span>
-                1 Litro
-                <strong class="preco-adicional">
-                    R$ ${Number(preco1L)
-                    .toFixed(2)
-                    .replace(".", ",")}
-                </strong>
-            </span>
-
-            <input
-                type="radio"
-                name="tamanhoBebida"
-                value="1 Litro"
-                data-preco="${Number(preco1L)}"
-                checked
-            >
-
-        </label>
-
-
-        <label class="opcao-personalizar">
-
-            <span>
-                2 Litros
-                <strong class="preco-adicional">
-                    R$ ${Number(preco2L)
-                    .toFixed(2)
-                    .replace(".", ",")}
-                </strong>
-            </span>
-
-            <input
-                type="radio"
-                name="tamanhoBebida"
-                value="2 Litros"
-                data-preco="${Number(preco2L)}"
-            >
-
-        </label>
-
-
-        <div
-            id="totalBebida"
-            class="total-personalizar"
-        >
-            Total: R$ ${Number(preco1L)
-            .toFixed(2)
-            .replace(".", ",")}
-        </div>
-
-
-        <button
-            id="confirmarBebida"
-            class="botao-confirmar"
-        >
-            Adicionar ao carrinho
-        </button>
-
-
-        <button
-            id="fecharBebida"
-            class="botao-fechar"
-        >
-            Fechar
-        </button>
-
-    `;
-
-
-    fundo.appendChild(caixa);
-
-    document.body.appendChild(fundo);
-
-
-    const radios =
-        caixa.querySelectorAll(
-            'input[name="tamanhoBebida"]'
-        );
-
-
-    radios.forEach(function(radio) {
-
-        radio.addEventListener(
-            "change",
-            function() {
-
-                const valor =
-                    Number(
-                        radio.dataset.preco
-                    );
-
-                document.getElementById(
-                    "totalBebida"
-                ).textContent =
-                    "Total: R$ " +
-                    valor
-                    .toFixed(2)
-                    .replace(".", ",");
-
-            }
-        );
-
-    });
-
-
-    document.getElementById(
-        "confirmarBebida"
-    ).onclick = function() {
-
-        const escolhido =
-            caixa.querySelector(
-                'input[name="tamanhoBebida"]:checked'
-            );
-
-
-        const valor =
-            Number(
-                escolhido.dataset.preco
-            );
-
-
-        carrinho.push({
-
-            nome: nome,
-
-            preco: valor,
-
-            quantidade: 1,
-
-            detalhes: [
-
-                "Tamanho: " +
-                escolhido.value
-
-            ]
-
-        });
-
-
-        salvarCarrinho();
-
-        fundo.remove();
-
-        alert(
-            "Bebida adicionada ao carrinho!"
-        );
-
-    };
-
-
-    document.getElementById(
-        "fecharBebida"
-    ).onclick = function() {
-
-        fundo.remove();
-
-    };
-
-}
-
-
-// ======================================================
-// JANELA DE PERSONALIZAÇÃO
-// ======================================================
-
-function abrirPersonalizacao(config) {
 
     const antigo =
         document.getElementById(
@@ -475,293 +125,146 @@ function abrirPersonalizacao(config) {
     fundo.id =
         "personalizarModal";
 
-    fundo.className =
-        "modal-personalizar";
+
+    fundo.style.cssText = `
+        position:fixed;
+        inset:0;
+        background:rgba(0,0,0,.65);
+        z-index:99999;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        padding:15px;
+    `;
 
 
     const caixa =
         document.createElement("div");
 
-    caixa.className =
-        "caixa-personalizar";
+
+    caixa.style.cssText = `
+        width:100%;
+        max-width:520px;
+        max-height:92vh;
+        overflow:auto;
+        background:#fff8e7;
+        border:4px solid #ffb300;
+        border-radius:22px;
+        padding:20px;
+        box-sizing:border-box;
+    `;
 
 
     caixa.innerHTML = `
 
-        <h2>
-            Personalize seu pedido
+        <h2 style="
+            color:#c62828;
+            text-align:center;
+            margin-top:0;
+        ">
+            Personalizar pedido
         </h2>
-
 
         <div style="
             background:white;
             border:2px solid #ffd166;
             border-radius:15px;
             padding:15px;
-            margin-bottom:18px;
+            margin-bottom:20px;
         ">
 
             <strong style="
                 font-size:22px;
-                display:block;
             ">
-                ${config.nome}
+                ${nome}
             </strong>
 
-            <strong style="
-                color:#c62828;
-                font-size:20px;
-            ">
-                A partir de R$
-                ${config.preco
-                .toFixed(2)
-                .replace(".", ",")}
-            </strong>
+            <div
+                id="totalPersonalizado"
+                style="
+                    color:#c62828;
+                    font-size:22px;
+                    font-weight:bold;
+                    margin-top:8px;
+                "
+            >
+                Total: R$ ${Number(preco)
+                    .toFixed(2)
+                    .replace(".", ",")}
+            </div>
 
         </div>
 
-    `;
-
-
-    // ==================================================
-    // TAMANHO DA PIZZA
-    // ==================================================
-
-    if (config.tipo === "pizza") {
-
-        caixa.innerHTML += `
-
-            <h3>
-                Tamanho da pizza
-            </h3>
-
-
-            <label class="opcao-personalizar">
-
-                <span>
-                    Broto
-                    <strong class="preco-adicional">
-                        + R$ 0,00
-                    </strong>
-                </span>
-
-                <input
-                    type="radio"
-                    name="tamanhoPizza"
-                    value="Broto"
-                    data-preco="0"
-                    checked
-                >
-
-            </label>
-
-
-            <label class="opcao-personalizar">
-
-                <span>
-                    Média
-                    <strong class="preco-adicional">
-                        + R$ 8,00
-                    </strong>
-                </span>
-
-                <input
-                    type="radio"
-                    name="tamanhoPizza"
-                    value="Média"
-                    data-preco="8"
-                >
-
-            </label>
-
-
-            <label class="opcao-personalizar">
-
-                <span>
-                    Grande
-                    <strong class="preco-adicional">
-                        + R$ 15,00
-                    </strong>
-                </span>
-
-                <input
-                    type="radio"
-                    name="tamanhoPizza"
-                    value="Grande"
-                    data-preco="15"
-                >
-
-            </label>
-
-        `;
-
-    }
-
-
-    // ==================================================
-    // TAMANHO DA BATATA
-    // ==================================================
-
-    if (config.tipo === "batata") {
-
-        caixa.innerHTML += `
-
-            <h3>
-                Tamanho
-            </h3>
-
-
-            <label class="opcao-personalizar">
-
-                <span>
-                    Pequena
-                    <strong class="preco-adicional">
-                        + R$ 0,00
-                    </strong>
-                </span>
-
-                <input
-                    type="radio"
-                    name="tamanhoBatata"
-                    value="Pequena"
-                    data-preco="0"
-                    checked
-                >
-
-            </label>
-
-
-            <label class="opcao-personalizar">
-
-                <span>
-                    Média
-                    <strong class="preco-adicional">
-                        + R$ 5,00
-                    </strong>
-                </span>
-
-                <input
-                    type="radio"
-                    name="tamanhoBatata"
-                    value="Média"
-                    data-preco="5"
-                >
-
-            </label>
-
-
-            <label class="opcao-personalizar">
-
-                <span>
-                    Grande
-                    <strong class="preco-adicional">
-                        + R$ 10,00
-                    </strong>
-                </span>
-
-                <input
-                    type="radio"
-                    name="tamanhoBatata"
-                    value="Grande"
-                    data-preco="10"
-                >
-
-            </label>
-
-        `;
-
-    }
-
-
-    // ==================================================
-    // INGREDIENTES
-    // ==================================================
-
-    if (
-        config.ingredientes &&
-        config.ingredientes.length > 0
-    ) {
-
-        caixa.innerHTML += `
-
-            <h3>
-                Ingredientes
-            </h3>
-
-            <p style="
-                color:#666;
-                font-size:14px;
-            ">
-                Desmarque o que você não quer.
-            </p>
-
-            <div id="listaIngredientes"></div>
-
-        `;
-
-    }
-
-
-    // ==================================================
-    // ADICIONAIS
-    // ==================================================
-
-    if (
-        config.adicionais &&
-        config.adicionais.length > 0
-    ) {
-
-        caixa.innerHTML += `
-
-            <h3>
-                Adicionais
-            </h3>
-
-            <p style="
-                color:#666;
-                font-size:14px;
-            ">
-                Marque o que deseja acrescentar.
-            </p>
-
-            <div id="listaAdicionais"></div>
-
-        `;
-
-    }
-
-
-    // ==================================================
-    // TOTAL
-    // ==================================================
-
-    caixa.innerHTML += `
-
-        <div
-            id="totalPersonalizado"
-            class="total-personalizar"
-        >
-            Total: R$ ${config.preco
-            .toFixed(2)
-            .replace(".", ",")}
-        </div>
-
+        ${
+            ingredientes.length > 0
+            ? `
+                <h3 style="
+                    color:#c62828;
+                ">
+                    Ingredientes
+                </h3>
+
+                <p style="
+                    font-size:15px;
+                    color:#666;
+                ">
+                    Desmarque o que você não quer.
+                </p>
+
+                <div id="listaIngredientes"></div>
+              `
+            : ""
+        }
+
+        ${
+            adicionais.length > 0
+            ? `
+                <h3 style="
+                    color:#c62828;
+                    margin-top:22px;
+                ">
+                    Adicionais
+                </h3>
+
+                <div id="listaAdicionais"></div>
+              `
+            : ""
+        }
 
         <button
-            id="btnConfirmarPersonalizacao"
-            class="botao-confirmar"
+            id="btnAdicionarPersonalizado"
+            style="
+                width:100%;
+                padding:16px;
+                margin-top:20px;
+                border:0;
+                border-radius:12px;
+                background:#ffb300;
+                font-size:19px;
+                font-weight:bold;
+                cursor:pointer;
+            "
         >
             Adicionar ao carrinho
         </button>
 
-
         <button
-            id="btnFecharPersonalizacao"
-            class="botao-fechar"
+            id="btnFecharPersonalizar"
+            style="
+                width:100%;
+                padding:14px;
+                margin-top:10px;
+                border:2px solid #c62828;
+                border-radius:12px;
+                background:white;
+                color:#c62828;
+                font-size:18px;
+                font-weight:bold;
+                cursor:pointer;
+            "
         >
             Fechar
         </button>
-
     `;
 
 
@@ -775,19 +278,30 @@ function abrirPersonalizacao(config) {
     // ==================================================
 
     const listaIngredientes =
-        caixa.querySelector(
-            "#listaIngredientes"
+        document.getElementById(
+            "listaIngredientes"
         );
 
 
     if (listaIngredientes) {
 
-        config.ingredientes.forEach(
-            function(ingrediente) {
+        ingredientes.forEach(
+            function(ingrediente, index) {
 
                 listaIngredientes.innerHTML += `
 
-                    <label class="opcao-personalizar">
+                    <label style="
+                        display:flex;
+                        justify-content:space-between;
+                        align-items:center;
+                        background:white;
+                        border:1px solid #ddd;
+                        border-radius:12px;
+                        padding:13px;
+                        margin-bottom:8px;
+                        font-size:17px;
+                        cursor:pointer;
+                    ">
 
                         <span>
                             ${ingrediente}
@@ -795,15 +309,18 @@ function abrirPersonalizacao(config) {
 
                         <input
                             type="checkbox"
-                            class="check-ingrediente"
+                            class="ingrediente"
                             data-nome="${ingrediente}"
                             checked
+                            style="
+                                width:24px;
+                                height:24px;
+                                accent-color:#ffb300;
+                            "
                         >
 
                     </label>
-
                 `;
-
             }
         );
 
@@ -815,29 +332,40 @@ function abrirPersonalizacao(config) {
     // ==================================================
 
     const listaAdicionais =
-        caixa.querySelector(
-            "#listaAdicionais"
+        document.getElementById(
+            "listaAdicionais"
         );
 
 
     if (listaAdicionais) {
 
-        config.adicionais.forEach(
+        adicionais.forEach(
             function(adicional, index) {
 
                 listaAdicionais.innerHTML += `
 
-                    <label class="opcao-personalizar">
+                    <label style="
+                        display:flex;
+                        justify-content:space-between;
+                        align-items:center;
+                        background:white;
+                        border:1px solid #ddd;
+                        border-radius:12px;
+                        padding:13px;
+                        margin-bottom:8px;
+                        font-size:17px;
+                        cursor:pointer;
+                    ">
 
                         <span>
 
                             ${adicional.nome}
 
-                            <strong
-                                class="preco-adicional"
-                            >
-                                + R$
-                                ${Number(
+                            <strong style="
+                                color:#c62828;
+                                margin-left:5px;
+                            ">
+                                + R$ ${Number(
                                     adicional.preco
                                 )
                                 .toFixed(2)
@@ -848,14 +376,17 @@ function abrirPersonalizacao(config) {
 
                         <input
                             type="checkbox"
-                            class="check-adicional"
+                            class="adicional"
                             data-index="${index}"
+                            style="
+                                width:24px;
+                                height:24px;
+                                accent-color:#ffb300;
+                            "
                         >
 
                     </label>
-
                 `;
-
             }
         );
 
@@ -869,56 +400,35 @@ function abrirPersonalizacao(config) {
     function atualizarTotal() {
 
         let total =
-            Number(config.preco);
-
-
-        const tamanho =
-            caixa.querySelector(
-                'input[name="tamanhoPizza"]:checked,' +
-                'input[name="tamanhoBatata"]:checked'
-            );
-
-
-        if (tamanho) {
-
-            total +=
-                Number(
-                    tamanho.dataset.preco || 0
-                );
-
-        }
+            Number(preco);
 
 
         caixa
             .querySelectorAll(
-                ".check-adicional"
+                ".adicional"
             )
-            .forEach(
-                function(check) {
+            .forEach(function(check) {
 
-                    if (check.checked) {
+                if (check.checked) {
 
-                        const index =
-                            Number(
-                                check.dataset.index
-                            );
+                    const index =
+                        Number(
+                            check.dataset.index
+                        );
 
-                        total +=
-                            Number(
-                                config
-                                .adicionais[index]
-                                .preco
-                            );
-
-                    }
+                    total +=
+                        Number(
+                            adicionais[index].preco
+                        );
 
                 }
-            );
+
+            });
 
 
         const totalElemento =
-            caixa.querySelector(
-                "#totalPersonalizado"
+            document.getElementById(
+                "totalPersonalizado"
             );
 
 
@@ -927,8 +437,8 @@ function abrirPersonalizacao(config) {
             totalElemento.textContent =
                 "Total: R$ " +
                 total
-                .toFixed(2)
-                .replace(".", ",");
+                    .toFixed(2)
+                    .replace(".", ",");
 
         }
 
@@ -937,137 +447,121 @@ function abrirPersonalizacao(config) {
 
     caixa
         .querySelectorAll(
-            'input[name="tamanhoPizza"],' +
-            'input[name="tamanhoBatata"],' +
-            '.check-adicional'
+            ".adicional"
         )
-        .forEach(
-            function(input) {
+        .forEach(function(check) {
 
-                input.addEventListener(
-                    "change",
-                    atualizarTotal
-                );
+            check.addEventListener(
+                "change",
+                atualizarTotal
+            );
 
-            }
-        );
+        });
 
 
     // ==================================================
-    // CONFIRMAR
+    // ADICIONAR PERSONALIZADO
     // ==================================================
 
-    caixa
-        .querySelector(
-            "#btnConfirmarPersonalizacao"
+    document
+        .getElementById(
+            "btnAdicionarPersonalizado"
         )
         .onclick =
         function() {
 
 
             let total =
-                Number(config.preco);
+                Number(preco);
 
 
             let detalhes = [];
 
 
-            //------------------------------------------
+            // ------------------------------------------
             // INGREDIENTES RETIRADOS
             // ------------------------------------------
 
-            let retirados = [];
-
-
             caixa
                 .querySelectorAll(
-                    ".check-ingrediente"
+                    ".ingrediente"
                 )
-                .forEach(
-                    function(check) {
+                .forEach(function(check) {
 
-                        if (!check.checked) {
+                    if (!check.checked) {
 
-                            retirados.push(
-                                check.dataset.nome
-                            );
-
-                        }
+                        detalhes.push(
+                            "Sem " +
+                            check.dataset.nome
+                        );
 
                     }
-                );
 
-
-            if (retirados.length > 0) {
-
-                detalhes.push(
-                    "Sem: " +
-                    retirados.join(", ")
-                );
-
-            }
+                });
 
 
             // ------------------------------------------
             // ADICIONAIS
             // ------------------------------------------
 
-            let escolhidos = [];
+            let adicionaisEscolhidos = [];
 
 
             caixa
                 .querySelectorAll(
-                    ".check-adicional"
+                    ".adicional"
                 )
-                .forEach(
-                    function(check) {
+                .forEach(function(check) {
 
-                        if (check.checked) {
+                    if (check.checked) {
 
-                            const index =
-                                Number(
-                                    check.dataset.index
-                                );
-
-
-                            const adicional =
-                                config
-                                .adicionais[index];
-
-
-                            total +=
-                                Number(
-                                    adicional.preco
-                                );
-
-
-                            escolhidos.push(
-                                adicional.nome
+                        const index =
+                            Number(
+                                check.dataset.index
                             );
 
-                        }
+
+                        const adicional =
+                            adicionais[index];
+
+
+                        adicionaisEscolhidos.push(
+                            adicional.nome
+                        );
+
+
+                        total +=
+                            Number(
+                                adicional.preco
+                            );
 
                     }
-                );
 
-
-            if (escolhidos.length > 0) {
-
-                detalhes.push(
-                    "Adicionais: " +
-                    escolhidos.join(", ")
-                );
-
-            }
+                });
 
 
             // ------------------------------------------
-            // CARRINHO
+            // DETALHES DOS ADICIONAIS
+            // ------------------------------------------
+
+            adicionaisEscolhidos.forEach(
+                function(adicional) {
+
+                    detalhes.push(
+                        "Com " + adicional
+                    );
+
+                }
+            );
+
+
+            // ------------------------------------------
+            // ADICIONAR
             // ------------------------------------------
 
             carrinho.push({
 
-                nome: config.nome,
+                nome: nome,
 
                 preco: total,
 
@@ -1095,9 +589,323 @@ function abrirPersonalizacao(config) {
     // FECHAR
     // ==================================================
 
-    caixa
-        .querySelector(
-            "#btnFecharPersonalizacao"
+    document
+        .getElementById(
+            "btnFecharPersonalizar"
+        )
+        .onclick =
+        function() {
+
+            fundo.remove();
+
+        };
+
+}
+
+
+// ======================================================
+// PERSONALIZAR PIZZA
+// ======================================================
+
+function personalizarPizza(
+    nome,
+    preco,
+    ingredientes = [],
+    adicionais = []
+) {
+
+    personalizarProduto(
+        nome,
+        preco,
+        ingredientes,
+        adicionais
+    );
+
+}
+
+
+// ======================================================
+// PERSONALIZAR BATATA
+// ======================================================
+
+function personalizarBatata(
+    nome,
+    preco
+) {
+
+    const adicionais = [
+
+        {
+            nome: "Queijo",
+            preco: 3
+        },
+
+        {
+            nome: "Bacon",
+            preco: 4
+        },
+
+        {
+            nome: "Calabresa",
+            preco: 4
+        },
+
+        {
+            nome: "Catupiry",
+            preco: 3
+        },
+
+        {
+            nome: "Cheddar",
+            preco: 3
+        },
+
+        {
+            nome: "Molho especial",
+            preco: 2
+        }
+
+    ];
+
+
+    personalizarProduto(
+        nome,
+        preco,
+        [],
+        adicionais
+    );
+
+}
+
+
+// ======================================================
+// PERSONALIZAR BEBIDA
+// ======================================================
+
+function personalizarBebida(
+    nome,
+    tamanhos
+) {
+
+    const antigo =
+        document.getElementById(
+            "personalizarModal"
+        );
+
+    if (antigo) antigo.remove();
+
+
+    const fundo =
+        document.createElement("div");
+
+    fundo.id =
+        "personalizarModal";
+
+
+    fundo.style.cssText = `
+        position:fixed;
+        inset:0;
+        background:rgba(0,0,0,.65);
+        z-index:99999;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        padding:15px;
+    `;
+
+
+    const caixa =
+        document.createElement("div");
+
+
+    caixa.style.cssText = `
+        width:100%;
+        max-width:500px;
+        background:#fff8e7;
+        border:4px solid #ffb300;
+        border-radius:22px;
+        padding:20px;
+    `;
+
+
+    let html = `
+
+        <h2 style="
+            text-align:center;
+            color:#c62828;
+            margin-top:0;
+        ">
+            Escolha o tamanho
+        </h2>
+
+    `;
+
+
+    tamanhos.forEach(
+        function(tamanho, index) {
+
+            html += `
+
+                <label style="
+                    display:flex;
+                    justify-content:space-between;
+                    align-items:center;
+                    background:white;
+                    border:2px solid #ddd;
+                    border-radius:12px;
+                    padding:15px;
+                    margin-bottom:10px;
+                    font-size:18px;
+                    cursor:pointer;
+                ">
+
+                    <span>
+                        ${tamanho.nome}
+
+                        <strong style="
+                            color:#c62828;
+                            margin-left:6px;
+                        ">
+                            R$ ${Number(
+                                tamanho.preco
+                            )
+                            .toFixed(2)
+                            .replace(".", ",")}
+                        </strong>
+                    </span>
+
+                    <input
+                        type="radio"
+                        name="tamanhoBebida"
+                        value="${index}"
+                        ${
+                            index === 0
+                            ? "checked"
+                            : ""
+                        }
+                        style="
+                            width:24px;
+                            height:24px;
+                        "
+                    >
+
+                </label>
+
+            `;
+
+        }
+    );
+
+
+    html += `
+
+        <button
+            id="btnConfirmarBebida"
+            style="
+                width:100%;
+                padding:16px;
+                background:#ffb300;
+                border:0;
+                border-radius:12px;
+                font-size:19px;
+                font-weight:bold;
+            "
+        >
+            Adicionar ao carrinho
+        </button>
+
+        <button
+            id="btnFecharBebida"
+            style="
+                width:100%;
+                padding:14px;
+                margin-top:10px;
+                background:white;
+                border:2px solid #c62828;
+                border-radius:12px;
+                color:#c62828;
+                font-size:18px;
+                font-weight:bold;
+            "
+        >
+            Fechar
+        </button>
+
+    `;
+
+
+    caixa.innerHTML = html;
+
+    fundo.appendChild(caixa);
+
+    document.body.appendChild(fundo);
+
+
+    document
+        .getElementById(
+            "btnConfirmarBebida"
+        )
+        .onclick =
+        function() {
+
+            const escolhido =
+                caixa.querySelector(
+                    'input[name="tamanhoBebida"]:checked'
+                );
+
+
+            if (!escolhido) {
+
+                alert(
+                    "Escolha um tamanho."
+                );
+
+                return;
+
+            }
+
+
+            const tamanho =
+                tamanhos[
+                    Number(escolhido.value)
+                ];
+
+
+            carrinho.push({
+
+                nome:
+                    nome +
+                    " - " +
+                    tamanho.nome,
+
+                preco:
+                    Number(
+                        tamanho.preco
+                    ),
+
+                quantidade: 1,
+
+                detalhes: []
+
+            });
+
+
+            salvarCarrinho();
+
+
+            fundo.remove();
+
+
+            alert(
+                "Bebida adicionada ao carrinho!"
+            );
+
+        };
+
+
+    document
+        .getElementById(
+            "btnFecharBebida"
         )
         .onclick =
         function() {
@@ -1129,6 +937,7 @@ function verCarrinho() {
     fundo.id =
         "carrinhoModal";
 
+
     fundo.style.cssText = `
         position:fixed;
         inset:0;
@@ -1144,10 +953,11 @@ function verCarrinho() {
     const caixa =
         document.createElement("div");
 
+
     caixa.style.cssText = `
         width:100%;
         max-width:520px;
-        max-height:90vh;
+        max-height:92vh;
         overflow:auto;
         background:#fff8e7;
         border:4px solid #ffb300;
@@ -1179,8 +989,7 @@ function verCarrinho() {
 
             <p style="
                 text-align:center;
-                font-size:18px;
-                padding:20px;
+                font-size:19px;
             ">
                 Seu carrinho está vazio.
             </p>
@@ -1193,21 +1002,15 @@ function verCarrinho() {
         carrinho.forEach(
             function(produto, index) {
 
-
                 const quantidade =
                     Number(
                         produto.quantidade || 1
                     );
 
 
-                const preco =
-                    Number(
-                        produto.preco
-                    );
-
-
                 total +=
-                    preco * quantidade;
+                    Number(produto.preco) *
+                    quantidade;
 
 
                 let detalhesHTML = "";
@@ -1223,10 +1026,10 @@ function verCarrinho() {
                         <div style="
                             margin-top:8px;
                             color:#666;
-                            font-size:14px;
-                            line-height:1.5;
+                            font-size:15px;
                         ">
-                            ${produto.detalhes.join("<br>")}
+                            ${produto.detalhes
+                                .join("<br>")}
                         </div>
 
                     `;
@@ -1247,84 +1050,80 @@ function verCarrinho() {
                         <strong style="
                             font-size:18px;
                         ">
+                            ${quantidade}x
                             ${produto.nome}
                         </strong>
 
-
-                        <div style="
-                            color:#c62828;
-                            font-weight:bold;
-                            margin-top:6px;
-                        ">
-                            R$
-                            ${preco
-                            .toFixed(2)
-                            .replace(".", ",")}
-                            cada
-                        </div>
-
-
                         ${detalhesHTML}
 
-
-                        <div style="
-                            display:flex;
-                            align-items:center;
-                            gap:10px;
-                            margin-top:14px;
-                            flex-wrap:wrap;
+                        <p style="
+                            color:#c62828;
+                            font-weight:bold;
                         ">
+                            R$ ${
+                                (
+                                    Number(
+                                        produto.preco
+                                    ) *
+                                    quantidade
+                                )
+                                .toFixed(2)
+                                .replace(".", ",")
+                            }
+                        </p>
 
-                            <button
-                                onclick="diminuirProduto(${index})"
-                                style="
-                                    padding:9px 16px;
-                                    font-size:20px;
-                                    border:0;
-                                    border-radius:8px;
-                                    background:#ffb300;
-                                "
-                            >
-                                −
-                            </button>
-
-
-                            <strong style="
+                        <button
+                            onclick="
+                                diminuirProduto(${index})
+                            "
+                            style="
+                                padding:10px 16px;
                                 font-size:20px;
-                            ">
-                                ${quantidade}
-                            </strong>
+                                border:0;
+                                border-radius:8px;
+                                background:#ffb300;
+                            "
+                        >
+                            −
+                        </button>
 
+                        <strong style="
+                            margin:0 15px;
+                            font-size:19px;
+                        ">
+                            ${quantidade}
+                        </strong>
 
-                            <button
-                                onclick="aumentarProduto(${index})"
-                                style="
-                                    padding:9px 16px;
-                                    font-size:20px;
-                                    border:0;
-                                    border-radius:8px;
-                                    background:#ffb300;
-                                "
-                            >
-                                +
-                            </button>
+                        <button
+                            onclick="
+                                aumentarProduto(${index})
+                            "
+                            style="
+                                padding:10px 16px;
+                                font-size:20px;
+                                border:0;
+                                border-radius:8px;
+                                background:#ffb300;
+                            "
+                        >
+                            +
+                        </button>
 
-
-                            <button
-                                onclick="removerProduto(${index})"
-                                style="
-                                    padding:9px 10px;
-                                    border:0;
-                                    border-radius:8px;
-                                    background:#c62828;
-                                    color:white;
-                                    font-weight:bold;
-                                "
-                            >
-                                Remover
-                            </button>
-
-                        </div>
+                        <button
+                            onclick="
+                                removerProduto(${index})
+                            "
+                            style="
+                                margin-left:8px;
+                                padding:10px;
+                                background:#c62828;
+                                color:white;
+                                border:0;
+                                border-radius:8px;
+                            "
+                        >
+                            Remover
+                        </button>
 
                     </div>
 
@@ -1340,12 +1139,12 @@ function verCarrinho() {
                 text-align:center;
                 color:#c62828;
             ">
-                Total: R$
-                ${total
-                .toFixed(2)
-                .replace(".", ",")}
+                Total: R$ ${
+                    total
+                    .toFixed(2)
+                    .replace(".", ",")
+                }
             </h2>
-
 
             <button
                 onclick="irParaPedido()"
@@ -1394,9 +1193,11 @@ function verCarrinho() {
     document.body.appendChild(fundo);
 
 
-    document.getElementById(
-        "fecharCarrinho"
-    ).onclick =
+    document
+        .getElementById(
+            "fecharCarrinho"
+        )
+        .onclick =
         function() {
 
             fundo.remove();
@@ -1406,8 +1207,7 @@ function verCarrinho() {
 }
 
 
-//
-======================================================
+// ======================================================
 // AUMENTAR
 // ======================================================
 
@@ -1466,7 +1266,11 @@ function diminuirProduto(index) {
 
 function removerProduto(index) {
 
+    if (!carrinho[index]) return;
+
+
     carrinho.splice(index, 1);
+
 
     salvarCarrinho();
 
@@ -1502,26 +1306,7 @@ function irParaPedido() {
 
 
 // ======================================================
-// CATEGORIAS
-// ======================================================
-
-function irParaSecao(id) {
-
-    const secao =
-        document.getElementById(id);
-
-    if (!secao) return;
-
-
-    secao.scrollIntoView({
-        behavior: "smooth"
-    });
-
-}
-
-
-// ======================================================
-// PESQUISA
+// INICIAR
 // ======================================================
 
 document.addEventListener(
@@ -1529,52 +1314,6 @@ document.addEventListener(
     function() {
 
         atualizarContador();
-
-
-        const pesquisa =
-            document.querySelector(
-                ".pesquisa"
-            );
-
-
-        if (pesquisa) {
-
-            pesquisa.addEventListener(
-                "input",
-                function() {
-
-                    const termo =
-                        pesquisa.value
-                        .toLowerCase()
-                        .trim();
-
-
-                    document
-                        .querySelectorAll(
-                            ".card-produto"
-                        )
-                        .forEach(
-                            function(card) {
-
-                                const texto =
-                                    card.textContent
-                                    .toLowerCase();
-
-
-                                card.style.display =
-                                    texto.includes(
-                                        termo
-                                    )
-                                    ? ""
-                                    : "none";
-
-                            }
-                        );
-
-                }
-            );
-
-        }
 
     }
 );
