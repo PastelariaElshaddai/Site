@@ -1469,61 +1469,135 @@ footer p {
 
 <script>
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function() {
+document.addEventListener("DOMContentLoaded", function() {
 
-        const pesquisa =
-            document.getElementById("pesquisa");
+    const pesquisa = document.getElementById("pesquisa");
 
-        if (!pesquisa) return;
+    if (!pesquisa) return;
 
-        pesquisa.addEventListener(
-            "input",
-            function() {
 
-                const termo =
-                    this.value
-                    .toLowerCase()
-                    .trim();
+    pesquisa.addEventListener("input", function() {
 
-                const cards =
-                    document.querySelectorAll(
-                        ".card-produto"
-                    );
+        const termo = this.value
+            .toLowerCase()
+            .trim();
 
-                cards.forEach(
-                    function(card) {
 
-                        const texto =
-                            card.textContent
-                            .toLowerCase();
+        const secoes = document.querySelectorAll(".secao");
 
-                        if (
-                            termo === "" ||
-                            texto.includes(termo)
-                        ) {
 
-                            card.style.display = "";
+        secoes.forEach(function(secao) {
 
-                        } else {
+            const cards = secao.querySelectorAll(
+                ".card-produto"
+            );
 
-                            card.style.display = "none";
+            let encontrou = false;
 
-                        }
 
-                    }
-                );
+            cards.forEach(function(card) {
+
+                const texto = card.textContent
+                    .toLowerCase();
+
+
+                if (
+                    termo === "" ||
+                    texto.includes(termo)
+                ) {
+
+                    card.style.display = "";
+
+                    encontrou = true;
+
+                } else {
+
+                    card.style.display = "none";
+
+                }
+
+            });
+
+
+            /*
+             * Se estiver pesquisando alguma coisa,
+             * esconde a seção que não possui resultado.
+             */
+
+            if (termo !== "") {
+
+                if (encontrou) {
+
+                    secao.style.display = "";
+
+                } else {
+
+                    secao.style.display = "none";
+
+                }
+
+            } else {
+
+                secao.style.display = "";
 
             }
-        );
+
+        });
+
+    });
+
+});
+
+
+/* =========================================
+   BOTÕES DAS CATEGORIAS
+========================================= */
+
+function irParaSecao(id) {
+
+    const secao = document.getElementById(id);
+
+    if (!secao) return;
+
+
+    /* limpa a pesquisa */
+
+    const pesquisa =
+        document.getElementById("pesquisa");
+
+    if (pesquisa) {
+
+        pesquisa.value = "";
 
     }
-);
+
+
+    /* mostra todas as seções novamente */
+
+    document.querySelectorAll(".secao").forEach(
+        function(secao) {
+
+            secao.style.display = "";
+
+            secao.querySelectorAll(
+                ".card-produto"
+            ).forEach(function(card) {
+
+                card.style.display = "";
+
+            });
+
+        }
+    );
+
+
+    /* vai para a categoria */
+
+    secao.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+
+}
 
 </script>
-
-
-</body>
-
-    </html>
