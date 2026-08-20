@@ -919,13 +919,82 @@ function enviarPedido() {
 
 
     // ======================================
-    // PAGAMENTO
-    // ======================================
+// PAGAMENTO
+// ======================================
+
+mensagem +=
+"\n*PAGAMENTO:* " +
+pagamento.value +
+"\n";
+
+
+if (pagamento.value === "Pix") {
+
+    const pixQuando =
+    document.querySelector(
+        'input[name="pixQuando"]:checked'
+    );
+
+
+    if (!pixQuando) {
+
+        alert(
+            "Escolha se o Pix será pago agora ou na entrega."
+        );
+
+        return;
+
+    }
+
+
+    if (pixQuando.value === "Agora") {
+
+        mensagem +=
+        "Pix: Pagar agora\n";
+
+    } else {
+
+        mensagem +=
+        "Pix: Pagar na entrega\n";
+
+    }
+
+}
+
+
+if (pagamento.value === "Dinheiro") {
+
+    const troco =
+    document.getElementById(
+        "troco"
+    ).value.trim();
+
+
+    if (!troco) {
+
+        alert(
+            "Informe o valor para o troco."
+        );
+
+        return;
+
+    }
+
 
     mensagem +=
-    "\n*PAGAMENTO:* " +
-    pagamento.value +
+    "Troco para: " +
+    troco +
     "\n";
+
+}
+
+
+if (pagamento.value === "Cartão") {
+
+    mensagem +=
+    "Cartão: Pagar na entrega\n";
+
+}
 
 
     if (
@@ -1078,8 +1147,69 @@ document.addEventListener(
 
         mostrarEndereco();
 
-        mostrarTroco();
+        function mostrarOpcoesPagamento() {
 
+    const pagamento =
+    document.querySelector(
+        'input[name="pagamento"]:checked'
+    );
+
+    const opcoesPix =
+    document.getElementById(
+        "opcoesPix"
+    );
+
+    const areaTroco =
+    document.getElementById(
+        "areaTroco"
+    );
+
+
+    // PIX
+    if (
+        pagamento &&
+        pagamento.value === "Pix"
+    ) {
+
+        opcoesPix.style.display = "block";
+
+    } else {
+
+        opcoesPix.style.display = "none";
+
+        document
+            .querySelectorAll(
+                'input[name="pixQuando"]'
+            )
+            .forEach(function(item) {
+
+                item.checked = false;
+
+            });
+
+    }
+
+
+    // DINHEIRO
+    if (
+        pagamento &&
+        pagamento.value === "Dinheiro"
+    ) {
+
+        areaTroco.style.display = "block";
+
+    } else {
+
+        areaTroco.style.display = "none";
+
+        document.getElementById(
+            "troco"
+        ).value = "";
+
+    }
+
+        }
+mostrarOpcoesPagamento();
         mostrarResumo();
 
     }
