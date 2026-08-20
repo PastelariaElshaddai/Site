@@ -362,17 +362,39 @@ Forma de pagamento
 <div class="pagamento">
 
 <label>
-
 <input
 type="radio"
 name="pagamento"
 value="Pix"
-onchange="mostrarTroco()"
+onchange="mostrarOpcoesPagamento()"
+>
+Pix
+</label>
+
+<div
+id="opcoesPix"
+style="display:none; margin-left:10px;"
 >
 
-Pix
-
+<label>
+<input
+type="radio"
+name="pixQuando"
+value="Agora"
+>
+Pagar agora
 </label>
+
+<label>
+<input
+type="radio"
+name="pixQuando"
+value="Entrega"
+>
+Pagar na entrega
+</label>
+
+</div>
 
 
 <label>
@@ -381,10 +403,10 @@ Pix
 type="radio"
 name="pagamento"
 value="Cartão"
-onchange="mostrarTroco()"
+onchange="mostrarOpcoesPagamento()"
 >
 
-Cartão
+Cartão — pagar na entrega
 
 </label>
 
@@ -395,7 +417,7 @@ Cartão
 type="radio"
 name="pagamento"
 value="Dinheiro"
-onchange="mostrarTroco()"
+onchange="mostrarOpcoesPagamento()"
 >
 
 Dinheiro
@@ -404,6 +426,31 @@ Dinheiro
 
 </div>
 
+
+<!-- =====================================
+     TROCO
+===================================== -->
+
+<div
+id="areaTroco"
+style="display:none;"
+>
+
+<div class="grupo">
+
+<label for="troco">
+Troco para quanto?
+</label>
+
+<input
+type="text"
+id="troco"
+placeholder="Ex.: R$ 50,00"
+>
+
+</div>
+
+</div>
 
 <!-- =====================================
      TROCO
