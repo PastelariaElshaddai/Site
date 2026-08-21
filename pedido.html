@@ -123,7 +123,7 @@ textarea {
     gap: 10px;
 }
 
-.pagamento label {
+.pagamento > label {
     background: #fff;
     border: 2px solid #ddd;
     border-radius: 10px;
@@ -137,9 +137,40 @@ textarea {
     margin-right: 8px;
 }
 
+.subopcoes {
+    display: none;
+    background: #fff8e1;
+    border: 1px solid #ffcc80;
+    border-radius: 10px;
+    padding: 12px;
+    margin-top: -4px;
+}
+
+.subopcao {
+    display: block;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.subopcao input {
+    width: auto;
+    margin-right: 8px;
+}
+
 #areaTroco {
     display: none;
     margin-top: 12px;
+    background: #fff8e1;
+    border: 1px solid #ffcc80;
+    border-radius: 10px;
+    padding: 12px;
+}
+
+.info-pagamento {
+    font-size: 14px;
+    color: #666;
+    margin: 4px 0 0 28px;
 }
 
 .botao-enviar {
@@ -164,6 +195,7 @@ textarea {
     background: white;
     color: #555;
     font-size: 16px;
+    cursor: pointer;
 }
 
 </style>
@@ -361,41 +393,57 @@ Forma de pagamento
 
 <div class="pagamento">
 
+
+<!-- PIX -->
+
 <label>
+
 <input
 type="radio"
 name="pagamento"
 value="Pix"
 onchange="mostrarOpcoesPagamento()"
 >
+
 Pix
+
 </label>
+
 
 <div
 id="opcoesPix"
-style="display:none; margin-left:10px;"
+class="subopcoes"
 >
 
-<label>
+<label class="subopcao">
+
 <input
 type="radio"
 name="pixQuando"
 value="Agora"
 >
+
 Pagar agora
+
 </label>
 
-<label>
+
+<label class="subopcao">
+
 <input
 type="radio"
 name="pixQuando"
 value="Entrega"
 >
+
 Pagar na entrega
+
 </label>
 
 </div>
 
+
+<!-- CARTÃO -->
 
 <label>
 
@@ -406,10 +454,49 @@ value="Cartão"
 onchange="mostrarOpcoesPagamento()"
 >
 
-Cartão — pagar na entrega
+Cartão
+
+<p class="info-pagamento">
+Crédito ou débito — pagamento na entrega
+</p>
 
 </label>
 
+
+<div
+id="opcoesCartao"
+class="subopcoes"
+>
+
+<label class="subopcao">
+
+<input
+type="radio"
+name="cartaoTipo"
+value="Crédito"
+>
+
+Crédito
+
+</label>
+
+
+<label class="subopcao">
+
+<input
+type="radio"
+name="cartaoTipo"
+value="Débito"
+>
+
+Débito
+
+</label>
+
+</div>
+
+
+<!-- DINHEIRO -->
 
 <label>
 
@@ -422,7 +509,12 @@ onchange="mostrarOpcoesPagamento()"
 
 Dinheiro
 
+<p class="info-pagamento">
+Pagamento na entrega
+</p>
+
 </label>
+
 
 </div>
 
@@ -433,30 +525,7 @@ Dinheiro
 
 <div
 id="areaTroco"
-style="display:none;"
 >
-
-<div class="grupo">
-
-<label for="troco">
-Troco para quanto?
-</label>
-
-<input
-type="text"
-id="troco"
-placeholder="Ex.: R$ 50,00"
->
-
-</div>
-
-</div>
-
-<!-- =====================================
-     TROCO
-===================================== -->
-
-<div id="areaTroco">
 
 <div class="grupo">
 
@@ -584,35 +653,73 @@ function mostrarEndereco() {
 
 
 // ==========================================
-// PAGAMENTO / TROCO
+// PAGAMENTO
 // ==========================================
 
-function mostrarTroco() {
+function mostrarOpcoesPagamento() {
 
     const pagamento =
     document.querySelector(
         'input[name="pagamento"]:checked'
     );
 
-    const area =
+    const opcoesPix =
+    document.getElementById(
+        "opcoesPix"
+    );
+
+    const opcoesCartao =
+    document.getElementById(
+        "opcoesCartao"
+    );
+
+    const areaTroco =
     document.getElementById(
         "areaTroco"
     );
+
+
+    // Esconder tudo primeiro
+
+    opcoesPix.style.display = "none";
+
+    opcoesCartao.style.display = "none";
+
+    areaTroco.style.display = "none";
+
+
+    // PIX
+
+    if (
+        pagamento &&
+        pagamento.value === "Pix"
+    ) {
+
+        opcoesPix.style.display = "block";
+
+    }
+
+
+    // CARTÃO
+
+    if (
+        pagamento &&
+        pagamento.value === "Cartão"
+    ) {
+
+        opcoesCartao.style.display = "block";
+
+    }
+
+
+    // DINHEIRO
 
     if (
         pagamento &&
         pagamento.value === "Dinheiro"
     ) {
 
-        area.style.display = "block";
-
-    } else {
-
-        area.style.display = "none";
-
-        document.getElementById(
-            "troco"
-        ).value = "";
+        areaTroco.style.display = "block";
 
     }
 
@@ -688,7 +795,6 @@ function mostrarResumo() {
                     Subtotal:
                     R$ ${subtotal.toFixed(2).replace(".",",")}
                 </strong>
-
         `;
 
 
@@ -766,6 +872,10 @@ function enviarPedido() {
         'input[name="pagamento"]:checked'
     );
 
+
+    // ======================================
+    // VALIDAÇÕES
+    // ======================================
 
     if (!nome) {
 
@@ -919,83 +1029,82 @@ function enviarPedido() {
 
 
     // ======================================
-// PAGAMENTO
-// ======================================
-
-mensagem +=
-"\n*PAGAMENTO:* " +
-pagamento.value +
-"\n";
-
-
-if (pagamento.value === "Pix") {
-
-    const pixQuando =
-    document.querySelector(
-        'input[name="pixQuando"]:checked'
-    );
-
-
-    if (!pixQuando) {
-
-        alert(
-            "Escolha se o Pix será pago agora ou na entrega."
-        );
-
-        return;
-
-    }
-
-
-    if (pixQuando.value === "Agora") {
-
-        mensagem +=
-        "Pix: Pagar agora\n";
-
-    } else {
-
-        mensagem +=
-        "Pix: Pagar na entrega\n";
-
-    }
-
-}
-
-
-if (pagamento.value === "Dinheiro") {
-
-    const troco =
-    document.getElementById(
-        "troco"
-    ).value.trim();
-
-
-    if (!troco) {
-
-        alert(
-            "Informe o valor para o troco."
-        );
-
-        return;
-
-    }
-
+    // PAGAMENTO
+    // ======================================
 
     mensagem +=
-    "Troco para: " +
-    troco +
+    "\n*PAGAMENTO:* " +
+    pagamento.value +
     "\n";
 
-}
+
+    // PIX
+
+    if (
+        pagamento.value === "Pix"
+    ) {
+
+        const pixQuando =
+        document.querySelector(
+            'input[name="pixQuando"]:checked'
+        );
 
 
-if (pagamento.value === "Cartão") {
+        if (!pixQuando) {
 
-    mensagem +=
-    "Cartão: Pagar na entrega\n";
+            alert(
+                "Escolha se o Pix será pago agora ou na entrega."
+            );
 
-}
+            return;
 
+        }
+
+
+        mensagem +=
+        "Pix: " +
+        (
+            pixQuando.value === "Agora"
+            ? "Pagar agora"
+            : "Pagar na entrega"
+        ) +
+        "\n";
+
+    }
+
+
+    // CARTÃO
+
+    if (
+        pagamento.value === "Cartão"
+    ) {
+
+        const cartaoTipo =
+        document.querySelector(
+            'input[name="cartaoTipo"]:checked'
+        );
+
+
+        if (!cartaoTipo) {
+
+            alert(
+                "Escolha se o cartão será Crédito ou Débito."
+            );
+
+            return;
+
+        }
+
+
+        mensagem +=
+        "Cartão: " +
+        cartaoTipo.value +
+        " — Pagar na entrega\n";
+
+    }
+
+
+    // DINHEIRO
 
     if (
         pagamento.value === "Dinheiro"
@@ -1010,12 +1119,16 @@ if (pagamento.value === "Cartão") {
         if (!troco) {
 
             alert(
-                "Informe o valor para o troco."
+                "Informe para quanto precisa de troco."
             );
 
             return;
 
         }
+
+
+        mensagem +=
+        "Dinheiro — Pagar na entrega\n";
 
 
         mensagem +=
@@ -1147,69 +1260,8 @@ document.addEventListener(
 
         mostrarEndereco();
 
-        function mostrarOpcoesPagamento() {
+        mostrarOpcoesPagamento();
 
-    const pagamento =
-    document.querySelector(
-        'input[name="pagamento"]:checked'
-    );
-
-    const opcoesPix =
-    document.getElementById(
-        "opcoesPix"
-    );
-
-    const areaTroco =
-    document.getElementById(
-        "areaTroco"
-    );
-
-
-    // PIX
-    if (
-        pagamento &&
-        pagamento.value === "Pix"
-    ) {
-
-        opcoesPix.style.display = "block";
-
-    } else {
-
-        opcoesPix.style.display = "none";
-
-        document
-            .querySelectorAll(
-                'input[name="pixQuando"]'
-            )
-            .forEach(function(item) {
-
-                item.checked = false;
-
-            });
-
-    }
-
-
-    // DINHEIRO
-    if (
-        pagamento &&
-        pagamento.value === "Dinheiro"
-    ) {
-
-        areaTroco.style.display = "block";
-
-    } else {
-
-        areaTroco.style.display = "none";
-
-        document.getElementById(
-            "troco"
-        ).value = "";
-
-    }
-
-        }
-mostrarOpcoesPagamento();
         mostrarResumo();
 
     }
