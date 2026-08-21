@@ -710,17 +710,6 @@ footer p {
 <div class="container">
 
 
-<!-- =========================================
-     INFORMAÇÕES
-========================================= -->
-
-<div class="topo-info">
-
-    <p>
-        Entrega • Retirada • Pix • Cartão • Dinheiro
-    </p>
-
-</div>
 
 
 <!-- =========================================
@@ -728,12 +717,45 @@ footer p {
 ========================================= -->
 
 <input
-    type="text"
-    id="pesquisa"
-    class="pesquisa"
-    placeholder="Pesquisar pastel, pizza, bebida, batata..."
+type="text"
+id="pesquisa"
+class="pesquisa"
+placeholder="Pesquisar pastel, pizza, bebida, batata..."
 >
 
+<div class="categorias">
+
+<button
+class="botao"
+onclick="irParaSecao('pasteis')">
+Pastéis
+</button>
+
+<button
+class="botao"
+onclick="irParaSecao('combos')">
+Combos
+</button>
+
+<button
+class="botao"
+onclick="irParaSecao('bebidas')">
+Bebidas
+</button>
+
+<button
+class="botao"
+onclick="irParaSecao('pizzas')">
+Pizzas
+</button>
+
+<button
+class="botao"
+onclick="irParaSecao('batatas')">
+Batatas
+</button>
+
+</div>
 
 <!-- =========================================
      CATEGORIAS
