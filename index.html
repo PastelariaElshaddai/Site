@@ -1445,46 +1445,86 @@ document.addEventListener("DOMContentLoaded", function() {
 
     pesquisa.addEventListener("input", function() {
 
-        const termo = this.value
-            .toLowerCase()
-            .trim();
+    const termo = this.value
+        .toLowerCase()
+        .trim();
 
+    const secoes = document.querySelectorAll(".secao");
 
-        const secoes = document.querySelectorAll(".secao");
+    let primeiraSecaoEncontrada = null;
 
+    secoes.forEach(function(secao) {
 
-        secoes.forEach(function(secao) {
+        const cards = secao.querySelectorAll(".card-produto");
 
-            const cards = secao.querySelectorAll(
-                ".card-produto"
-            );
+        let encontrou = false;
 
-            let encontrou = false;
+        cards.forEach(function(card) {
 
+            const texto = card.textContent
+                .toLowerCase();
 
-            cards.forEach(function(card) {
+            if (
+                termo === "" ||
+                texto.includes(termo)
+            ) {
 
-                const texto = card.textContent
-                    .toLowerCase();
+                card.style.display = "";
+                encontrou = true;
 
+            } else {
 
-                if (
-                    termo === "" ||
-                    texto.includes(termo)
-                ) {
+                card.style.display = "none";
 
-                    card.style.display = "";
+            }
 
-                    encontrou = true;
+        });
 
-                } else {
+        if (termo !== "") {
 
-                    card.style.display = "none";
+            if (encontrou) {
 
+                secao.style.display = "";
+
+                if (!primeiraSecaoEncontrada) {
+                    primeiraSecaoEncontrada = secao;
                 }
 
+            } else {
+
+                secao.style.display = "none";
+
+            }
+
+        } else {
+
+            secao.style.display = "";
+
+        }
+
+    });
+
+    /* =====================================
+       LEVA AUTOMATICAMENTE PARA O RESULTADO
+    ===================================== */
+
+    if (
+        termo !== "" &&
+        primeiraSecaoEncontrada
+    ) {
+
+        setTimeout(function() {
+
+            primeiraSecaoEncontrada.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
             });
 
+        }, 150);
+
+    }
+
+});
 
             /*
              * Se estiver pesquisando alguma coisa,
