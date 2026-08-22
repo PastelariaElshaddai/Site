@@ -206,22 +206,13 @@ header p {
 ========================================= */
 
 .categorias {
-
     display: flex;
-
-    gap: 8px;
-
+    gap: 6px;
     overflow-x: auto;
-
-    padding: 3px 2px 10px;
-
+    padding: 2px 0 5px;
+    margin-bottom: 10px;
     scrollbar-width: none;
-
-    position: sticky;
-
-    top: 0;
-
-    z-index: 100;
+    -webkit-overflow-scrolling: touch;
 }
 
 .categorias::-webkit-scrollbar {
@@ -229,34 +220,16 @@ header p {
 }
 
 .categorias .botao {
-
     flex: 0 0 auto;
-
     background: white;
-
     color: #c62828;
-
-    border: 2px solid #ffb300;
-
-    border-radius: 18px;
-
-    padding: 8px 12px;
-
-    font-size: 13px;
-
+    border: 1.5px solid #ffb300;
+    border-radius: 15px;
+    padding: 6px 10px;
+    font-size: 12px;
     font-weight: bold;
-
     white-space: nowrap;
-
-    box-shadow:
-        0 3px 8px rgba(0,0,0,.08);
-}
-
-.categorias .botao:hover {
-
-    background: #ffb300;
-
-    color: #222;
+    box-shadow: 0 2px 5px rgba(0,0,0,.06);
 }
 
 
