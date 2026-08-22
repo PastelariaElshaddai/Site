@@ -207,12 +207,35 @@ header p {
 
 .categorias {
     display: flex;
+    flex-wrap: nowrap;
     gap: 6px;
     overflow-x: auto;
+    overflow-y: hidden;
     padding: 2px 0 5px;
     margin-bottom: 10px;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
+    width: 100%;
+    white-space: nowrap;
+}
+
+.categorias::-webkit-scrollbar {
+    display: none;
+}
+
+.categorias .botao {
+    flex: 0 0 auto;
+    background: white;
+    color: #c62828;
+    border: 1.5px solid #ffb300;
+    border-radius: 15px;
+    padding: 6px 10px;
+    font-size: 12px;
+    line-height: 1;
+    font-weight: bold;
+    white-space: nowrap;
+    box-shadow: 0 2px 5px rgba(0,0,0,.06);
+    min-height: 28px;
 }
 
 .categorias::-webkit-scrollbar {
