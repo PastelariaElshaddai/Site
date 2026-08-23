@@ -13,13 +13,7 @@ content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="style.css">
 
 <style>
-<div class="logo-area">
 
-    <img
-        src="logo.png"
-        alt="Pastelaria El Shaddai">
-
-</div>
 /* =========================================
    CONFIGURAÇÃO GERAL
 ========================================= */
@@ -54,58 +48,49 @@ header {
 
     color: white;
     text-align: center;
-    padding: 20px 15px 25px;
+
+    padding: 35px 15px 32px;
 
     box-shadow:
         0 4px 15px rgba(0,0,0,.18);
-
-    position: relative;
 }
 
 
-/* Espaço preparado para a logo */
+/* LOGO */
 
 .logo-area {
-    width: 105px;
-    height: 105px;
 
-    margin: 0 auto 10px;
+    width: 145px;
+    height: 145px;
 
-    background: white;
-
-    border: 4px solid #ffcf40;
+    margin: 0 auto 18px;
 
     border-radius: 50%;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
     overflow: hidden;
 
+    background: white;
+
     box-shadow:
-        0 4px 12px rgba(0,0,0,.18);
+        0 4px 14px rgba(0,0,0,.20);
 }
 
-.logo-area span {
-    color: #c62828;
-    font-size: 13px;
-    font-weight: bold;
-    line-height: 1.2;
+.logo-area img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
 }
 
 
-/*
-Quando tivermos a logo, podemos colocar:
-
-<img src="logo.png" alt="Pastelaria El Shaddai">
-
-dentro de .logo-area.
-*/
-
+/* TÍTULO */
 
 header h1 {
-    margin: 5px 0 6px;
+
+    margin: 5px 0 7px;
 
     font-size: 30px;
 
@@ -116,11 +101,12 @@ header h1 {
 }
 
 header p {
+
     margin: 0;
 
-    font-size: 16px;
+    font-size: 17px;
 
-    font-weight: 500;
+    font-weight: 600;
 }
 
 
@@ -134,41 +120,7 @@ header p {
 
     max-width: 1050px;
 
-    margin: 20px auto 40px;
-}
-
-
-/* =========================================
-   INFORMAÇÕES
-========================================= */
-
-.topo-info {
-
-    background: white;
-
-    border: 2px solid #ffd166;
-
-    border-radius: 16px;
-
-    padding: 12px;
-
-    text-align: center;
-
-    margin-bottom: 15px;
-
-    box-shadow:
-        0 3px 10px rgba(0,0,0,.06);
-}
-
-.topo-info p {
-
-    margin: 0;
-
-    font-size: 15px;
-
-    font-weight: bold;
-
-    color: #555;
+    margin: 25px auto 40px;
 }
 
 
@@ -176,17 +128,28 @@ header p {
    PESQUISA
 ========================================= */
 
+.area-pesquisa {
+
+    position: relative;
+
+    width: 100%;
+
+    margin-bottom: 10px;
+}
+
 .pesquisa {
 
     width: 100%;
 
-    padding: 15px 17px;
+    height: 54px;
+
+    padding: 10px 58px 10px 17px;
 
     border: 2px solid #ffd166;
 
     border-radius: 14px;
 
-    font-size: 16px;
+    font-size: 17px;
 
     background: white;
 
@@ -194,8 +157,6 @@ header p {
 
     box-shadow:
         0 3px 10px rgba(0,0,0,.06);
-
-    margin-bottom: 15px;
 }
 
 .pesquisa:focus {
@@ -207,101 +168,156 @@ header p {
 }
 
 
+/* LUPA */
+
+.botao-pesquisa {
+
+    position: absolute;
+
+    right: 5px;
+    top: 5px;
+
+    width: 44px;
+    height: 44px;
+
+    border: none;
+
+    border-radius: 11px;
+
+    background: #ffb300;
+
+    color: #c62828;
+
+    font-size: 23px;
+
+    cursor: pointer;
+}
+
+.botao-pesquisa:active {
+
+    transform: scale(.95);
+}
+
+
 /* =========================================
    CATEGORIAS
 ========================================= */
 
-.categorias {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 6px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding: 2px 0 5px;
-    margin-bottom: 10px;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
+.area-categorias {
+
+    position: relative;
+
     width: 100%;
+
+    margin-bottom: 16px;
+
+    overflow: hidden;
+}
+
+
+/* AVISO DISCRETO */
+
+.aviso-deslize {
+
+    position: absolute;
+
+    right: 2px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    z-index: 5;
+
+    background: rgba(255,255,255,.92);
+
+    color: #c62828;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    padding: 4px 7px;
+
+    border-radius: 10px;
+
+    pointer-events: none;
+
+    box-shadow:
+        0 2px 6px rgba(0,0,0,.08);
+
+    transition: opacity .3s;
+}
+
+
+/* FAIXA DOS BOTÕES */
+
+.categorias {
+
+    display: flex;
+
+    gap: 7px;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;
+
+    padding: 2px 35px 6px 0;
+
+    margin: 0;
+
+    scrollbar-width: none;
+
+    -webkit-overflow-scrolling: touch;
+
     white-space: nowrap;
 }
 
 .categorias::-webkit-scrollbar {
+
     display: none;
 }
 
-.categorias .botao {
-    flex: 0 0 auto;
-    background: white;
-    color: #c62828;
-    border: 1.5px solid #ffb300;
-    border-radius: 15px;
-    padding: 6px 10px;
-    font-size: 12px;
-    line-height: 1;
-    font-weight: bold;
-    white-space: nowrap;
-    box-shadow: 0 2px 5px rgba(0,0,0,.06);
-    min-height: 28px;
-}
 
-.categorias::-webkit-scrollbar {
-    display: none;
-}
+/* BOTÕES PEQUENOS */
 
 .categorias .botao {
+
     flex: 0 0 auto;
+
+    height: 36px;
+
     background: white;
+
     color: #c62828;
+
     border: 1.5px solid #ffb300;
-    border-radius: 15px;
-    padding: 6px 10px;
+
+    border-radius: 18px;
+
+    padding: 5px 13px;
+
     font-size: 12px;
+
     font-weight: bold;
+
     white-space: nowrap;
-    box-shadow: 0 2px 5px rgba(0,0,0,.06);
+
+    box-shadow:
+        0 2px 5px rgba(0,0,0,.06);
+
+    cursor: pointer;
 }
-<div class="categorias-wrapper">
 
-    <div class="categorias">
+.categorias .botao:active {
 
-        <button
-            class="botao"
-            onclick="irParaSecao('pasteis')">
-            Pastéis
-        </button>
+    background: #ffb300;
 
-        <button
-            class="botao"
-            onclick="irParaSecao('combos')">
-            Combos
-        </button>
+    transform: scale(.97);
+}
 
-        <button
-            class="botao"
-            onclick="irParaSecao('bebidas')">
-            Bebidas
-        </button>
-
-        <button
-            class="botao"
-            onclick="irParaSecao('pizzas')">
-            Pizza
-        </button>
-
-        <button
-            class="botao"
-            onclick="irParaSecao('batatas')">
-            Batata
-        </button>
-
-    </div>
-
-    <span class="arraste">→</span>
-
-</div>
 
 /* =========================================
-   BOTÕES
+   BOTÕES GERAIS
 ========================================= */
 
 .botao {
@@ -327,37 +343,12 @@ header p {
 
 .botao:hover {
 
-    transform: translateY(-1px);
-
     opacity: .92;
 }
 
 .botao:active {
 
     transform: scale(.98);
-}
-
-
-/* =========================================
-   AÇÕES
-========================================= */
-
-.acoes {
-
-    display: flex;
-
-    gap: 10px;
-
-    flex-wrap: wrap;
-
-    margin: 18px 0;
-}
-
-.acoes .botao {
-
-    flex: 1;
-
-    min-width: 140px;
 }
 
 
@@ -481,6 +472,29 @@ header p {
 
 
 /* =========================================
+   AÇÕES
+========================================= */
+
+.acoes {
+
+    display: flex;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+
+    margin: 18px 0;
+}
+
+.acoes .botao {
+
+    flex: 1;
+
+    min-width: 140px;
+}
+
+
+/* =========================================
    SEÇÕES
 ========================================= */
 
@@ -488,7 +502,7 @@ header p {
 
     margin-top: 38px;
 
-    scroll-margin-top: 70px;
+    scroll-margin-top: 25px;
 }
 
 .secao h2 {
@@ -585,94 +599,24 @@ header p {
 
 
 /* =========================================
-   IMAGENS DOS PRODUTOS
+   PIZZAS / BATATAS
 ========================================= */
 
-.card-produto img {
-
-    width: 100%;
-
-    height: 170px;
-
-    object-fit: cover;
-
-    border-radius: 13px;
-
-    margin-bottom: 12px;
-}
-
-
-/* =========================================
-   BANNER FINAL
-========================================= */
-
-.banner {
+.aviso-categoria {
 
     background: white;
 
-    border: 3px solid #ffb300;
+    border: 2px solid #ffd166;
 
-    border-radius: 20px;
+    border-radius: 15px;
 
-    padding: 22px;
-
-    margin: 40px 0 20px;
+    padding: 20px;
 
     text-align: center;
 
-    box-shadow:
-        0 4px 12px rgba(0,0,0,.08);
-}
+    color: #666;
 
-.banner h2 {
-
-    color: #c62828;
-
-    margin-top: 0;
-}
-
-.banner p {
-
-    margin-bottom: 0;
-
-    font-size: 16px;
-}
-
-
-/* =========================================
-   RODAPÉ
-========================================= */
-
-footer {
-
-    margin-top: 45px;
-
-    padding: 30px 20px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #b71c1c,
-            #c62828
-        );
-
-    color: white;
-
-    text-align: center;
-}
-
-footer h3 {
-
-    margin-top: 0;
-
-    font-size: 21px;
-}
-
-footer p {
-
-    margin: 8px 0;
-
-    font-size: 15px;
+    font-weight: bold;
 }
 
 
@@ -682,32 +626,74 @@ footer p {
 
 @media (max-width: 600px) {
 
-    header h1 {
-        font-size: 26px;
+    header {
+
+        padding: 28px 12px 25px;
     }
 
     .logo-area {
-        width: 95px;
-        height: 95px;
+
+        width: 140px;
+        height: 140px;
+
+        margin-bottom: 15px;
+    }
+
+    header h1 {
+
+        font-size: 26px;
+    }
+
+    header p {
+
+        font-size: 16px;
+    }
+
+    .container {
+
+        width: 90%;
+
+        margin-top: 22px;
+    }
+
+    .pesquisa {
+
+        height: 52px;
+
+        font-size: 16px;
+    }
+
+    .categorias .botao {
+
+        height: 34px;
+
+        padding: 4px 12px;
+
+        font-size: 12px;
     }
 
     .banner-principal {
+
         padding: 25px 17px;
     }
 
     .banner-principal h2 {
+
         font-size: 24px;
     }
 
     .produtos {
+
         grid-template-columns: 1fr;
     }
 
     .acoes {
+
         flex-direction: column;
     }
 
     .acoes .botao {
+
         width: 100%;
     }
 
@@ -729,16 +715,18 @@ footer p {
 
     <div class="logo-area">
 
-        <span>
-            LOGO<br>
-            EL SHADDAI
-        </span>
+        <img
+            src="logo.png"
+            alt="Pastelaria El Shaddai"
+        >
 
     </div>
+
 
     <h1>
         Pastelaria El Shaddai
     </h1>
+
 
     <p>
         Feito a dois, no ponto pra você!
@@ -747,53 +735,101 @@ footer p {
 </header>
 
 
+
 <div class="container">
-
-
 
 
 <!-- =========================================
      PESQUISA
 ========================================= -->
 
-<input
-type="text"
-id="pesquisa"
-class="pesquisa"
-placeholder="Pesquisar pastel, pizza, bebida, batata..."
->
+<div class="area-pesquisa">
 
-<div class="categorias">
+    <input
+        type="text"
+        id="pesquisa"
+        class="pesquisa"
+        placeholder="Pesquisar pastel, pizza, bebida, batata..."
+    >
 
-<button
-class="botao"
-onclick="irParaSecao('pasteis')">
-Pastéis
-</button>
+    <button
+        type="button"
+        class="botao-pesquisa"
+        onclick="executarPesquisa()"
+        aria-label="Pesquisar">
 
-<button
-class="botao"
-onclick="irParaSecao('combos')">
-Combos
-</button>
+        🔍
 
-<button
-class="botao"
-onclick="irParaSecao('bebidas')">
-Bebidas
-</button>
+    </button>
 
-<button
-class="botao"
-onclick="irParaSecao('pizzas')">
-Pizzas
-</button>
+</div>
 
-<button
-class="botao"
-onclick="irParaSecao('batatas')">
-Batatas
-</button>
+
+
+<!-- =========================================
+     CATEGORIAS
+========================================= -->
+
+<div class="area-categorias">
+
+    <div
+        class="categorias"
+        id="categorias">
+
+        <button
+            class="botao"
+            onclick="irParaSecao('pasteis')">
+
+            Pastéis
+
+        </button>
+
+
+        <button
+            class="botao"
+            onclick="irParaSecao('combos')">
+
+            Combos
+
+        </button>
+
+
+        <button
+            class="botao"
+            onclick="irParaSecao('bebidas')">
+
+            Bebidas
+
+        </button>
+
+
+        <button
+            class="botao"
+            onclick="irParaSecao('pizzas')">
+
+            Pizza
+
+        </button>
+
+
+        <button
+            class="botao"
+            onclick="irParaSecao('batatas')">
+
+            Batata
+
+        </button>
+
+    </div>
+
+
+    <div
+        id="avisoDeslize"
+        class="aviso-deslize">
+
+        deslize →
+
+    </div>
 
 </div>
 
@@ -823,6 +859,7 @@ Batatas
 </div>
 
 
+
 <!-- =========================================
      PROMOÇÃO
 ========================================= -->
@@ -839,6 +876,7 @@ Batatas
     </p>
 
 </div>
+
 
 
 <!-- =========================================
@@ -866,6 +904,7 @@ Batatas
     </button>
 
 </div>
+
 
 
 <!-- =========================================
@@ -918,6 +957,7 @@ Batatas
         </div>
 
 
+
         <div class="card-produto">
 
             <h3>
@@ -950,6 +990,7 @@ Batatas
             </button>
 
         </div>
+
 
 
         <div class="card-produto">
@@ -986,6 +1027,7 @@ Batatas
         </div>
 
 
+
         <div class="card-produto">
 
             <h3>
@@ -1019,10 +1061,10 @@ Batatas
 
         </div>
 
-
     </div>
 
 </section>
+
 
 
 <!-- =========================================
@@ -1075,6 +1117,7 @@ Batatas
         </div>
 
 
+
         <div class="card-produto">
 
             <h3>
@@ -1108,10 +1151,10 @@ Batatas
 
         </div>
 
-
     </div>
 
 </section>
+
 
 
 <!-- =========================================
@@ -1164,6 +1207,7 @@ Batatas
         </div>
 
 
+
         <div class="card-produto">
 
             <h3>
@@ -1198,6 +1242,7 @@ Batatas
         </div>
 
 
+
         <div class="card-produto">
 
             <h3>
@@ -1225,10 +1270,10 @@ Batatas
 
         </div>
 
-
     </div>
 
 </section>
+
 
 
 <!-- =========================================
@@ -1243,7 +1288,9 @@ Batatas
         Pizza
     </h2>
 
+
     <div class="produtos">
+
 
         <div class="card-produto">
 
@@ -1277,6 +1324,7 @@ Batatas
         </div>
 
 
+
         <div class="card-produto">
 
             <h3>
@@ -1308,6 +1356,7 @@ Batatas
             </button>
 
         </div>
+
 
 
         <div class="card-produto">
@@ -1347,6 +1396,7 @@ Batatas
 </section>
 
 
+
 <!-- =========================================
      BATATAS
 ========================================= -->
@@ -1356,265 +1406,314 @@ Batatas
     class="secao">
 
     <h2>
-        Batata
+        Batatas
     </h2>
 
-    <div class="produtos">
 
-        <div class="card-produto">
+    <div class="aviso-categoria">
 
-            <h3>
-                Batata Frita
-            </h3>
-
-            <p>
-                Escolha o tamanho e os adicionais.
-            </p>
-
-            <p class="preco">
-                A partir de R$ 12,00
-            </p>
-
-            <button
-                class="botao"
-                onclick="personalizarBatata(
-                    'Batata Frita',
-                    12
-                )">
-
-                Personalizar batata
-
-            </button>
-
-        </div>
-
-
-        <div class="card-produto">
-
-            <h3>
-                Batata Especial
-            </h3>
-
-            <p>
-                Batata com opções de queijo,
-                bacon e molhos.
-            </p>
-
-            <p class="preco">
-                A partir de R$ 18,00
-            </p>
-
-            <button
-                class="botao"
-                onclick="personalizarBatata(
-                    'Batata Especial',
-                    18
-                )">
-
-                Personalizar batata
-
-            </button>
-
-        </div>
+        Em breve teremos nossas opções de batatas! 🍟
 
     </div>
 
 </section>
 
 
-<!-- =========================================
-     BANNER FINAL
-========================================= -->
-
-<div class="banner">
-
-    <h2>
-        Os melhores produtos da cidade!
-    </h2>
-
-    <p>
-        Feitos na hora, com ingredientes selecionados.
-    </p>
-
-</div>
-
 
 </div>
 
 
 <!-- =========================================
-     RODAPÉ
-========================================= -->
-
-<footer>
-
-    <h3>
-        Pastelaria El Shaddai
-    </h3>
-
-    <p>
-        Retirada no local e entrega
-    </p>
-
-    <p>
-        WhatsApp: (85) 98894-4421
-    </p>
-
-    <p>
-        Funcionamento: 18:00 às 23:00
-    </p>
-
-    <p>
-        Aceitamos Pix, Dinheiro e Cartão
-    </p>
-
-</footer>
-
-
-<script src="script.js"></script>
-
-
-<!-- =========================================
-     PESQUISA DOS PRODUTOS
+     JAVASCRIPT
 ========================================= -->
 
 <script>
 
-document.addEventListener("DOMContentLoaded", function() {
 
-    const pesquisa = document.getElementById("pesquisa");
+/* =========================================
+   PESQUISA
+========================================= */
 
-    if (!pesquisa) return;
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        const pesquisa =
+            document.getElementById("pesquisa");
+
+        if (!pesquisa) return;
 
 
-    pesquisa.addEventListener("input", function() {
+        pesquisa.addEventListener(
+            "keydown",
+            function(event) {
 
-    const termo = this.value
-        .toLowerCase()
-        .trim();
+                if (event.key === "Enter") {
 
-    const secoes = document.querySelectorAll(".secao");
+                    event.preventDefault();
 
-    let primeiraSecaoEncontrada = null;
+                    executarPesquisa();
 
-    secoes.forEach(function(secao) {
-
-        const cards = secao.querySelectorAll(".card-produto");
-
-        let encontrou = false;
-
-        cards.forEach(function(card) {
-
-            const texto = card.textContent
-                .toLowerCase();
-
-            if (
-                termo === "" ||
-                texto.includes(termo)
-            ) {
-
-                card.style.display = "";
-                encontrou = true;
-
-            } else {
-
-                card.style.display = "none";
-
-            }
-
-        });
-
-        if (termo !== "") {
-
-            if (encontrou) {
-
-                secao.style.display = "";
-
-                if (!primeiraSecaoEncontrada) {
-                    primeiraSecaoEncontrada = secao;
                 }
 
-            } else {
+            }
+        );
 
-                secao.style.display = "none";
+
+        pesquisa.addEventListener(
+            "input",
+            function() {
+
+                const termo =
+                    this.value
+                    .toLowerCase()
+                    .trim();
+
+
+                if (termo === "") {
+
+                    mostrarTodasSecoes();
+
+                    return;
+
+                }
+
+
+                filtrarProdutos(termo);
 
             }
-
-        } else {
-
-            secao.style.display = "";
-
-        }
-
-    });
-
-    /* =====================================
-       LEVA AUTOMATICAMENTE PARA O RESULTADO
-    ===================================== */
-
-    if (
-        termo !== "" &&
-        primeiraSecaoEncontrada
-    ) {
-
-        setTimeout(function() {
-
-            primeiraSecaoEncontrada.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-
-        }, 150);
+        );
 
     }
-
-});
-
-            /*
-             * Se estiver pesquisando alguma coisa,
-             * esconde a seção que não possui resultado.
-             */
-
-            if (termo !== "") {
-
-                if (encontrou) {
-
-                    secao.style.display = "";
-
-                } else {
-
-                    secao.style.display = "none";
-
-                }
-
-            } else {
-
-                secao.style.display = "";
-
-            }
-
-        });
-
-    });
-
-});
+);
 
 
 /* =========================================
-   BOTÕES DAS CATEGORIAS
+   EXECUTAR PESQUISA PELA LUPA
+========================================= */
+
+function executarPesquisa() {
+
+    const campo =
+        document.getElementById("pesquisa");
+
+    if (!campo) return;
+
+
+    const termo =
+        campo.value
+        .toLowerCase()
+        .trim();
+
+
+    if (!termo) return;
+
+
+    /*
+       Primeiro procuramos uma categoria.
+    */
+
+    if (
+        termo.includes("pastel") ||
+        termo.includes("pastéis")
+    ) {
+
+        irParaSecao("pasteis");
+
+        return;
+
+    }
+
+
+    if (termo.includes("combo")) {
+
+        irParaSecao("combos");
+
+        return;
+
+    }
+
+
+    if (
+        termo.includes("bebida") ||
+        termo.includes("coca") ||
+        termo.includes("guaraná") ||
+        termo.includes("guarana") ||
+        termo.includes("água") ||
+        termo.includes("agua")
+    ) {
+
+        irParaSecao("bebidas");
+
+        return;
+
+    }
+
+
+    if (termo.includes("pizza")) {
+
+        irParaSecao("pizzas");
+
+        return;
+
+    }
+
+
+    if (termo.includes("batata")) {
+
+        irParaSecao("batatas");
+
+        return;
+
+    }
+
+
+    /*
+       Se não for categoria,
+       procura diretamente nos produtos.
+    */
+
+    filtrarProdutos(termo);
+
+
+    const primeiro =
+        document.querySelector(
+            ".card-produto[style='']"
+        );
+
+
+    if (primeiro) {
+
+        primeiro.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+    }
+
+}
+
+
+/* =========================================
+   FILTRAR PRODUTOS
+========================================= */
+
+function filtrarProdutos(termo) {
+
+    const secoes =
+        document.querySelectorAll(".secao");
+
+
+    secoes.forEach(
+        function(secao) {
+
+            const cards =
+                secao.querySelectorAll(
+                    ".card-produto"
+                );
+
+
+            let encontrou = false;
+
+
+            cards.forEach(
+                function(card) {
+
+                    const texto =
+                        card.textContent
+                        .toLowerCase();
+
+
+                    if (
+                        texto.includes(termo)
+                    ) {
+
+                        card.style.display =
+                            "";
+
+                        encontrou = true;
+
+                    } else {
+
+                        card.style.display =
+                            "none";
+
+                    }
+
+                }
+            );
+
+
+            if (cards.length > 0) {
+
+                if (encontrou) {
+
+                    secao.style.display =
+                        "";
+
+                } else {
+
+                    secao.style.display =
+                        "none";
+
+                }
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   MOSTRAR TODAS AS SEÇÕES
+========================================= */
+
+function mostrarTodasSecoes() {
+
+    document
+        .querySelectorAll(".secao")
+        .forEach(
+            function(secao) {
+
+                secao.style.display =
+                    "";
+
+                secao
+                    .querySelectorAll(
+                        ".card-produto"
+                    )
+                    .forEach(
+                        function(card) {
+
+                            card.style.display =
+                                "";
+
+                        }
+                    );
+
+            }
+        );
+
+}
+
+
+/* =========================================
+   IR PARA CATEGORIA
 ========================================= */
 
 function irParaSecao(id) {
 
-    const secao = document.getElementById(id);
+    const secao =
+        document.getElementById(id);
 
     if (!secao) return;
 
 
-    /* limpa a pesquisa */
-
     const pesquisa =
         document.getElementById("pesquisa");
+
 
     if (pesquisa) {
 
@@ -1623,32 +1722,104 @@ function irParaSecao(id) {
     }
 
 
-    /* mostra todas as seções novamente */
+    mostrarTodasSecoes();
 
-    document.querySelectorAll(".secao").forEach(
-        function(secao) {
-
-            secao.style.display = "";
-
-            secao.querySelectorAll(
-                ".card-produto"
-            ).forEach(function(card) {
-
-                card.style.display = "";
-
-            });
-
-        }
-    );
-
-
-    /* vai para a categoria */
 
     secao.scrollIntoView({
+
         behavior: "smooth",
+
         block: "start"
+
     });
 
 }
 
+
+/* =========================================
+ESCONDER AVISO "DESLIZE"
+   DEPOIS QUE A PESSOA ARRASTAR
+========================================= */
+
+const categorias =
+    document.getElementById("categorias");
+
+const avisoDeslize =
+    document.getElementById("avisoDeslize");
+
+
+if (categorias) {
+
+    categorias.addEventListener(
+        "scroll",
+        function() {
+
+            if (
+                categorias.scrollLeft > 5
+            ) {
+
+                if (avisoDeslize) {
+
+                    avisoDeslize.style.opacity =
+                        "0";
+
+                }
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   FUNÇÕES DO CARRINHO
+   (MANTIDAS PARA O SCRIPT ATUAL)
+========================================= */
+
+function atualizarContador() {
+
+    const contador =
+        document.getElementById("contador");
+
+    if (!contador) return;
+
+    try {
+
+        const carrinho =
+            JSON.parse(
+                localStorage.getItem("carrinho")
+            ) || [];
+
+        let quantidade = 0;
+
+        carrinho.forEach(
+            function(item) {
+
+                quantidade +=
+                    Number(item.quantidade || 1);
+
+            }
+        );
+
+        contador.textContent =
+            quantidade;
+
+    } catch (erro) {
+
+        contador.textContent = "0";
+
+    }
+
+}
+
+
+atualizarContador();
+
+
 </script>
+
+</body>
+
+</html>
