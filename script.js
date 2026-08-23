@@ -1333,3 +1333,111 @@ function irParaSecao(id) {
     });
 
     }
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    const pesquisa = document.getElementById("pesquisa");
+
+    if (!pesquisa) return;
+
+    pesquisa.addEventListener("keydown", function(event) {
+
+        if (event.key === "Enter") {
+
+            event.preventDefault();
+
+            buscarProduto();
+
+        }
+
+    });
+
+});
+
+function buscarProduto() {
+
+    const campo = document.getElementById("pesquisa");
+
+    if (!campo) return;
+
+    const termo = campo.value
+        .toLowerCase()
+        .trim();
+
+    if (termo === "") {
+        return;
+    }
+
+
+    /* PASTÉIS */
+
+    if (
+        termo.includes("pastel") ||
+        termo.includes("pasteis") ||
+        termo.includes("pastéis")
+    ) {
+
+        irParaSecao("pasteis");
+        return;
+
+    }
+
+
+    /* BATATAS */
+
+    if (termo.includes("batata")) {
+
+        irParaSecao("batatas");
+        return;
+
+    }
+
+
+    /* PIZZAS */
+
+    if (
+        termo.includes("pizza") ||
+        termo.includes("pizzas")
+    ) {
+
+        irParaSecao("pizzas");
+        return;
+
+    }
+
+
+    /* BEBIDAS */
+
+    if (
+        termo.includes("bebida") ||
+        termo.includes("bebidas") ||
+        termo.includes("coca") ||
+        termo.includes("guaraná") ||
+        termo.includes("guarana") ||
+        termo.includes("água") ||
+        termo.includes("agua")
+    ) {
+
+        irParaSecao("bebidas");
+        return;
+
+    }
+
+
+    /* COMBOS */
+
+    if (termo.includes("combo")) {
+
+        irParaSecao("combos");
+        return;
+
+    }
+
+
+    /* SE NÃO ENCONTRAR CATEGORIA */
+
+    alert(
+        "Não encontrei essa categoria. Tente pesquisar por pastel, pizza, bebida, batata ou combo."
+    );
+
+}
