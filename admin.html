@@ -1,388 +1,49 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Painel El Shaddai</title>
-
-    <link rel="stylesheet" href="admin.css">
-
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Painel El Shaddai</title>
+<style>
+:root{--r:#c62828;--y:#ffb300;--bg:#f7f3ea}*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:#292929}button,input,textarea,select{font:inherit}.layout{display:flex;min-height:100vh}.menu{width:240px;background:#fff;position:fixed;inset:0 auto 0 0;padding:15px 10px;overflow:auto;border-right:1px solid #eee}.brand{text-align:center;padding:8px 4px 18px;border-bottom:1px solid #eee;margin-bottom:10px}.brand .logo{width:62px;height:62px;margin:auto;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--r),var(--y));font-size:30px}.brand h1{font-size:22px;color:var(--r);margin:7px 0 2px}.brand p{font-size:12px;color:#777;margin:0}.nav{width:100%;padding:9px;border:0;background:#fff;border-radius:9px;text-align:left;margin:2px 0;cursor:pointer;color:#555}.nav.ativo,.nav:hover{background:#fff3d1;color:var(--r);font-weight:bold}.nav span{margin-left:7px}.main{margin-left:240px;width:calc(100% - 240px);padding:15px}.top{background:#fff;border-radius:15px;padding:15px 18px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 3px 12px #0000000b}.top h2{margin:0 0 3px}.top p{margin:0;color:#777}.status{color:#16803a;background:#e9f8ed;border-radius:20px;padding:8px 12px;font-weight:bold;font-size:13px}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#1fa64a;margin-right:5px}.page{display:none}.page.active{display:block}.welcome{margin:20px 0}.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.summary>div,.box,.form{background:#fff;border-radius:15px;padding:17px;box-shadow:0 3px 12px #0000000a}.summary strong{font-size:22px}.summary p{margin:4px 0 0;color:#777}.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:15px}.quick button{border:1px solid #eee;background:#fff8e7;border-radius:13px;padding:15px;text-align:left;cursor:pointer}.quick span{font-size:27px;display:block;margin-bottom:7px}.quick small{display:block;color:#777;margin-top:4px}.bar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:18px 0 12px}.bar h2,.page>h2{color:var(--r)}.btn{border:0;border-radius:9px;padding:10px 14px;cursor:pointer;font-weight:bold}.primary{background:var(--y)}.red{background:var(--r);color:#fff}.gray{background:#eee}.form{margin-bottom:12px}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.field{display:flex;flex-direction:column;gap:5px}.field.full{grid-column:1/-1}.field label{font-weight:bold;font-size:14px}.field input,.field textarea,.field select{border:1px solid #ddd;border-radius:9px;padding:10px;background:#fff}.list{display:grid;gap:9px}.row{background:#fff;border-radius:13px;padding:14px;display:flex;justify-content:space-between;align-items:center;gap:10px;box-shadow:0 2px 8px #0000000a}.row strong{display:block;color:var(--r)}.row small{color:#777}.actions{display:flex;gap:6px}.empty{text-align:center;color:#777;background:#fff;padding:25px;border-radius:13px}.preview{width:130px;height:130px;object-fit:contain;border:2px dashed #ddd;border-radius:14px;background:#fafafa}.toast{position:fixed;right:15px;bottom:15px;background:#222;color:#fff;padding:11px 15px;border-radius:9px;display:none}.toast.show{display:block}.mobile{display:none}
+@media(max-width:800px){.menu{transform:translateX(-100%);transition:.2s;z-index:20}.menu.open{transform:translateX(0)}.main{margin-left:0;width:100%;padding:10px}.mobile{display:inline-block;background:var(--r);color:#fff;border:0;border-radius:8px;padding:7px 10px}.summary{grid-template-columns:repeat(2,1fr)}.quick{grid-template-columns:repeat(2,1fr)}}@media(max-width:500px){.summary,.quick,.grid{grid-template-columns:1fr}.field.full{grid-column:auto}.top{align-items:flex-start;gap:10px}}
+</style>
 </head>
-
-
 <body>
-
-
-<!-- =========================================
-     PAINEL
-========================================= -->
-
-<div class="painel">
-
-
-    <!-- MENU LATERAL -->
-
-    <aside class="menu">
-
-        <div class="menu-logo">
-
-            <div class="icone-logo">
-                🥟
-            </div>
-
-            <h1>
-                El Shaddai
-            </h1>
-
-            <p>
-                Painel administrativo
-            </p>
-
-        </div>
-
-
-        <nav>
-
-            <button class="menu-item ativo">
-                🏠
-                <span>Início</span>
-            </button>
-
-
-            <button class="menu-item">
-                🍴
-                <span>Produtos</span>
-            </button>
-
-
-            <button class="menu-item">
-                📂
-                <span>Categorias</span>
-            </button>
-
-
-            <button class="menu-item">
-                🖼️
-                <span>Aparência</span>
-            </button>
-
-
-            <button class="menu-item">
-                🎁
-                <span>Promoções</span>
-            </button>
-
-
-            <button class="menu-item">
-                🚚
-                <span>Entrega</span>
-            </button>
-
-
-            <button class="menu-item">
-                💳
-                <span>Pagamentos</span>
-            </button>
-
-
-            <button class="menu-item">
-                📱
-                <span>WhatsApp</span>
-            </button>
-
-
-            <button class="menu-item">
-                📋
-                <span>Pedidos</span>
-            </button>
-
-
-            <button class="menu-item">
-                👥
-                <span>Clientes</span>
-            </button>
-
-
-            <button class="menu-item">
-                📊
-                <span>Vendas</span>
-            </button>
-
-
-            <button class="menu-item">
-                ⚙️
-                <span>Configurações</span>
-            </button>
-
-        </nav>
-
-    </aside>
-
-
-
-    <!-- CONTEÚDO -->
-
-    <main class="conteudo">
-
-
-        <header class="topo-painel">
-
-            <div>
-
-                <h2>
-                    Painel administrativo
-                </h2>
-
-                <p>
-                    Pastelaria El Shaddai
-                </p>
-
-            </div>
-
-
-            <div class="status-loja">
-
-                <span class="bolinha"></span>
-
-                Loja aberta
-
-            </div>
-
-        </header>
-
-
-
-        <!-- ÁREA PRINCIPAL -->
-
-        <section class="inicio">
-
-
-            <div class="boas-vindas">
-
-                <h1>
-                    Olá! 👋
-                </h1>
-
-                <p>
-                    Aqui você poderá administrar
-                    sua plataforma sem precisar
-                    mexer no código.
-                </p>
-
-            </div>
-
-
-
-            <!-- CARDS -->
-
-            <div class="resumo">
-
-
-                <div class="card-resumo">
-
-                    <span class="card-icone">
-                        🍴
-                    </span>
-
-                    <div>
-
-                        <strong>
-                            0
-                        </strong>
-
-                        <p>
-                            Produtos
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-
-                <div class="card-resumo">
-
-                    <span class="card-icone">
-                        📋
-                    </span>
-
-                    <div>
-
-                        <strong>
-                            0
-                        </strong>
-
-                        <p>
-                            Pedidos hoje
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-
-                <div class="card-resumo">
-
-                    <span class="card-icone">
-                        💰
-                    </span>
-
-                    <div>
-
-                        <strong>
-                            R$ 0,00
-                        </strong>
-
-                        <p>
-                            Vendas hoje
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-
-                <div class="card-resumo">
-
-                    <span class="card-icone">
-                        👥
-                    </span>
-
-                    <div>
-
-                        <strong>
-                            0
-                        </strong>
-
-                        <p>
-                            Clientes
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- ACESSO RÁPIDO -->
-
-            <div class="bloco">
-
-                <div class="bloco-titulo">
-
-                    <div>
-
-                        <h2>
-                            Acesso rápido
-                        </h2>
-
-                        <p>
-                            Comece configurando sua loja.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="atalhos">
-
-
-                    <button class="atalho">
-
-                        <span>
-                            🍴
-                        </span>
-
-                        <strong>
-                            Adicionar produto
-                        </strong>
-
-                        <small>
-                            Cadastre seus produtos
-                        </small>
-
-                    </button>
-
-
-
-                    <button class="atalho">
-
-                        <span>
-                            📂
-                        </span>
-
-                        <strong>
-                            Criar categoria
-                        </strong>
-
-                        <small>
-                            Organize seu cardápio
-                        </small>
-
-                    </button>
-
-
-
-                    <button class="atalho">
-
-                        <span>
-                            🖼️
-                        </span>
-
-                        <strong>
-                            Personalizar loja
-                        </strong>
-
-                        <small>
-                            Logo, banner e aparência
-                        </small>
-
-                    </button>
-
-
-
-                    <button class="atalho">
-
-                        <span>
-                            📱
-                        </span>
-
-                        <strong>
-                            Configurar WhatsApp
-                        </strong>
-
-                        <small>
-                            Receba seus pedidos
-                        </small>
-
-                    </button>
-
-
-                </div>
-
-            </div>
-
-
-        </section>
-
-
-    </main>
-
-</div>
-
-
-</body>
-
-              </html>
+<div class="layout">
+<aside class="menu" id="menu"><div class="brand"><div class="logo">🥟</div><h1>El Shaddai</h1><p>Painel administrativo</p></div>
+<button class="nav ativo" data-page="inicio">🏠 <span>Início</span></button><button class="nav" data-page="produtos">🍴 <span>Produtos</span></button><button class="nav" data-page="categorias">📂 <span>Categorias</span></button><button class="nav" data-page="aparencia">🖼️ <span>Aparência</span></button><button class="nav" data-page="promocoes">🎁 <span>Promoções</span></button><button class="nav" data-page="entrega">🚚 <span>Entrega</span></button><button class="nav" data-page="pagamentos">💳 <span>Pagamentos</span></button><button class="nav" data-page="whatsapp">📱 <span>WhatsApp</span></button><button class="nav" data-page="pedidos">📋 <span>Pedidos</span></button><button class="nav" data-page="clientes">👥 <span>Clientes</span></button><button class="nav" data-page="vendas">📊 <span>Vendas</span></button><button class="nav" data-page="config">⚙️ <span>Configurações</span></button>
+</aside>
+<main class="main"><header class="top"><div><button class="mobile" id="mobileBtn">☰</button> <strong>Painel administrativo</strong><p>Pastelaria El Shaddai</p></div><div class="status"><span class="dot"></span>Loja aberta</div></header>
+<section class="page active" id="page-inicio"><div class="welcome"><h1>Olá! 👋</h1><p>Administre sua loja sem precisar mexer no código.</p></div><div class="summary"><div>🍴 <strong id="nProdutos">0</strong><p>Produtos</p></div><div>📋 <strong id="nPedidos">0</strong><p>Pedidos</p></div><div>💰 <strong id="nVendas">R$ 0,00</strong><p>Vendas</p></div><div>👥 <strong id="nClientes">0</strong><p>Clientes</p></div></div><div class="box"><h2>Acesso rápido</h2><div class="quick"><button data-page="produtos"><span>🍴</span><b>Adicionar produto</b><small>Cadastre seus produtos</small></button><button data-page="categorias"><span>📂</span><b>Criar categoria</b><small>Organize seu cardápio</small></button><button data-page="aparencia"><span>🖼️</span><b>Personalizar loja</b><small>Logo e aparência</small></button><button data-page="whatsapp"><span>📱</span><b>Configurar WhatsApp</b><small>Receba pedidos</small></button></div></div></section>
+<section class="page" id="page-produtos"><div class="bar"><div><h2>Produtos</h2><p>Cadastre e altere seus produtos.</p></div><button class="btn primary" id="addProd">+ Adicionar</button></div><div class="form" id="prodForm" style="display:none"><div class="grid"><div class="field"><label>Nome</label><input id="pNome"></div><div class="field"><label>Preço</label><input id="pPreco" type="number" step="0.01"></div><div class="field"><label>Categoria</label><select id="pCat"></select></div><div class="field"><label>Descrição</label><input id="pDesc"></div><div class="field full"><button class="btn red" id="saveProd">Salvar</button> <button class="btn gray" id="cancelProd">Cancelar</button></div></div></div><div class="list" id="prodList"></div></section>
+<section class="page" id="page-categorias"><div class="bar"><h2>Categorias</h2><button class="btn primary" id="addCat">+ Nova categoria</button></div><div class="form" id="catForm" style="display:none"><div class="field"><label>Nome</label><input id="catNome"><button class="btn red" id="saveCat">Salvar</button></div></div><div class="list" id="catList"></div></section>
+<section class="page" id="page-aparencia"><h2>Aparência</h2><div class="form"><div class="grid"><div class="field"><label>Nome da loja</label><input id="nomeLoja"></div><div class="field"><label>Slogan</label><input id="slogan"></div><div class="field full"><label>Logo</label><img id="logoPreview" class="preview"><input id="logoFile" type="file" accept="image/*"><small>Você escolhe a imagem aqui, sem editar o código.</small></div><div class="field full"><button class="btn red" id="saveLook">Salvar aparência</button></div></div></div></section>
+<section class="page" id="page-promocoes"><h2>Promoções</h2><div class="form"><div class="grid"><div class="field"><label>Nome</label><input id="promoNome"></div><div class="field"><label>Texto</label><input id="promoTexto"></div><div class="field full"><button class="btn red" id="savePromo">Salvar promoção</button></div></div></div><div class="box" id="promoView"></div></section>
+<section class="page" id="page-entrega"><h2>Entrega</h2><div class="form"><div class="grid"><div class="field"><label>Taxa (R$)</label><input id="taxa" type="number" step="0.01"></div><div class="field"><label>Pedido mínimo (R$)</label><input id="minimo" type="number" step="0.01"></div><div class="field"><label>Tempo</label><input id="tempo"></div><div class="field"><label>Retirada</label><select id="retirada"><option value="sim">Disponível</option><option value="nao">Indisponível</option></select></div><div class="field full"><button class="btn red" id="saveDelivery">Salvar</button></div></div></div></section>
+<section class="page" id="page-pagamentos"><h2>Pagamentos</h2><div class="form"><label><input type="checkbox" id="payPix"> Pix</label><br><label><input type="checkbox" id="payCard"> Cartão</label><br><label><input type="checkbox" id="payCash"> Dinheiro</label><br><label><input type="checkbox" id="payDelivery"> Pagamento na entrega</label><br><button class="btn red" id="savePay">Salvar</button></div></section>
+<section class="page" id="page-whatsapp"><h2>WhatsApp</h2><div class="form"><div class="grid"><div class="field full"><label>Número com DDI e DDD</label><input id="waNum" placeholder="5511999999999"></div><div class="field full"><label>Mensagem inicial</label><textarea id="waMsg" rows="4"></textarea></div><div class="field full"><button class="btn red" id="saveWa">Salvar WhatsApp</button></div></div></div></section>
+<section class="page" id="page-pedidos"><h2>Pedidos</h2><div class="empty">Os pedidos serão ligados ao banco de dados na próxima etapa.</div></section><section class="page" id="page-clientes"><h2>Clientes</h2><div class="empty">Os clientes serão registrados quando o sistema de pedidos estiver ligado.</div></section><section class="page" id="page-vendas"><h2>Vendas</h2><div class="empty">As vendas serão calculadas automaticamente pelos pedidos.</div></section>
+<section class="page" id="page-config"><h2>Configurações</h2><div class="form"><div class="grid"><div class="field"><label>Nome da loja</label><input id="cfgNome"></div><div class="field"><label>Status</label><select id="cfgStatus"><option>Loja aberta</option><option>Loja fechada</option></select></div><div class="field full"><button class="btn red" id="saveCfg">Salvar</button></div></div></div></section>
+</main></div><div class="toast" id="toast"></div>
+<script>
+const KEY='elShaddaiAdminV1';
+let db=JSON.parse(localStorage.getItem(KEY)||'null')||{config:{nome:'Pastelaria El Shaddai',slogan:'Feito a dois, no ponto pra você!',logo:'',status:'Loja aberta'},categorias:['Pastéis','Combos','Bebidas','Pizza','Batata'],produtos:[{nome:'Pastel de Carne',preco:15,categoria:'Pastéis',desc:'Carne temperada e recheio especial.'},{nome:'Pastel de Frango',preco:16,categoria:'Pastéis',desc:'Frango desfiado com catupiry.'},{nome:'Pastel de Pizza',preco:17,categoria:'Pastéis',desc:'Mussarela, presunto e tomate.'},{nome:'Pastel de Queijo',preco:14,categoria:'Pastéis',desc:'Mussarela cremosa.'}],promo:{nome:'',texto:''},entrega:{taxa:0,minimo:0,tempo:'30 a 50 minutos',retirada:'sim'},pagamentos:{pix:true,card:true,cash:true,delivery:true},whatsapp:{numero:'',msg:'Olá! Gostaria de fazer um pedido.'},pedidos:[],clientes:[]};
+function save(){localStorage.setItem(KEY,JSON.stringify(db));summary()}function toast(t){const e=document.getElementById('toast');e.textContent=t;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),1600)}
+function page(id){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById('page-'+id)?.classList.add('active');document.querySelectorAll('.nav').forEach(x=>x.classList.toggle('ativo',x.dataset.page===id));document.getElementById('menu').classList.remove('open');if(id==='produtos')renderProducts();if(id==='categorias')renderCats();if(id==='aparencia')loadLook();if(id==='promocoes')loadPromo();if(id==='entrega')loadDelivery();if(id==='pagamentos')loadPay();if(id==='whatsapp')loadWa();if(id==='config')loadCfg()}
+document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>page(b.dataset.page)));document.getElementById('mobileBtn').onclick=()=>document.getElementById('menu').classList.toggle('open');
+function summary(){nProdutos.textContent=db.produtos.length;nPedidos.textContent=db.pedidos.length;nClientes.textContent=db.clientes.length;let v=db.pedidos.reduce((a,p)=>a+Number(p.total||0),0);nVendas.textContent=v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}
+function renderCats(){catList.innerHTML=db.categorias.map((c,i)=>`<div class="row"><div><strong>${c}</strong><small>Categoria do cardápio</small></div><button class="btn gray" onclick="delCat(${i})">Excluir</button></div>`).join('')||'<div class="empty">Nenhuma categoria.</div>';pCat.innerHTML=db.categorias.map(c=>`<option>${c}</option>`).join('')}
+function renderProducts(){renderCats();prodList.innerHTML=db.produtos.map((p,i)=>`<div class="row"><div><strong>${p.nome}</strong><small>${p.categoria} · ${p.desc||''}</small><br><b>${Number(p.preco).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}</b></div><div class="actions"><button class="btn gray" onclick="editProd(${i})">Editar</button><button class="btn gray" onclick="delProd(${i})">Excluir</button></div></div>`).join('')||'<div class="empty">Nenhum produto.</div>'}
+function resetProd(){pNome.value='';pPreco.value='';pDesc.value='';prodForm.style.display='none';saveProd.onclick=addProduct}
+function addProduct(){let n=pNome.value.trim(),v=Number(pPreco.value);if(!n||!v)return toast('Preencha nome e preço.');db.produtos.push({nome:n,preco:v,categoria:pCat.value,desc:pDesc.value.trim()});save();renderProducts();resetProd();toast('Produto salvo!')}
+addProd.onclick=()=>{prodForm.style.display='block';pNome.focus()};cancelProd.onclick=resetProd;saveProd.onclick=addProduct;
+window.delProd=i=>{if(confirm('Excluir este produto?')){db.produtos.splice(i,1);save();renderProducts();toast('Produto excluído.')}};window.editProd=i=>{let p=db.produtos[i];pNome.value=p.nome;pPreco.value=p.preco;pCat.value=p.categoria;pDesc.value=p.desc||'';prodForm.style.display='block';saveProd.onclick=()=>{p.nome=pNome.value.trim();p.preco=Number(pPreco.value);p.categoria=pCat.value;p.desc=pDesc.value.trim();save();renderProducts();resetProd();toast('Produto atualizado!')}};
+addCat.onclick=()=>catForm.style.display='block';saveCat.onclick=()=>{let n=catNome.value.trim();if(!n)return toast('Digite a categoria.');db.categorias.push(n);save();renderCats();catNome.value='';catForm.style.display='none';toast('Categoria salva!')};window.delCat=i=>{if(confirm('Excluir esta categoria?')){db.categorias.splice(i,1);save();renderCats();toast('Categoria excluída.')}};
+function loadLook(){nomeLoja.value=db.config.nome;slogan.value=db.config.slogan;logoPreview.src=db.config.logo||'';logoPreview.style.visibility=db.config.logo?'visible':'hidden'}logoFile.onchange=e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{db.config.logo=r.result;logoPreview.src=r.result;logoPreview.style.visibility='visible'};r.readAsDataURL(f)};saveLook.onclick=()=>{db.config.nome=nomeLoja.value.trim();db.config.slogan=slogan.value.trim();save();toast('Aparência salva!')};
+function loadPromo(){promoNome.value=db.promo.nome;promoTexto.value=db.promo.texto;promoView.innerHTML=db.promo.nome?'<b>'+db.promo.nome+'</b><p>'+db.promo.texto+'</p>':'<div class="empty">Nenhuma promoção cadastrada.</div>'}savePromo.onclick=()=>{db.promo={nome:promoNome.value.trim(),texto:promoTexto.value.trim()};save();loadPromo();toast('Promoção salva!')};
+function loadDelivery(){taxa.value=db.entrega.taxa;minimo.value=db.entrega.minimo;tempo.value=db.entrega.tempo;retirada.value=db.entrega.retirada}saveDelivery.onclick=()=>{db.entrega={taxa:Number(taxa.value)||0,minimo:Number(minimo.value)||0,tempo:tempo.value,retirada:retirada.value};save();toast('Entrega salva!')};
+function loadPay(){payPix.checked=db.pagamentos.pix;payCard.checked=db.pagamentos.card;payCash.checked=db.pagamentos.cash;payDelivery.checked=db.pagamentos.delivery}savePay.onclick=()=>{db.pagamentos={pix:payPix.checked,card:payCard.checked,cash:payCash.checked,delivery:payDelivery.checked};save();toast('Pagamentos salvos!')};
+function loadWa(){waNum.value=db.whatsapp.numero;waMsg.value=db.whatsapp.msg}saveWa.onclick=()=>{db.whatsapp={numero:waNum.value.replace(/\D/g,''),msg:waMsg.value};save();toast('WhatsApp salvo!')};function loadCfg(){cfgNome.value=db.config.nome;cfgStatus.value=db.config.status}saveCfg.onclick=()=>{db.config.nome=cfgNome.value.trim();db.config.status=cfgStatus.value;save();toast('Configurações salvas!')};
+summary();renderProducts();
+</script></body></html>
+    
