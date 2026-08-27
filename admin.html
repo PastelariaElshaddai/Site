@@ -1,49 +1,2105 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Painel El Shaddai</title>
+
 <style>
-:root{--r:#c62828;--y:#ffb300;--bg:#f7f3ea}*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:#292929}button,input,textarea,select{font:inherit}.layout{display:flex;min-height:100vh}.menu{width:240px;background:#fff;position:fixed;inset:0 auto 0 0;padding:15px 10px;overflow:auto;border-right:1px solid #eee}.brand{text-align:center;padding:8px 4px 18px;border-bottom:1px solid #eee;margin-bottom:10px}.brand .logo{width:62px;height:62px;margin:auto;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--r),var(--y));font-size:30px}.brand h1{font-size:22px;color:var(--r);margin:7px 0 2px}.brand p{font-size:12px;color:#777;margin:0}.nav{width:100%;padding:9px;border:0;background:#fff;border-radius:9px;text-align:left;margin:2px 0;cursor:pointer;color:#555}.nav.ativo,.nav:hover{background:#fff3d1;color:var(--r);font-weight:bold}.nav span{margin-left:7px}.main{margin-left:240px;width:calc(100% - 240px);padding:15px}.top{background:#fff;border-radius:15px;padding:15px 18px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 3px 12px #0000000b}.top h2{margin:0 0 3px}.top p{margin:0;color:#777}.status{color:#16803a;background:#e9f8ed;border-radius:20px;padding:8px 12px;font-weight:bold;font-size:13px}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#1fa64a;margin-right:5px}.page{display:none}.page.active{display:block}.welcome{margin:20px 0}.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.summary>div,.box,.form{background:#fff;border-radius:15px;padding:17px;box-shadow:0 3px 12px #0000000a}.summary strong{font-size:22px}.summary p{margin:4px 0 0;color:#777}.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:15px}.quick button{border:1px solid #eee;background:#fff8e7;border-radius:13px;padding:15px;text-align:left;cursor:pointer}.quick span{font-size:27px;display:block;margin-bottom:7px}.quick small{display:block;color:#777;margin-top:4px}.bar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:18px 0 12px}.bar h2,.page>h2{color:var(--r)}.btn{border:0;border-radius:9px;padding:10px 14px;cursor:pointer;font-weight:bold}.primary{background:var(--y)}.red{background:var(--r);color:#fff}.gray{background:#eee}.form{margin-bottom:12px}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.field{display:flex;flex-direction:column;gap:5px}.field.full{grid-column:1/-1}.field label{font-weight:bold;font-size:14px}.field input,.field textarea,.field select{border:1px solid #ddd;border-radius:9px;padding:10px;background:#fff}.list{display:grid;gap:9px}.row{background:#fff;border-radius:13px;padding:14px;display:flex;justify-content:space-between;align-items:center;gap:10px;box-shadow:0 2px 8px #0000000a}.row strong{display:block;color:var(--r)}.row small{color:#777}.actions{display:flex;gap:6px}.empty{text-align:center;color:#777;background:#fff;padding:25px;border-radius:13px}.preview{width:130px;height:130px;object-fit:contain;border:2px dashed #ddd;border-radius:14px;background:#fafafa}.toast{position:fixed;right:15px;bottom:15px;background:#222;color:#fff;padding:11px 15px;border-radius:9px;display:none}.toast.show{display:block}.mobile{display:none}
-@media(max-width:800px){.menu{transform:translateX(-100%);transition:.2s;z-index:20}.menu.open{transform:translateX(0)}.main{margin-left:0;width:100%;padding:10px}.mobile{display:inline-block;background:var(--r);color:#fff;border:0;border-radius:8px;padding:7px 10px}.summary{grid-template-columns:repeat(2,1fr)}.quick{grid-template-columns:repeat(2,1fr)}}@media(max-width:500px){.summary,.quick,.grid{grid-template-columns:1fr}.field.full{grid-column:auto}.top{align-items:flex-start;gap:10px}}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f7f4ec;
+    color: #222;
+}
+
+/* =========================
+   MENU
+========================= */
+
+.painel {
+    min-height: 100vh;
+    display: flex;
+}
+
+.menu {
+    width: 250px;
+    background: #ffffff;
+    border-right: 1px solid #eee;
+    padding: 25px 15px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    overflow-y: auto;
+}
+
+.menu-logo {
+    text-align: center;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
+}
+
+.menu-logo h1 {
+    color: #c62828;
+    margin: 10px 0 5px;
+    font-size: 24px;
+}
+
+.menu-logo p {
+    color: #777;
+    margin: 0;
+    font-size: 13px;
+}
+
+.icone-logo {
+    width: 70px;
+    height: 70px;
+    margin: auto;
+    border-radius: 50%;
+    background: linear-gradient(135deg,#c62828,#ffb300);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+}
+
+.menu-item {
+    width: 100%;
+    border: none;
+    background: transparent;
+    padding: 13px 15px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    text-align: left;
+    font-size: 15px;
+    cursor: pointer;
+    color: #444;
+}
+
+.menu-item:hover {
+    background: #fff4d6;
+    color: #c62828;
+}
+
+.menu-item.ativo {
+    background: #fff0c7;
+    color: #c62828;
+    font-weight: bold;
+}
+
+/* =========================
+   CONTEÚDO
+========================= */
+
+.conteudo {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    min-height: 100vh;
+}
+
+.topo-painel {
+    background: white;
+    border-bottom: 1px solid #eee;
+    padding: 22px 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topo-painel h2 {
+    margin: 0 0 5px;
+    color: #c62828;
+}
+
+.topo-painel p {
+    margin: 0;
+    color: #777;
+}
+
+.status-loja {
+    background: #e9f8ee;
+    color: #16833b;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.bolinha {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    background: #22a447;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+
+/* =========================
+   INÍCIO
+========================= */
+
+.inicio {
+    padding: 35px;
+}
+
+.boas-vindas {
+    margin-bottom: 25px;
+}
+
+.boas-vindas h1 {
+    margin: 0 0 8px;
+    font-size: 30px;
+}
+
+.boas-vindas p {
+    margin: 0;
+    color: #777;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.resumo {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 18px;
+    margin-bottom: 30px;
+}
+
+.card-resumo {
+    background: white;
+    border-radius: 18px;
+    padding: 22px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 3px 12px rgba(0,0,0,.06);
+}
+
+.card-icone {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    background: #fff1c9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+}
+
+.card-resumo strong {
+    font-size: 24px;
+    display: block;
+}
+
+.card-resumo p {
+    margin: 4px 0 0;
+    color: #777;
+    font-size: 13px;
+}
+
+/* =========================
+   BLOCO
+========================= */
+
+.bloco {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 3px 12px rgba(0,0,0,.06);
+}
+
+.bloco-titulo h2 {
+    margin: 0 0 5px;
+}
+
+.bloco-titulo p {
+    margin: 0 0 22px;
+    color: #777;
+}
+
+.atalhos {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 15px;
+}
+
+.atalho {
+    background: #fffaf0;
+    border: 1px solid #f1dfad;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: left;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.atalho:hover {
+    transform: translateY(-2px);
+    border-color: #ffb300;
+}
+
+.atalho span {
+    font-size: 28px;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.atalho strong {
+    display: block;
+    margin-bottom: 6px;
+}
+
+.atalho small {
+    color: #777;
+}
+
+/* =========================
+   TELAS
+========================= */
+
+.tela {
+    display: none;
+}
+
+.tela.ativa {
+    display: block;
+}
+
+.titulo-tela {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.titulo-tela h1 {
+    margin: 0;
+    color: #c62828;
+}
+
+.titulo-tela p {
+    margin: 7px 0 0;
+    color: #777;
+}
+
+.botao-principal {
+    background: #ffb300;
+    border: none;
+    border-radius: 12px;
+    padding: 13px 20px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+/* =========================
+   FORMULÁRIO
+========================= */
+
+.formulario {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.campo {
+    margin-bottom: 18px;
+}
+
+.campo label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+.campo input,
+.campo textarea,
+.campo select {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 15px;
+    outline: none;
+}
+
+.campo textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.campo input:focus,
+.campo textarea:focus,
+.campo select:focus {
+    border-color: #ffb300;
+}
+
+.linha {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.botoes-form {
+    display: flex;
+    gap: 10px;
+}
+
+.salvar {
+    background: #c62828;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 13px 25px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cancelar {
+    background: #eee;
+    border: none;
+    border-radius: 10px;
+    padding: 13px 25px;
+    cursor: pointer;
+}
+
+/* =========================
+   PRODUTOS
+========================= */
+
+.lista-produtos {
+    display: grid;
+    gap: 15px;
+}
+
+.produto {
+    background: white;
+    border-radius: 17px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,.05);
+}
+
+.produto h3 {
+    margin: 0 0 6px;
+    color: #c62828;
+}
+
+.produto p {
+    margin: 4px 0;
+    color: #777;
+}
+
+.preco {
+    font-weight: bold;
+    color: #222 !important;
+}
+
+.acoes-produto {
+    display: flex;
+    gap: 8px;
+}
+
+.editar,
+.excluir {
+    border: none;
+    padding: 10px 14px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.editar {
+    background: #fff0c7;
+    color: #9b6900;
+}
+
+.excluir {
+    background: #ffe5e5;
+    color: #c62828;
+}
+
+/* =========================
+   ADICIONAIS
+========================= */
+
+.adicionais {
+    background: #fffaf0;
+    border: 1px solid #f1dfad;
+    border-radius: 12px;
+    padding: 15px;
+    margin-top: 10px;
+}
+
+.adicionais strong {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.adicional-linha {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    color: #555;
+}
+
+/* =========================
+   CONFIGURAÇÕES
+========================= */
+
+.config-card {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    margin-bottom: 18px;
+}
+
+.config-card h2 {
+    margin-top: 0;
+    color: #c62828;
+}
+
+.config-item {
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.config-item:last-child {
+    border-bottom: none;
+}
+
+.config-item strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.config-item span {
+    color: #777;
+    font-size: 14px;
+}
+
+/* =========================
+   CELULAR
+========================= */
+
+@media(max-width:800px) {
+
+    .menu {
+        width: 75px;
+        padding: 15px 8px;
+    }
+
+    .menu-logo h1,
+    .menu-logo p,
+    .menu-item span {
+        display: none;
+    }
+
+    .menu-item {
+        text-align: center;
+        font-size: 20px;
+        padding: 13px 5px;
+    }
+
+    .conteudo {
+        margin-left: 75px;
+        width: calc(100% - 75px);
+    }
+
+    .topo-painel {
+        padding: 18px;
+    }
+
+    .topo-painel h2 {
+        font-size: 18px;
+    }
+
+    .status-loja {
+        font-size: 11px;
+        padding: 8px;
+    }
+
+    .inicio {
+        padding: 20px 15px;
+    }
+
+    .resumo {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .atalhos {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .titulo-tela {
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .linha {
+        grid-template-columns: 1fr;
+    }
+
+    .produto {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .acoes-produto {
+        width: 100%;
+    }
+
+    .acoes-produto button {
+        flex: 1;
+    }
+}
+
+@media(max-width:480px) {
+
+    .resumo {
+        grid-template-columns: 1fr;
+    }
+
+    .atalhos {
+        grid-template-columns: 1fr;
+    }
+
+}
+
 </style>
 </head>
+
 <body>
-<div class="layout">
-<aside class="menu" id="menu"><div class="brand"><div class="logo">🥟</div><h1>El Shaddai</h1><p>Painel administrativo</p></div>
-<button class="nav ativo" data-page="inicio">🏠 <span>Início</span></button><button class="nav" data-page="produtos">🍴 <span>Produtos</span></button><button class="nav" data-page="categorias">📂 <span>Categorias</span></button><button class="nav" data-page="aparencia">🖼️ <span>Aparência</span></button><button class="nav" data-page="promocoes">🎁 <span>Promoções</span></button><button class="nav" data-page="entrega">🚚 <span>Entrega</span></button><button class="nav" data-page="pagamentos">💳 <span>Pagamentos</span></button><button class="nav" data-page="whatsapp">📱 <span>WhatsApp</span></button><button class="nav" data-page="pedidos">📋 <span>Pedidos</span></button><button class="nav" data-page="clientes">👥 <span>Clientes</span></button><button class="nav" data-page="vendas">📊 <span>Vendas</span></button><button class="nav" data-page="config">⚙️ <span>Configurações</span></button>
+
+<div class="painel">
+
+<!-- =========================
+     MENU
+========================= -->
+
+<aside class="menu">
+
+    <div class="menu-logo">
+
+        <div class="icone-logo">
+            E
+        </div>
+
+        <h1>El Shaddai</h1>
+
+        <p>Painel administrativo</p>
+
+    </div>
+
+    <button class="menu-item ativo" onclick="abrirTela('inicio',this)">
+        🏠 <span>Início</span>
+    </button>
+
+    <button class="menu-item" onclick="abrirTela('produtos',this)">
+        🍴 <span>Produtos</span>
+    </button>
+
+    <button class="menu-item" onclick="abrirTela('categorias',this)">
+        📂 <span>Categorias</span>
+    </button>
+
+    <button class="menu-item" onclick="abrirTela('aparencia',this)">
+        🖼️ <span>Aparência</span>
+    </button>
+
+    <button class="menu-item" onclick="abrirTela('promocoes',this)">
+        🎁 <span>Promoções</span>
+    </button>
+
+    <button class="menu-item" onclick="abrirTela('entrega',this)">
+        🚚 <span>Entrega</span>
+    </button>
+
+    <button class="menu-item" onclick="abrirTela('pagamentos',this)">
+        💳 <span>Pagamentos</span>
+    </button>
+
+    <button class="menu-item" onclick="abrirTela('whatsapp',this)">
+        📱 <span>WhatsApp</span>
+    </button>
+
+    <button class="menu-item" onclick="abrirTela('pedidos',this)">
+        📋 <span>Pedidos</span>
+    </button>
+
+    <button class="menu-item" onclick="abrirTela('clientes',this)">
+        👥 <span>Clientes</span>
+    </button>
+
+    <button class="menu-item" onclick="abrirTela('vendas',this)">
+        📊 <span>Vendas</span>
+    </button>
+
+    <button class="menu-item" onclick="abrirTela('configuracoes',this)">
+        ⚙️ <span>Configurações</span>
+    </button>
+
 </aside>
-<main class="main"><header class="top"><div><button class="mobile" id="mobileBtn">☰</button> <strong>Painel administrativo</strong><p>Pastelaria El Shaddai</p></div><div class="status"><span class="dot"></span>Loja aberta</div></header>
-<section class="page active" id="page-inicio"><div class="welcome"><h1>Olá! 👋</h1><p>Administre sua loja sem precisar mexer no código.</p></div><div class="summary"><div>🍴 <strong id="nProdutos">0</strong><p>Produtos</p></div><div>📋 <strong id="nPedidos">0</strong><p>Pedidos</p></div><div>💰 <strong id="nVendas">R$ 0,00</strong><p>Vendas</p></div><div>👥 <strong id="nClientes">0</strong><p>Clientes</p></div></div><div class="box"><h2>Acesso rápido</h2><div class="quick"><button data-page="produtos"><span>🍴</span><b>Adicionar produto</b><small>Cadastre seus produtos</small></button><button data-page="categorias"><span>📂</span><b>Criar categoria</b><small>Organize seu cardápio</small></button><button data-page="aparencia"><span>🖼️</span><b>Personalizar loja</b><small>Logo e aparência</small></button><button data-page="whatsapp"><span>📱</span><b>Configurar WhatsApp</b><small>Receba pedidos</small></button></div></div></section>
-<section class="page" id="page-produtos"><div class="bar"><div><h2>Produtos</h2><p>Cadastre e altere seus produtos.</p></div><button class="btn primary" id="addProd">+ Adicionar</button></div><div class="form" id="prodForm" style="display:none"><div class="grid"><div class="field"><label>Nome</label><input id="pNome"></div><div class="field"><label>Preço</label><input id="pPreco" type="number" step="0.01"></div><div class="field"><label>Categoria</label><select id="pCat"></select></div><div class="field"><label>Descrição</label><input id="pDesc"></div><div class="field full"><button class="btn red" id="saveProd">Salvar</button> <button class="btn gray" id="cancelProd">Cancelar</button></div></div></div><div class="list" id="prodList"></div></section>
-<section class="page" id="page-categorias"><div class="bar"><h2>Categorias</h2><button class="btn primary" id="addCat">+ Nova categoria</button></div><div class="form" id="catForm" style="display:none"><div class="field"><label>Nome</label><input id="catNome"><button class="btn red" id="saveCat">Salvar</button></div></div><div class="list" id="catList"></div></section>
-<section class="page" id="page-aparencia"><h2>Aparência</h2><div class="form"><div class="grid"><div class="field"><label>Nome da loja</label><input id="nomeLoja"></div><div class="field"><label>Slogan</label><input id="slogan"></div><div class="field full"><label>Logo</label><img id="logoPreview" class="preview"><input id="logoFile" type="file" accept="image/*"><small>Você escolhe a imagem aqui, sem editar o código.</small></div><div class="field full"><button class="btn red" id="saveLook">Salvar aparência</button></div></div></div></section>
-<section class="page" id="page-promocoes"><h2>Promoções</h2><div class="form"><div class="grid"><div class="field"><label>Nome</label><input id="promoNome"></div><div class="field"><label>Texto</label><input id="promoTexto"></div><div class="field full"><button class="btn red" id="savePromo">Salvar promoção</button></div></div></div><div class="box" id="promoView"></div></section>
-<section class="page" id="page-entrega"><h2>Entrega</h2><div class="form"><div class="grid"><div class="field"><label>Taxa (R$)</label><input id="taxa" type="number" step="0.01"></div><div class="field"><label>Pedido mínimo (R$)</label><input id="minimo" type="number" step="0.01"></div><div class="field"><label>Tempo</label><input id="tempo"></div><div class="field"><label>Retirada</label><select id="retirada"><option value="sim">Disponível</option><option value="nao">Indisponível</option></select></div><div class="field full"><button class="btn red" id="saveDelivery">Salvar</button></div></div></div></section>
-<section class="page" id="page-pagamentos"><h2>Pagamentos</h2><div class="form"><label><input type="checkbox" id="payPix"> Pix</label><br><label><input type="checkbox" id="payCard"> Cartão</label><br><label><input type="checkbox" id="payCash"> Dinheiro</label><br><label><input type="checkbox" id="payDelivery"> Pagamento na entrega</label><br><button class="btn red" id="savePay">Salvar</button></div></section>
-<section class="page" id="page-whatsapp"><h2>WhatsApp</h2><div class="form"><div class="grid"><div class="field full"><label>Número com DDI e DDD</label><input id="waNum" placeholder="5511999999999"></div><div class="field full"><label>Mensagem inicial</label><textarea id="waMsg" rows="4"></textarea></div><div class="field full"><button class="btn red" id="saveWa">Salvar WhatsApp</button></div></div></div></section>
-<section class="page" id="page-pedidos"><h2>Pedidos</h2><div class="empty">Os pedidos serão ligados ao banco de dados na próxima etapa.</div></section><section class="page" id="page-clientes"><h2>Clientes</h2><div class="empty">Os clientes serão registrados quando o sistema de pedidos estiver ligado.</div></section><section class="page" id="page-vendas"><h2>Vendas</h2><div class="empty">As vendas serão calculadas automaticamente pelos pedidos.</div></section>
-<section class="page" id="page-config"><h2>Configurações</h2><div class="form"><div class="grid"><div class="field"><label>Nome da loja</label><input id="cfgNome"></div><div class="field"><label>Status</label><select id="cfgStatus"><option>Loja aberta</option><option>Loja fechada</option></select></div><div class="field full"><button class="btn red" id="saveCfg">Salvar</button></div></div></div></section>
-</main></div><div class="toast" id="toast"></div>
+
+
+<!-- =========================
+     CONTEÚDO
+========================= -->
+
+<main class="conteudo">
+
+<header class="topo-painel">
+
+    <div>
+        <h2>Painel administrativo</h2>
+        <p>Pastelaria El Shaddai</p>
+    </div>
+
+    <div class="status-loja">
+        <span class="bolinha"></span>
+        Loja aberta
+    </div>
+
+</header>
+
+
+<div class="inicio">
+
+<!-- =========================
+     INÍCIO
+========================= -->
+
+<section id="tela-inicio" class="tela ativa">
+
+    <div class="boas-vindas">
+
+        <h1>Olá!</h1>
+
+        <p>
+            Gerencie sua loja de forma simples,
+            sem precisar mexer no código.
+        </p>
+
+    </div>
+
+
+    <div class="resumo">
+
+        <div class="card-resumo">
+            <span class="card-icone">🍴</span>
+            <div>
+                <strong id="totalProdutos">4</strong>
+                <p>Produtos</p>
+            </div>
+        </div>
+
+        <div class="card-resumo">
+            <span class="card-icone">📋</span>
+            <div>
+                <strong>0</strong>
+                <p>Pedidos hoje</p>
+            </div>
+        </div>
+
+        <div class="card-resumo">
+            <span class="card-icone">R$</span>
+            <div>
+                <strong>R$ 0,00</strong>
+                <p>Vendas hoje</p>
+            </div>
+        </div>
+
+        <div class="card-resumo">
+            <span class="card-icone">👥</span>
+            <div>
+                <strong>0</strong>
+                <p>Clientes</p>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="bloco">
+
+        <div class="bloco-titulo">
+
+            <h2>Acesso rápido</h2>
+
+            <p>
+                Comece configurando sua loja.
+            </p>
+
+        </div>
+
+
+        <div class="atalhos">
+
+            <button class="atalho"
+                onclick="abrirTelaPorNome('produtos')">
+
+                <span>+</span>
+
+                <strong>Adicionar produto</strong>
+
+                <small>
+                    Cadastre seus produtos
+                </small>
+
+            </button>
+
+
+            <button class="atalho"
+                onclick="abrirTelaPorNome('categorias')">
+
+                <span>+</span>
+
+                <strong>Criar categoria</strong>
+
+                <small>
+                    Organize seu cardápio
+                </small>
+
+            </button>
+
+
+            <button class="atalho"
+                onclick="abrirTelaPorNome('aparencia')">
+
+                <span>◉</span>
+
+                <strong>Personalizar loja</strong>
+
+                <small>
+                    Logo, banner e aparência
+                </small>
+
+            </button>
+
+
+            <button class="atalho"
+                onclick="abrirTelaPorNome('whatsapp')">
+
+                <span>W</span>
+
+                <strong>Configurar WhatsApp</strong>
+
+                <small>
+                    Receba seus pedidos
+                </small>
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     PRODUTOS
+========================= -->
+
+<section id="tela-produtos" class="tela">
+
+    <div class="titulo-tela">
+
+        <div>
+            <h1>Produtos</h1>
+            <p>Cadastre e altere seus produtos.</p>
+        </div>
+
+        <button class="botao-principal"
+            onclick="mostrarFormulario()">
+
+            + Adicionar
+
+        </button>
+
+    </div>
+
+
+    <div id="formularioProduto"
+         class="formulario"
+         style="display:none;">
+
+        <h2 id="tituloFormulario">
+            Novo produto
+        </h2>
+
+
+        <input type="hidden" id="produtoId">
+
+
+        <div class="campo">
+
+            <label>Nome</label>
+
+            <input
+                type="text"
+                id="nomeProduto"
+                placeholder="Ex.: Pastel de Carne">
+
+        </div>
+
+
+        <div class="linha">
+
+            <div class="campo">
+
+                <label>Preço</label>
+
+                <input
+                    type="number"
+                    id="precoProduto"
+                    step="0.01"
+                    placeholder="15.00">
+
+            </div>
+
+
+            <div class="campo">
+
+                <label>Categoria</label>
+
+                <select id="categoriaProduto">
+
+                    <option>Pastéis</option>
+                    <option>Combos</option>
+                    <option>Bebidas</option>
+                    <option>Pizza</option>
+                    <option>Batata</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <div class="campo">
+
+            <label>Descrição</label>
+
+            <textarea
+                id="descricaoProduto"
+                placeholder="Descreva o produto..."></textarea>
+
+        </div>
+
+
+        <div class="campo">
+
+            <label>Foto do produto</label>
+
+            <input
+                type="file"
+                id="fotoProduto"
+                accept="image/*">
+
+        </div>
+
+
+        <div class="campo">
+
+            <label>
+
+                <input
+                    type="checkbox"
+                    id="produtoAtivo"
+                    checked>
+
+                Produto ativo
+
+            </label>
+
+        </div>
+
+
+        <div class="campo">
+
+            <label>
+                Adicionais
+            </label>
+
+            <div class="adicionais">
+
+                <label>
+                    <input type="checkbox"
+                           class="adicional"
+                           value="Queijo"
+                           data-preco="2">
+
+                    Queijo — R$ 2,00
+                </label>
+
+                <br>
+
+                <label>
+                    <input type="checkbox"
+                           class="adicional"
+                           value="Catupiry"
+                           data-preco="2">
+
+                    Catupiry — R$ 2,00
+                </label>
+
+                <br>
+
+                <label>
+                    <input type="checkbox"
+                           class="adicional"
+                           value="Bacon"
+                           data-preco="3">
+
+                    Bacon — R$ 3,00
+                </label>
+
+                <br>
+
+                <label>
+                    <input type="checkbox"
+                           class="adicional"
+                           value="Milho"
+                           data-preco="1.5">
+
+                    Milho — R$ 1,50
+                </label>
+
+            </div>
+
+        </div>
+
+
+        <div class="botoes-form">
+
+            <button
+                class="salvar"
+                onclick="salvarProduto()">
+
+                Salvar
+
+            </button>
+
+            <button
+                class="cancelar"
+                onclick="cancelarProduto()">
+
+                Cancelar
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div id="listaProdutos"
+         class="lista-produtos">
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CATEGORIAS
+========================= -->
+
+<section id="tela-categorias" class="tela">
+
+    <div class="titulo-tela">
+
+        <div>
+            <h1>Categorias</h1>
+
+            <p>
+                Organize seus produtos.
+            </p>
+        </div>
+
+        <button class="botao-principal">
+            + Adicionar categoria
+        </button>
+
+    </div>
+
+
+    <div class="config-card">
+
+        <h2>Categorias do cardápio</h2>
+
+        <div class="config-item">
+            <strong>Pastéis</strong>
+            <span>Produtos de pastelaria</span>
+        </div>
+
+        <div class="config-item">
+            <strong>Combos</strong>
+            <span>Combinações especiais</span>
+        </div>
+
+        <div class="config-item">
+            <strong>Bebidas</strong>
+            <span>Refrigerantes, água e outras bebidas</span>
+        </div>
+
+        <div class="config-item">
+            <strong>Pizza</strong>
+            <span>Pizzas disponíveis</span>
+        </div>
+
+        <div class="config-item">
+            <strong>Batata</strong>
+            <span>Batatas e acompanhamentos</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     APARÊNCIA
+========================= -->
+
+<section id="tela-aparencia" class="tela">
+
+    <div class="titulo-tela">
+
+        <div>
+            <h1>Aparência</h1>
+
+            <p>
+                Personalize sua loja.
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="config-card">
+
+        <h2>Identidade da loja</h2>
+
+        <div class="campo">
+
+            <label>Nome da loja</label>
+
+            <input
+                type="text"
+                value="Pastelaria El Shaddai">
+
+        </div>
+
+
+        <div class="campo">
+
+            <label>Slogan</label>
+
+            <input
+                type="text"
+                value="Feito a dois, no ponto pra você!">
+
+        </div>
+
+
+        <div class="campo">
+
+            <label>Logo da loja</label>
+
+            <input
+                type="file"
+                accept="image/*">
+
+        </div>
+
+
+        <div class="campo">
+
+            <label>Banner principal</label>
+
+            <input
+                type="file"
+                accept="image/*">
+
+        </div>
+
+
+        <button class="salvar">
+            Salvar aparência
+        </button>
+
+    </div>
+
+</section>
+
+
+        <!-- =========================================
+             PROMOÇÕES
+        ========================================= -->
+
+        <section class="admin-secao" id="secao-promocoes">
+
+            <div class="secao-cabecalho">
+
+                <div>
+                    <h2>Promoções</h2>
+                    <p>Crie ofertas para destacar no seu cardápio.</p>
+                </div>
+
+                <button class="botao-principal"
+                        onclick="abrirFormularioPromocao()">
+                    + Nova promoção
+                </button>
+
+            </div>
+
+
+            <div id="formulario-promocao" class="formulario-admin" style="display:none;">
+
+                <h3>Nova promoção</h3>
+
+                <label>Nome da promoção</label>
+
+                <input
+                    type="text"
+                    id="promo-nome"
+                    placeholder="Ex.: Combo da semana"
+                >
+
+
+                <label>Descrição</label>
+
+                <textarea
+                    id="promo-descricao"
+                    placeholder="Ex.: 2 pastéis + refrigerante"
+                ></textarea>
+
+
+                <div class="duas-colunas">
+
+                    <div>
+                        <label>Preço promocional</label>
+
+                        <input
+                            type="number"
+                            id="promo-preco"
+                            step="0.01"
+                            placeholder="0,00"
+                        >
+                    </div>
+
+
+                    <div>
+                        <label>Validade</label>
+
+                        <input
+                            type="date"
+                            id="promo-validade"
+                        >
+                    </div>
+
+                </div>
+
+
+                <label class="linha-checkbox">
+
+                    <input
+                        type="checkbox"
+                        id="promo-ativa"
+                        checked
+                    >
+
+                    Promoção ativa
+
+                </label>
+
+
+                <div class="botoes-formulario">
+
+                    <button
+                        class="botao-salvar"
+                        onclick="salvarPromocao()">
+                        Salvar promoção
+                    </button>
+
+                    <button
+                        class="botao-cancelar"
+                        onclick="fecharFormularioPromocao()">
+                        Cancelar
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div id="lista-promocoes" class="lista-admin">
+
+                <div class="estado-vazio">
+
+                    <h3>Nenhuma promoção cadastrada</h3>
+
+                    <p>
+                        Crie uma promoção para aparecer no seu cardápio.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             ENTREGA
+        ========================================= -->
+
+        <section class="admin-secao" id="secao-entrega">
+
+            <div class="secao-cabecalho">
+
+                <div>
+                    <h2>Entrega</h2>
+                    <p>Configure como sua loja trabalha com entregas.</p>
+                </div>
+
+            </div>
+
+
+            <div class="config-card">
+
+                <div class="config-item">
+
+                    <div>
+                        <strong>Entrega</strong>
+
+                        <small>
+                            Permitir que o cliente escolha entrega.
+                        </small>
+                    </div>
+
+                    <label class="interruptor">
+
+                        <input
+                            type="checkbox"
+                            id="entrega-ativa"
+                            checked
+                        >
+
+                        <span></span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="config-item">
+
+                    <div>
+                        <strong>Retirada no local</strong>
+
+                        <small>
+                            Permitir que o cliente retire o pedido.
+                        </small>
+                    </div>
+
+                    <label class="interruptor">
+
+                        <input
+                            type="checkbox"
+                            id="retirada-ativa"
+                            checked
+                        >
+
+                        <span></span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="campo-config">
+
+                    <label>Taxa de entrega</label>
+
+                    <div class="campo-preco">
+
+                        <span>R$</span>
+
+                        <input
+                            type="number"
+                            id="taxa-entrega"
+                            step="0.01"
+                            placeholder="0,00"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="campo-config">
+
+                    <label>Pedido mínimo para entrega</label>
+
+                    <div class="campo-preco">
+
+                        <span>R$</span>
+
+                        <input
+                            type="number"
+                            id="pedido-minimo"
+                            step="0.01"
+                            placeholder="0,00"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="botao-salvar"
+                    onclick="salvarConfiguracaoEntrega()">
+
+                    Salvar configurações
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             PAGAMENTOS
+        ========================================= -->
+
+        <section class="admin-secao" id="secao-pagamentos">
+
+            <div class="secao-cabecalho">
+
+                <div>
+                    <h2>Pagamentos</h2>
+
+                    <p>
+                        Escolha as formas de pagamento aceitas na sua loja.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="config-card">
+
+                <div class="config-item">
+
+                    <div>
+                        <strong>Pix</strong>
+
+                        <small>
+                            Aceitar pagamentos por Pix.
+                        </small>
+                    </div>
+
+                    <label class="interruptor">
+
+                        <input
+                            type="checkbox"
+                            id="pagamento-pix"
+                            checked
+                        >
+
+                        <span></span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="config-item">
+
+                    <div>
+                        <strong>Cartão</strong>
+
+                        <small>
+                            Aceitar pagamentos com cartão.
+                        </small>
+                    </div>
+
+                    <label class="interruptor">
+
+                        <input
+                            type="checkbox"
+                            id="pagamento-cartao"
+                            checked
+                        >
+
+                        <span></span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="config-item">
+
+                    <div>
+                        <strong>Dinheiro</strong>
+
+                        <small>
+                            Aceitar pagamento em dinheiro.
+                        </small>
+                    </div>
+
+                    <label class="interruptor">
+
+                        <input
+                            type="checkbox"
+                            id="pagamento-dinheiro"
+                            checked
+                        >
+
+                        <span></span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="campo-config">
+
+                    <label>Chave Pix</label>
+
+                    <input
+                        type="text"
+                        id="chave-pix"
+                        placeholder="Digite sua chave Pix"
+                    >
+
+                </div>
+
+
+                <div class="campo-config">
+
+                    <label>Nome que aparecerá no pagamento</label>
+
+                    <input
+                        type="text"
+                        id="nome-pix"
+                        placeholder="Ex.: Pastelaria El Shaddai"
+                    >
+
+                </div>
+
+
+                <button
+                    class="botao-salvar"
+                    onclick="salvarConfiguracaoPagamento()">
+
+                    Salvar pagamentos
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             WHATSAPP
+        ========================================= -->
+
+        <section class="admin-secao" id="secao-whatsapp">
+
+            <div class="secao-cabecalho">
+
+                <div>
+
+                    <h2>WhatsApp</h2>
+
+                    <p>
+                        Configure para onde os pedidos serão enviados.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="config-card">
+
+                <div class="whatsapp-status">
+
+                    <div class="status-icone">
+                        WhatsApp
+                    </div>
+
+                    <div>
+                        <strong>Recebimento de pedidos</strong>
+
+                        <small>
+                            Os pedidos serão enviados de forma organizada.
+                        </small>
+                    </div>
+
+                </div>
+
+
+                <div class="campo-config">
+
+                    <label>Número do WhatsApp</label>
+
+                    <input
+                        type="tel"
+                        id="whatsapp-numero"
+                        placeholder="Ex.: 5585999999999"
+                    >
+
+                    <small>
+                        Informe o número com código do país e DDD.
+                    </small>
+
+                </div>
+
+
+                <div class="config-item">
+
+                    <div>
+                        <strong>Enviar resumo do pedido</strong>
+
+                        <small>
+                            Enviar produtos, adicionais, quantidades,
+                            endereço e valor total.
+                        </small>
+                    </div>
+
+                    <label class="interruptor">
+
+                        <input
+                            type="checkbox"
+                            id="whatsapp-resumo"
+                            checked
+                        >
+
+                        <span></span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="config-item">
+
+                    <div>
+                        <strong>Enviar pedido automaticamente</strong>
+
+                        <small>
+                            Depois que o cliente finalizar o pedido,
+                            abrir o WhatsApp com a mensagem pronta.
+                        </small>
+                    </div>
+
+                    <label class="interruptor">
+
+                        <input
+                            type="checkbox"
+                            id="whatsapp-automatico"
+                            checked
+                        >
+
+                        <span></span>
+
+                    </label>
+
+                </div>
+
+
+                <button
+                    class="botao-salvar"
+                    onclick="salvarConfiguracaoWhatsApp()">
+
+                    Salvar WhatsApp
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             PEDIDOS
+        ========================================= -->
+
+        <section class="admin-secao" id="secao-pedidos">
+
+            <div class="secao-cabecalho">
+
+                <div>
+
+                    <h2>Pedidos</h2>
+
+                    <p>
+                        Acompanhe os pedidos realizados pelos clientes.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="filtros-pedidos">
+
+                <button
+                    class="filtro-pedido ativo"
+                    onclick="filtrarPedidos('todos')">
+
+                    Todos
+
+                </button>
+
+
+                <button
+                    class="filtro-pedido"
+                    onclick="filtrarPedidos('novo')">
+
+                    Novos
+
+                </button>
+
+
+                <button
+                    class="filtro-pedido"
+                    onclick="filtrarPedidos('preparando')">
+
+                    Preparando
+
+                </button>
+
+
+                <button
+                    class="filtro-pedido"
+                    onclick="filtrarPedidos('pronto')">
+
+                    Prontos
+
+                </button>
+
+
+                <button
+                    class="filtro-pedido"
+                    onclick="filtrarPedidos('entregue')">
+
+                    Entregues
+
+                </button>
+
+            </div>
+
+
+            <div id="lista-pedidos" class="lista-pedidos">
+
+                <div class="estado-vazio">
+
+                    <h3>Nenhum pedido ainda</h3>
+
+                    <p>
+                        Quando um cliente fizer um pedido,
+                        ele aparecerá aqui.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             CLIENTES
+        ========================================= -->
+
+        <section class="admin-secao" id="secao-clientes">
+
+            <div class="secao-cabecalho">
+
+                <div>
+
+                    <h2>Clientes</h2>
+
+                    <p>
+                        Veja os clientes que já fizeram pedidos.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="cliente-resumo">
+
+                <div class="mini-card">
+
+                    <strong id="total-clientes">
+                        0
+                    </strong>
+
+                    <span>
+                        Clientes
+                    </span>
+
+                </div>
+
+
+                <div class="mini-card">
+
+                    <strong id="clientes-novos">
+                        0
+                    </strong>
+
+                    <span>
+                        Novos clientes
+                    </span>
+
+                </div>
+
+
+                <div class="mini-card">
+
+                    <strong id="clientes-fieis">
+                        0
+                    </strong>
+
+                    <span>
+                        Clientes fiéis
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div id="lista-clientes" class="lista-admin">
+
+                <div class="estado-vazio">
+
+                    <h3>Nenhum cliente cadastrado</h3>
+
+                    <p>
+                        Os clientes aparecerão aqui conforme realizarem pedidos.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             VENDAS
+        ========================================= -->
+
+        <section class="admin-secao" id="secao-vendas">
+
+            <div class="secao-cabecalho">
+
+                <div>
+
+                    <h2>Vendas</h2>
+
+                    <p>
+                        Acompanhe o desempenho da sua loja.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="vendas-grid">
+
+                <div class="venda-card">
+
+                    <span>Hoje</span>
+
+                    <strong id="vendas-hoje">
+                        R$ 0,00
+                    </strong>
+
+                </div>
+
+
+                <div class="venda-card">
+
+                    <span>Esta semana</span>
+
+                    <strong id="vendas-semana">
+                        R$ 0,00
+                    </strong>
+
+                </div>
+
+
+                <div class="venda-card">
+
+                    <span>Este mês</span>
+
+                    <strong id="vendas-mes">
+                        R$ 0,00
+                    </strong>
+
+                </div>
+
+
+                <div class="venda-card">
+
+                    <span>Pedidos</span>
+
+                    <strong id="total-pedidos">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             CONFIGURAÇÕES
+        ========================================= -->
+
+        <section class="admin-secao" id="secao-configuracoes">
+
+            <div class="secao-cabecalho">
+
+                <div>
+
+                    <h2>Configurações</h2>
+
+                    <p>
+                        Configurações gerais da sua plataforma.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="config-card">
+
+                <div class="campo-config">
+
+                    <label>Nome da loja</label>
+
+                    <input
+                        type="text"
+                        id="nome-loja"
+                        value="Pastelaria El Shaddai"
+                    >
+
+                </div>
+
+
+                <div class="campo-config">
+
+                    <label>Slogan</label>
+
+                    <input
+                        type="text"
+                        id="slogan-loja"
+                        value="Feito a dois, no ponto pra você!"
+                    >
+
+                </div>
+
+
+                <div class="config-item">
+
+                    <div>
+
+                        <strong>Loja aberta</strong>
+
+                        <small>
+                            Quando desligada, o cliente verá que a loja está fechada.
+                        </small>
+
+                    </div>
+
+                    <label class="interruptor">
+
+                        <input
+                            type="checkbox"
+                            id="loja-aberta"
+                            checked
+                        >
+
+                        <span></span>
+
+                    </label>
+
+                </div>
+
+
+                <button
+                    class="botao-salvar"
+                    onclick="salvarConfiguracoesGerais()">
+
+                    Salvar configurações
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+    </main>
+
+</div>
+
+
+
 <script>
-const KEY='elShaddaiAdminV1';
-let db=JSON.parse(localStorage.getItem(KEY)||'null')||{config:{nome:'Pastelaria El Shaddai',slogan:'Feito a dois, no ponto pra você!',logo:'',status:'Loja aberta'},categorias:['Pastéis','Combos','Bebidas','Pizza','Batata'],produtos:[{nome:'Pastel de Carne',preco:15,categoria:'Pastéis',desc:'Carne temperada e recheio especial.'},{nome:'Pastel de Frango',preco:16,categoria:'Pastéis',desc:'Frango desfiado com catupiry.'},{nome:'Pastel de Pizza',preco:17,categoria:'Pastéis',desc:'Mussarela, presunto e tomate.'},{nome:'Pastel de Queijo',preco:14,categoria:'Pastéis',desc:'Mussarela cremosa.'}],promo:{nome:'',texto:''},entrega:{taxa:0,minimo:0,tempo:'30 a 50 minutos',retirada:'sim'},pagamentos:{pix:true,card:true,cash:true,delivery:true},whatsapp:{numero:'',msg:'Olá! Gostaria de fazer um pedido.'},pedidos:[],clientes:[]};
-function save(){localStorage.setItem(KEY,JSON.stringify(db));summary()}function toast(t){const e=document.getElementById('toast');e.textContent=t;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),1600)}
-function page(id){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById('page-'+id)?.classList.add('active');document.querySelectorAll('.nav').forEach(x=>x.classList.toggle('ativo',x.dataset.page===id));document.getElementById('menu').classList.remove('open');if(id==='produtos')renderProducts();if(id==='categorias')renderCats();if(id==='aparencia')loadLook();if(id==='promocoes')loadPromo();if(id==='entrega')loadDelivery();if(id==='pagamentos')loadPay();if(id==='whatsapp')loadWa();if(id==='config')loadCfg()}
-document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>page(b.dataset.page)));document.getElementById('mobileBtn').onclick=()=>document.getElementById('menu').classList.toggle('open');
-function summary(){nProdutos.textContent=db.produtos.length;nPedidos.textContent=db.pedidos.length;nClientes.textContent=db.clientes.length;let v=db.pedidos.reduce((a,p)=>a+Number(p.total||0),0);nVendas.textContent=v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}
-function renderCats(){catList.innerHTML=db.categorias.map((c,i)=>`<div class="row"><div><strong>${c}</strong><small>Categoria do cardápio</small></div><button class="btn gray" onclick="delCat(${i})">Excluir</button></div>`).join('')||'<div class="empty">Nenhuma categoria.</div>';pCat.innerHTML=db.categorias.map(c=>`<option>${c}</option>`).join('')}
-function renderProducts(){renderCats();prodList.innerHTML=db.produtos.map((p,i)=>`<div class="row"><div><strong>${p.nome}</strong><small>${p.categoria} · ${p.desc||''}</small><br><b>${Number(p.preco).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}</b></div><div class="actions"><button class="btn gray" onclick="editProd(${i})">Editar</button><button class="btn gray" onclick="delProd(${i})">Excluir</button></div></div>`).join('')||'<div class="empty">Nenhum produto.</div>'}
-function resetProd(){pNome.value='';pPreco.value='';pDesc.value='';prodForm.style.display='none';saveProd.onclick=addProduct}
-function addProduct(){let n=pNome.value.trim(),v=Number(pPreco.value);if(!n||!v)return toast('Preencha nome e preço.');db.produtos.push({nome:n,preco:v,categoria:pCat.value,desc:pDesc.value.trim()});save();renderProducts();resetProd();toast('Produto salvo!')}
-addProd.onclick=()=>{prodForm.style.display='block';pNome.focus()};cancelProd.onclick=resetProd;saveProd.onclick=addProduct;
-window.delProd=i=>{if(confirm('Excluir este produto?')){db.produtos.splice(i,1);save();renderProducts();toast('Produto excluído.')}};window.editProd=i=>{let p=db.produtos[i];pNome.value=p.nome;pPreco.value=p.preco;pCat.value=p.categoria;pDesc.value=p.desc||'';prodForm.style.display='block';saveProd.onclick=()=>{p.nome=pNome.value.trim();p.preco=Number(pPreco.value);p.categoria=pCat.value;p.desc=pDesc.value.trim();save();renderProducts();resetProd();toast('Produto atualizado!')}};
-addCat.onclick=()=>catForm.style.display='block';saveCat.onclick=()=>{let n=catNome.value.trim();if(!n)return toast('Digite a categoria.');db.categorias.push(n);save();renderCats();catNome.value='';catForm.style.display='none';toast('Categoria salva!')};window.delCat=i=>{if(confirm('Excluir esta categoria?')){db.categorias.splice(i,1);save();renderCats();toast('Categoria excluída.')}};
-function loadLook(){nomeLoja.value=db.config.nome;slogan.value=db.config.slogan;logoPreview.src=db.config.logo||'';logoPreview.style.visibility=db.config.logo?'visible':'hidden'}logoFile.onchange=e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{db.config.logo=r.result;logoPreview.src=r.result;logoPreview.style.visibility='visible'};r.readAsDataURL(f)};saveLook.onclick=()=>{db.config.nome=nomeLoja.value.trim();db.config.slogan=slogan.value.trim();save();toast('Aparência salva!')};
-function loadPromo(){promoNome.value=db.promo.nome;promoTexto.value=db.promo.texto;promoView.innerHTML=db.promo.nome?'<b>'+db.promo.nome+'</b><p>'+db.promo.texto+'</p>':'<div class="empty">Nenhuma promoção cadastrada.</div>'}savePromo.onclick=()=>{db.promo={nome:promoNome.value.trim(),texto:promoTexto.value.trim()};save();loadPromo();toast('Promoção salva!')};
-function loadDelivery(){taxa.value=db.entrega.taxa;minimo.value=db.entrega.minimo;tempo.value=db.entrega.tempo;retirada.value=db.entrega.retirada}saveDelivery.onclick=()=>{db.entrega={taxa:Number(taxa.value)||0,minimo:Number(minimo.value)||0,tempo:tempo.value,retirada:retirada.value};save();toast('Entrega salva!')};
-function loadPay(){payPix.checked=db.pagamentos.pix;payCard.checked=db.pagamentos.card;payCash.checked=db.pagamentos.cash;payDelivery.checked=db.pagamentos.delivery}savePay.onclick=()=>{db.pagamentos={pix:payPix.checked,card:payCard.checked,cash:payCash.checked,delivery:payDelivery.checked};save();toast('Pagamentos salvos!')};
-function loadWa(){waNum.value=db.whatsapp.numero;waMsg.value=db.whatsapp.msg}saveWa.onclick=()=>{db.whatsapp={numero:waNum.value.replace(/\D/g,''),msg:waMsg.value};save();toast('WhatsApp salvo!')};function loadCfg(){cfgNome.value=db.config.nome;cfgStatus.value=db.config.status}saveCfg.onclick=()=>{db.config.nome=cfgNome.value.trim();db.config.status=cfgStatus.value;save();toast('Configurações salvas!')};
-summary();renderProducts();
-</script></body></html>
-    
+
+function salvarConfiguracaoPagamento() {
+
+    const configuracao = {
+
+        pix:
+            document.getElementById("pagamento-pix").checked,
+
+        cartao:
+            document.getElementById("pagamento-cartao").checked,
+
+        dinheiro:
+            document.getElementById("pagamento-dinheiro").checked,
+
+        chavePix:
+            document.getElementById("chave-pix").value,
+
+        nomePix:
+            document.getElementById("nome-pix").value
+
+    };
+
+
+    localStorage.setItem(
+        "configPagamento",
+        JSON.stringify(configuracao)
+    );
+
+
+    alert("Pagamentos salvos com sucesso.");
+
+}
+
+
+function salvarConfiguracaoWhatsApp() {
+
+    const configuracao = {
+
+        numero:
+            document.getElementById("whatsapp-numero").value,
+
+        resumo:
+            document.getElementById("whatsapp-resumo").checked,
+
+        automatico:
+            document.getElementById("whatsapp-automatico").checked
+
+    };
+
+
+    localStorage.setItem(
+        "configWhatsApp",
+        JSON.stringify(configuracao)
+    );
+
+
+    alert("WhatsApp configurado com sucesso.");
+
+}
+
+
+function salvarConfiguracoesGerais() {
+
+    const configuracao = {
+
+        nome:
+            document.getElementById("nome-loja").value,
+
+        slogan:
+            document.getElementById("slogan-loja").value,
+
+        aberta:
+            document.getElementById("loja-aberta").checked
+
+    };
+
+
+    localStorage.setItem(
+        "configLoja",
+        JSON.stringify(configuracao)
+    );
+
+
+    alert("Configurações salvas com sucesso.");
+
+}
+
+
+function filtrarPedidos(tipo) {
+
+    document
+        .querySelectorAll(".filtro-pedido")
+        .forEach(function(botao) {
+
+            botao.classList.remove("ativo");
+
+        });
+
+
+    if (event && event.currentTarget) {
+
+        event.currentTarget.classList.add("ativo");
+
+    }
+
+}
+
+</script>
+
+
+</body>
+
+                    </html>
